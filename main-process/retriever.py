@@ -40,6 +40,12 @@ RELATIONSHIPS_FILE = "relationships.jsonl"
 SOURCES_FILE = "sources.jsonl"
 REPORT_FILE = "processing_report.json"  # never used as retrieval content
 
+# Written by the enrichment pass: the same records carrying an "ai_enrichment"
+# block that explains what a rule means, why it matters and how to resolve it.
+# Merged onto the base records by id when present, so enrichment is additive and
+# a knowledge base without this file behaves exactly as before.
+ENRICHED_FILE = "enriched_knowledge.jsonl"
+
 # Fallback messages (stable strings, asserted by tests)
 MSG_NO_KB = "Knowledge base file 'knowledge.jsonl' not found in {}."
 MSG_EMPTY_KB = "The BIDS knowledge base is empty or could not be loaded."
@@ -73,7 +79,7 @@ class KnowledgeRecord:
         "id", "knowledge_type", "title", "summary", "retrieval_text",
         "source", "scope", "raw_content", "bids_version", "schema_version",
         "requirements", "conditions", "allowed_values",
-        "severity", "expression", "unit",
+        "severity", "expression", "unit", "enrichment",
     )
 
     def __init__(self, data: Dict[str, Any]) -> None:
@@ -93,6 +99,7 @@ class KnowledgeRecord:
         self.severity: Any = data.get("severity")
         self.expression: Any = data.get("expression")
         self.unit: Any = data.get("unit")
+        self.enrichment: Dict[str, Any] = data.get("ai_enrichment") or {}
 
     # -- searchable representation ------------------------------------
 
@@ -123,6 +130,34 @@ class KnowledgeRecord:
         add("expression", self.expression, 1.5)
         add("severity", self.severity, 1.0)
         add("unit", self.unit, 1.0)
+
+        # Enrichment text describes the same rule in the words a user would
+        # reach for ("my file is not 3D", "how do I fix"), which the schema's own
+        # phrasing never contains. Weighted below the identifiers so it widens
+        # what can be found without displacing an exact identifier match.
+        #
+        # It is ONE block, not one per field, even though that loses the ability
+        # to weight the parts differently. Scoring adds a token's contribution
+        # once per block it appears in, and an explanation naturally repeats its
+        # subject across description, causes and resolution, so five blocks
+        # multiplied a single word by five. That was enough to rank an explained
+        # validation check above the definition of the very field a user had
+        # asked about by name.
+        if self.enrichment:
+            add(
+                "explanation",
+                " ".join(
+                    part for part in (
+                        self._normalize(self.enrichment.get("description")),
+                        self._normalize(self.enrichment.get("why_it_matters")),
+                        self._flatten(self.enrichment.get("common_causes")),
+                        self._flatten(self.enrichment.get("resolution_guidance")),
+                        self._flatten(self.enrichment.get("example_scenarios")),
+                    ) if part
+                ),
+                1.2,
+            )
+
         add("raw_content", json.dumps(self.raw_content, ensure_ascii=False), 0.8)
 
         return blocks
@@ -194,7 +229,29 @@ class Scorer:
     Whole-word matching avoids the "every record scores similarly because
     of common words" problem: stop words are excluded and partial/substring
     matches are not rewarded across every record.
+
+    Two damping rules keep a single lucky word from carrying a record: the
+    rarity multiplier is capped, and a multi-word query whose match rests on one
+    token is penalised. Both exist because explanatory text uses ordinary
+    English, which introduces many words that are rare in the knowledge base
+    while saying nothing about what a record is for.
     """
+
+    # Ceiling on the rarity multiplier for a single token.
+    MAX_IDF = 3.0
+
+    # Queries at least this long must match more than one token to score fully.
+    # Below it, a query is usually an identifier or a code and one match is the
+    # whole question.
+    COVERAGE_MIN_TOKENS = 3
+
+    # What a multi-word query's score is multiplied by when only one token hit.
+    SINGLE_MATCH_PENALTY = 0.35
+
+    # Shortest query token allowed to match as a word prefix. Also the length of
+    # the prefix keys in the retriever's postings lists, so the two must agree:
+    # a shorter prefix rule than the index would silently stop finding matches.
+    MIN_PREFIX_LEN = 3
 
     STOPWORDS = frozenset({
         "a", "an", "the", "and", "or", "but", "if", "then", "else",
@@ -219,6 +276,17 @@ class Scorer:
         "contain", "include", "includes", "including", "specify",
         "specifies", "specified", "used", "uses", "using", "needed",
         "mean", "means", "make", "makes", "look", "looks",
+        # Personal pronouns and conversational filler. A user asking for help
+        # writes "how do I fix my dataset", and without these the single-letter
+        # pronoun "i" scores a whole-word match against the schema's "i" enum,
+        # which is the imaginary part of a complex image. The top hit for the
+        # most natural phrasing of a help request was therefore an unrelated
+        # record, purely because of the word "I".
+        "i", "me", "my", "mine", "myself",
+        "we", "us", "our", "ours", "you", "your", "yours",
+        "he", "him", "his", "she", "her", "hers", "they", "them", "their",
+        "am", "get", "gets", "got", "want", "wants", "help", "tell",
+        "say", "says", "said", "know", "think", "try", "trying",
     })
 
     # BIDS-specific terms that deserve an identity bonus when matched.
@@ -264,6 +332,7 @@ class Scorer:
 
         idf_map = idf_map or {}
         total = 0.0
+        matched_tokens = 0
 
         # 1. Phrase bonus: whole normalized query appears verbatim.
         norm_query = re.sub(r"\s+", " ", query.lower()).strip()
@@ -276,20 +345,42 @@ class Scorer:
         # 2. Token matches per block.
         for token in tokens:
             variants = cls._match_variants(token)
-            idf = idf_map.get(token, 1.0)
+
+            # Rarity is informative but must not be decisive on its own. An
+            # uncapped multiplier lets ONE incidental word carry a record over
+            # the relevance floor: an unrelated question containing "configure"
+            # matched a record whose explanatory text happened to use that word,
+            # and scored four times the threshold on that single hit. The cap
+            # keeps rare terms ahead of common ones without letting one of them
+            # outvote everything else.
+            idf = min(idf_map.get(token, 1.0), cls.MAX_IDF)
+
             whole_match_any = False
             for _label, text, weight in blocks:
                 if any(cls._whole_word(v, text) for v in variants):
                     total += 2.0 * weight * idf
                     whole_match_any = True
-            if not whole_match_any and len(token) >= 3:
+            if not whole_match_any and len(token) >= cls.MIN_PREFIX_LEN:
                 for _label, text, weight in blocks:
                     if cls._prefix_word(token, text):
                         total += 0.5 * weight * idf
+                        whole_match_any = True
                         break
+            if whole_match_any:
+                matched_tokens += 1
             # 3. BIDS identifier bonus (also damped by term rarity).
             if token in cls.BIDS_TERMS and cls._whole_word(token, identity_text):
                 total += 3.0 * min(idf, 1.5)
+
+        # 3. Coverage requirement.
+        #
+        # A record that answers one word of a six-word question has not answered
+        # the question. Requiring a second matched token for anything but a very
+        # short query is what separates "this record is about what you asked"
+        # from "this record happens to contain one of your words". Short queries
+        # are exempt because a one-token query is usually an identifier.
+        if len(tokens) >= cls.COVERAGE_MIN_TOKENS and matched_tokens < 2:
+            total *= cls.SINGLE_MATCH_PENALTY
 
         return total
 
@@ -388,8 +479,55 @@ class Formatter:
                 raw_str = raw_str[: cls.RAW_CONTENT_LIMIT] + "..."
             parts.append(f"Raw Content: {raw_str}")
 
+        parts.extend(cls._fmt_enrichment(record.enrichment))
+
         parts.append("")
         return "\n".join(parts)
+
+    @staticmethod
+    def _fmt_enrichment(enrichment: Dict[str, Any]) -> List[str]:
+        """Render the explanatory block, when the record has one.
+
+        Labelled as explanation rather than specification so a model reading it
+        does not quote it as though the standard said it. The resolution
+        guidance is emitted last because it is what the user actually asked for.
+        """
+        if not enrichment:
+            return []
+
+        out: List[str] = ["", "--- Explanation (not normative specification text) ---"]
+
+        for key, label in (
+            ("description", "What this means"),
+            ("interpretation", "How to read it"),
+            ("why_it_matters", "Why it matters"),
+        ):
+            value = str(enrichment.get(key, "") or "").strip()
+            if value:
+                out.append(f"{label}: {value}")
+
+        for key, label in (
+            ("common_causes", "Common causes"),
+            ("example_scenarios", "Examples"),
+        ):
+            values = enrichment.get(key)
+            if isinstance(values, list) and values:
+                out.append(f"{label}:")
+                out.extend(f"  - {v}" for v in values if str(v).strip())
+
+        guidance = str(enrichment.get("resolution_guidance", "") or "").strip()
+        if guidance:
+            out.append(f"How to resolve: {guidance}")
+
+        notes = str(enrichment.get("additional_notes", "") or "").strip()
+        if notes:
+            out.append(f"Notes: {notes}")
+
+        confidence = str(enrichment.get("confidence", "") or "").strip()
+        if confidence:
+            out.append(f"Explanation confidence: {confidence}")
+
+        return out
 
     # -- value formatting -----------------------------------------------
 
@@ -452,6 +590,13 @@ class Retriever:
 
         # id -> record index (used to resolve relationship endpoints)
         self._index: Dict[str, int] = {}
+        # validator issue code -> record index, for exact-code lookups
+        self._code_index: Dict[str, int] = {}
+        # metadata field / column name -> index of the record DEFINING it
+        self._subject_index: Dict[str, int] = {}
+        # term -> record indices containing it, and the same for short prefixes
+        self._postings: Dict[str, Set[int]] = {}
+        self._prefix_postings: Dict[str, Set[int]] = {}
         # adjacency: record_index -> [(relation, neighbor_index, direction)]
         self._adjacency: Dict[int, List[Tuple[str, int, str]]] = {}
         # term token -> inverse document frequency (computed over the KB)
@@ -460,6 +605,7 @@ class Retriever:
         self._min_best: float = MIN_BEST_SCORE
 
         self._load_knowledge()
+        self._load_enrichment()
         self._load_relationships()
         self._load_sources()
         self._build_index()
@@ -497,6 +643,52 @@ class Retriever:
             return
 
         logger.info("Loaded %d records (%d skipped) from %s", loaded, skipped, path.name)
+
+    def _load_enrichment(self) -> None:
+        """Merge ``enriched_knowledge.jsonl`` onto the records already loaded.
+
+        Only the ``ai_enrichment`` block is taken. The base record stays
+        authoritative for everything else, so an enrichment file generated
+        against an older extraction cannot overwrite a corrected rule, it can
+        only fail to have an entry for it.
+        """
+        path = self.data_dir / ENRICHED_FILE
+        if not path.exists():
+            logger.info("%s not found; serving un-enriched records.", ENRICHED_FILE)
+            return
+
+        by_id = {record.id: record for record in self.records}
+        merged, orphaned = 0, 0
+
+        for line_no, line in enumerate(self._read_lines(path), 1):
+            try:
+                data = json.loads(line)
+            except json.JSONDecodeError:
+                logger.warning("Skipping malformed line %d of %s", line_no, path.name)
+                continue
+
+            if not isinstance(data, dict):
+                continue
+
+            enrichment = data.get("ai_enrichment")
+            if not isinstance(enrichment, dict) or not enrichment:
+                continue
+
+            target = by_id.get(str(data.get("id", "")))
+            if target is None:
+                orphaned += 1
+                continue
+
+            target.enrichment = enrichment
+            merged += 1
+
+        if orphaned:
+            logger.info(
+                "%d enrichment record(s) refer to ids that no longer exist; "
+                "re-run the enrichment pass to cover the current knowledge base.",
+                orphaned,
+            )
+        logger.info("Merged %d enrichment record(s) from %s", merged, path.name)
 
     def _load_relationships(self) -> None:
         path = self.data_dir / RELATIONSHIPS_FILE
@@ -542,6 +734,44 @@ class Retriever:
         self.identities = [r.identity_text() for r in self.records]
         self._index = {r.id: i for i, r in enumerate(self.records)}
 
+        # Validator issue codes, indexed exactly.
+        #
+        # A user asking about a failed validation pastes the code the validator
+        # printed and nothing else. Token scoring handles that badly, because a
+        # code splits into ordinary words that occur throughout the knowledge
+        # base: TSV_COLUMN_MISSING becomes "tsv", "column", "missing", which
+        # every tabular record contains. The result is a confident answer about
+        # the wrong rule, which is worse than no answer. An exact map makes the
+        # one query that matters most deterministic.
+        for i, record in enumerate(self.records):
+            code = (record.scope or {}).get("issue_code")
+            if isinstance(code, str) and code:
+                self._code_index.setdefault(code.strip().upper(), i)
+
+        # Metadata fields and TSV columns, indexed by the name they are written
+        # under, pointing at the record that DEFINES them.
+        #
+        # Naming a field is the other half of naming an issue code, and it fails
+        # the same way. "What does EffectiveEchoSpacing mean" is one token, and
+        # the validation checks that mention the field score above the field's
+        # own definition simply by repeating the word in more places. The
+        # definition is the direct answer to a question that names a field, so it
+        # is looked up rather than competed for.
+        for i, record in enumerate(self.records):
+            source_file = str((record.source or {}).get("file", ""))
+            if source_file not in ("objects/metadata.yaml", "objects/columns.yaml"):
+                continue
+            scope = record.scope or {}
+            names = list(scope.get("metadata_fields") or []) + list(scope.get("columns") or [])
+            for name in names:
+                if not isinstance(name, str) or not self._is_distinctive(name):
+                    continue
+                self._subject_index.setdefault(name.lower(), i)
+                # Also under the form with separators removed, so a query that
+                # writes participant_id and one that writes participantid both
+                # resolve.
+                self._subject_index.setdefault(re.sub(r"[^a-z0-9]", "", name.lower()), i)
+
         # Adjacency over edges whose BOTH endpoints resolve to records.
         # (Many relationship nodes are group placeholders that are not
         # themselves knowledge records; those edges are skipped.)
@@ -555,13 +785,31 @@ class Retriever:
 
         # IDF map: common boilerplate terms (must/should/field/...) are
         # damped so that specific technical terms dominate the ranking.
+        #
+        # The same pass builds the postings lists. Scoring every record against
+        # every query is linear in the size of the knowledge base, which is the
+        # one real cost of holding more records: a query that can only match a
+        # few dozen records was paying to be compared against all of them.
+        # Postings narrow the candidates to records that contain at least one
+        # query term, which is exactly the set that can score above zero.
         word_re = re.compile(r"[a-z0-9]+")
         df = Counter()
-        for blocks in self.blocks:
+        for idx, blocks in enumerate(self.blocks):
             seen = set()
             for _label, text, _weight in blocks:
                 seen.update(t for t in word_re.findall(text) if t not in Scorer.STOPWORDS)
             df.update(seen)
+            for term in seen:
+                self._postings.setdefault(term, set()).add(idx)
+                # A short prefix of every term as well, because a query token
+                # that is not a whole word can still match as a word PREFIX
+                # (three characters or more). Without these entries the prefix
+                # rule would silently stop firing, changing results rather than
+                # only making them faster.
+                if len(term) >= Scorer.MIN_PREFIX_LEN:
+                    self._prefix_postings.setdefault(
+                        term[:Scorer.MIN_PREFIX_LEN], set()
+                    ).add(idx)
         n = max(len(self.records), 1)
         self._idf = {
             token: max(0.2, math.log((n + 1) / (count + 1)))
@@ -584,11 +832,36 @@ class Retriever:
 
         # 1. Score every record.
         scored = self._score_all(query)
-        if not scored or scored[0][0] < self._min_best:
+
+        # 2. Any validator issue code named in the query outranks the scorer.
+        code_hits = self._codes_in(query)
+
+        if not code_hits and (not scored or scored[0][0] < self._min_best):
             return MSG_NO_MATCH.format(query)
 
-        # 2. Combine base hits with relationship-aware neighbours.
-        combined = self._expand_related(query, scored)
+        # 3. Combine base hits with relationship-aware neighbours.
+        combined = self._expand_related(query, scored) if scored else []
+
+        # 4. Exact lookups are placed above everything the scorer produced.
+        #
+        # Codes come first: a user quoting a code is asking about that specific
+        # finding. Field and column definitions come next, and only when the
+        # scorer already rates them as relevant, so that "what causes X to be
+        # rejected" still reaches the checks about X rather than being displaced
+        # by X's definition.
+        subject_hits = [
+            idx for idx in self._subjects_in(query)
+            if idx not in code_hits and any(idx == i for _s, i in scored)
+        ]
+
+        top = (combined[0][0] if combined else 0.0) + 100.0
+        promoted = (
+            [(top - rank, idx) for rank, idx in enumerate(code_hits)]
+            + [(top - len(code_hits) - rank - 0.5, idx)
+               for rank, idx in enumerate(subject_hits)]
+        )
+        combined = promoted + combined
+
         combined.sort(key=lambda x: x[0], reverse=True)
 
         # 3. Select top_k (deduplicated, stable order).
@@ -613,17 +886,112 @@ class Retriever:
 
         return "\n".join(chunks)
 
+    # -- Exact issue-code lookup ----------------------------------------
+
+    # A validator issue code is an identifier of at least two underscore-joined
+    # segments. Most are upper case, but not all: the schema defines
+    # M0Type_SET_INCORRECTLY, whose first segment is mixed case. An upper-case
+    # only pattern silently skipped those codes, and the fallback then ranked
+    # the longer codes that share their prefix above the code actually asked
+    # about. Mixed case is therefore accepted, which also matches ordinary
+    # snake_case words; those are simply misses against the code index, since it
+    # holds nothing but real codes.
+    _CODE_RE = re.compile(r"\b[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)+\b")
+
+    def _codes_in(self, query: str) -> List[int]:
+        """Record indices for every validator issue code named in the query."""
+        hits: List[int] = []
+        for token in self._CODE_RE.findall(query):
+            # The index is keyed upper case, so a mixed-case code such as
+            # M0Type_SET_INCORRECTLY resolves however the user typed it.
+            idx = self._code_index.get(token.upper())
+            if idx is not None and idx not in hits:
+                hits.append(idx)
+        return hits
+
+    # Identifier-shaped words, keeping underscores so participant_id survives.
+    _SUBJECT_RE = re.compile(r"[A-Za-z][A-Za-z0-9_]{2,}")
+
+    @staticmethod
+    def _is_distinctive(name: str) -> bool:
+        """Whether a field or column name is unambiguous enough to look up.
+
+        Some BIDS names are ordinary English words: there are fields called
+        Type, Name, Columns, Description and Units. Promoting a record because a
+        sentence happened to contain "columns" answers a question about
+        participants.tsv with the definition of a field called Columns. A name
+        earns a direct lookup only when writing it is unlikely to be accidental,
+        which means an underscore or an internal capital. Everything else is
+        still reachable through ordinary scoring, which weighs it against the
+        rest of the query instead of overriding it.
+        """
+        if not name or len(name) < 4:
+            return False
+        if "_" in name:
+            return True
+        return any(c.isupper() for c in name[1:])
+
+    def _subjects_in(self, query: str) -> List[int]:
+        """Record indices for every metadata field or column named in the query."""
+        hits: List[int] = []
+        for token in self._SUBJECT_RE.findall(query):
+            lowered = token.lower()
+            for candidate in (lowered, re.sub(r"[^a-z0-9]", "", lowered)):
+                idx = self._subject_index.get(candidate)
+                if idx is not None and idx not in hits:
+                    hits.append(idx)
+                    break
+        return hits
+
+    def lookup_code(self, code: str) -> Optional[str]:
+        """Return the formatted record for one validator issue code.
+
+        Exposed for callers that already know the code, such as an agent
+        explaining a specific line of validator output.
+        """
+        idx = self._code_index.get(str(code or "").strip().upper())
+        if idx is None:
+            return None
+        record = self.records[idx]
+        category = self.source_categories.get(
+            str(record.source.get("file", "")).replace("\\", "/"), ""
+        )
+        return Formatter.format(record, 1, category)
+
+    def known_codes(self) -> List[str]:
+        """Every validator issue code the knowledge base can explain."""
+        return sorted(self._code_index)
+
     # -- Scoring internals ----------------------------------------------
+
+    def _candidates(self, query: str) -> Set[int]:
+        """Records that contain at least one query term, exactly or as a prefix.
+
+        A record sharing no term with the query scores zero, so restricting
+        scoring to this set is a speed-up and not a change in behaviour.
+        """
+        candidates: Set[int] = set()
+        for token in Scorer.tokenize(query):
+            for variant in Scorer._match_variants(token):
+                candidates |= self._postings.get(variant, frozenset())
+            if len(token) >= Scorer.MIN_PREFIX_LEN:
+                candidates |= self._prefix_postings.get(
+                    token[:Scorer.MIN_PREFIX_LEN], frozenset()
+                )
+        return candidates
 
     def _score_all(self, query: str) -> List[Tuple[float, int]]:
         scored: List[Tuple[float, int]] = []
-        for idx, record in enumerate(self.records):
+        for idx in self._candidates(query):
             s = Scorer.score(
-                query, record, self.blocks[idx], self.identities[idx], self._idf
+                query, self.records[idx], self.blocks[idx],
+                self.identities[idx], self._idf,
             )
             if s > 0:
                 scored.append((s, idx))
-        scored.sort(key=lambda x: x[0], reverse=True)
+        # Sorted by score, then by record index so that equal scores come back
+        # in a stable order rather than in whatever order the set iterated.
+        scored.sort(key=lambda x: (-x[0], x[1]))
         return scored
 
     def _expand_related(

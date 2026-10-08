@@ -1,7 +1,7 @@
 {
-  "files_processed": 109,
-  "records_created": 1272,
-  "relationships_created": 271,
+  "files_processed": 110,
+  "records_created": 2488,
+  "relationships_created": 1026,
   "duplicates_found": 0,
   "conflicts_found": 0,
   "inferred_records": 0,
@@ -18,19 +18,19 @@
   ],
   "knowledge_categories": [
     "Association",
-    "Relationship",
-    "Concept",
-    "Enum",
-    "Check",
-    "Error",
-    "MetadataRule",
     "Definition",
     "FileSpecification",
-    "DirectoryRule",
-    "TabularRule",
+    "Version",
+    "MetadataRule",
+    "Relationship",
+    "Check",
+    "Enum",
     "Warning",
+    "Concept",
+    "Error",
+    "TabularRule",
     "Template",
-    "Version"
+    "DirectoryRule"
   ],
   "source_categories": [
     ""

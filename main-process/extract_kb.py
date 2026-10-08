@@ -23,16 +23,23 @@ from collections import defaultdict
 # Configuration
 # ============================================================
 
-SRC_DIR = Path(__file__).parent
+OUT_DIR = Path(__file__).parent
+
+# The raw BIDS schema lives in a sibling directory of this script. It can be
+# overridden so the extractor can be pointed at a different schema checkout.
+SRC_DIR = Path(
+    os.environ.get("BIDS_RULES_DIR", OUT_DIR.parent / "BIDS-Rules")
+).resolve()
+
 BIDS_VERSION = "1.11.2-dev"
 SCHEMA_VERSION = "2.0.0-dev"
 
 # Output files
-OUTPUT_KNOWLEDGE = SRC_DIR / "knowledge.jsonl"
-OUTPUT_RELATIONSHIPS = SRC_DIR / "relationships.jsonl"
-OUTPUT_SOURCES = SRC_DIR / "sources.jsonl"
-OUTPUT_REPORT = SRC_DIR / "processing_report.json"
-OUTPUT_README = SRC_DIR / "KB_README.md"
+OUTPUT_KNOWLEDGE = OUT_DIR / "knowledge.jsonl"
+OUTPUT_RELATIONSHIPS = OUT_DIR / "relationships.jsonl"
+OUTPUT_SOURCES = OUT_DIR / "sources.jsonl"
+OUTPUT_REPORT = OUT_DIR / "processing_report.json"
+OUTPUT_README = OUT_DIR / "KB_README.md"
 
 # Counters
 stats = {
@@ -63,8 +70,45 @@ def make_id(prefix: str, key: str, suffix: str = "", section: str = "") -> str:
     return "_".join(parts)
 
 
+# Every id handed out so far, so no two records can share one.
+_used_ids = {}
+
+
+def unique_id(candidate: str, hint: str = "") -> str:
+    """Return ``candidate``, or a disambiguated variant if it is already taken.
+
+    Ids collide for reasons that are invisible in the id itself: make_id() folds
+    case, so the schema's MISCChannelCount and MiscChannelCount become one
+    string, and the same rule name is defined in two different files. A duplicate
+    id is not cosmetic. The retriever indexes records by id, so the second record
+    silently replaces the first and one rule becomes unanswerable.
+    """
+    if candidate not in _used_ids:
+        _used_ids[candidate] = 1
+        return candidate
+
+    if hint:
+        hinted = f"{candidate}__{re.sub(r'[^a-z0-9]+', '_', hint.lower()).strip('_')}"
+        if hinted not in _used_ids:
+            _used_ids[hinted] = 1
+            return hinted
+
+    _used_ids[candidate] += 1
+    numbered = f"{candidate}__{_used_ids[candidate]}"
+    while numbered in _used_ids:
+        _used_ids[candidate] += 1
+        numbered = f"{candidate}__{_used_ids[candidate]}"
+    _used_ids[numbered] = 1
+    return numbered
+
+
 def save_record(record):
-    """Save a knowledge record."""
+    """Save a knowledge record, guaranteeing its id is unique."""
+    source = record.get("source") or {}
+    record["id"] = unique_id(
+        record.get("id", ""),
+        hint=str(source.get("section") or source.get("file") or ""),
+    )
     knowledge_records.append(record)
     stats["records_created"] += 1
 
@@ -117,6 +161,314 @@ def resolve_refs(data, ref_map=None):
         return obj
     
     return _resolve(data)
+
+
+# ============================================================
+# Shared schema helpers
+#
+# The BIDS schema separates *definitions* (objects/) from *rules* (rules/).
+# A field like RepetitionTime is DEFINED once in objects/metadata.yaml and then
+# REFERENCED by many rule groups that each say, for one datatype/suffix
+# combination, whether it is required, recommended or optional. Neither half is
+# usable on its own: the definition never says where the field applies, and the
+# rule never says what the field means. These helpers load the definitions once
+# so both halves can be joined into a single answerable record.
+# ============================================================
+
+# Populated by load_schema_objects(); keyed by field/column name.
+METADATA_OBJECTS = {}
+COLUMN_OBJECTS = {}
+ENUM_OBJECTS = {}
+
+# Requirement levels used throughout the schema, ordered from strongest to
+# weakest so the strongest level across rule groups can be reported.
+LEVEL_ORDER = ["required", "recommended", "optional", "deprecated", "prohibited"]
+
+# How each level should be phrased. The distinction matters: a validator reports
+# a missing required field as an error and a missing recommended field as a
+# warning, and users routinely treat the two as the same thing.
+LEVEL_PHRASING = {
+    "required": "REQUIRED (its absence is a validation error)",
+    "recommended": "RECOMMENDED (its absence is a validation warning, not an error)",
+    "optional": "OPTIONAL (it may be omitted without any validation message)",
+    "deprecated": "DEPRECATED (still tolerated, but it should no longer be used)",
+    "prohibited": "PROHIBITED (it must not be present)",
+}
+
+
+def load_schema_objects():
+    """Load the object definitions that rules refer to by name."""
+    global METADATA_OBJECTS, COLUMN_OBJECTS, ENUM_OBJECTS
+
+    meta_path = SRC_DIR / "objects" / "metadata.yaml"
+    if meta_path.exists():
+        METADATA_OBJECTS = safe_load_yaml(str(meta_path))
+
+    cols_path = SRC_DIR / "objects" / "columns.yaml"
+    if cols_path.exists():
+        COLUMN_OBJECTS = safe_load_yaml(str(cols_path))
+
+    enums_path = SRC_DIR / "objects" / "enums.yaml"
+    if enums_path.exists():
+        ENUM_OBJECTS = safe_load_yaml(str(enums_path))
+
+
+def clean_text(value, limit=None) -> str:
+    """Flatten a schema description into a single line of readable prose.
+
+    Schema descriptions are markdown with hard line wraps and SPEC_ROOT links
+    that mean nothing outside the specification website.
+    """
+    text = " ".join(str(value or "").split())
+
+    # Markdown links, keeping the link text and dropping the target. The target
+    # may itself contain balanced parentheses (DICOM tag URLs end in "(0020,0110)"),
+    # so a non-greedy "[^)]*" stops at the wrong bracket and leaves a stray ")".
+    text = re.sub(r"\[([^\]]+)\]\((?:[^()]|\([^()]*\))*\)", r"\1", text)
+
+    text = text.replace("`", "")
+    if limit and len(text) > limit:
+        cut = text[:limit].rsplit(" ", 1)[0]
+        text = cut + "..."
+    return text.strip()
+
+
+def resolve_enum(value):
+    """Resolve a schema ``$ref`` into the value it points at.
+
+    Enumerations in rules are stored as references such as
+    ``{"$ref": "objects.enums.EEG.value"}``. Left unresolved they are useless to
+    a reader, who sees a pointer instead of the allowed value.
+    """
+    if isinstance(value, dict):
+        ref = value.get("$ref")
+        if isinstance(ref, str) and ref.startswith("objects.enums."):
+            key = ref.split(".")[2] if len(ref.split(".")) > 2 else ""
+            entry = ENUM_OBJECTS.get(key)
+            if isinstance(entry, dict):
+                return entry.get("value", key)
+            return key
+        for key in ("value", "name", "const"):
+            if key in value:
+                return value[key]
+        return None
+    return value
+
+
+def describe_type(definition) -> str:
+    """Describe the value a field or column accepts, in words."""
+    if not isinstance(definition, dict):
+        return ""
+
+    alternatives = definition.get("anyOf")
+    if isinstance(alternatives, list) and alternatives:
+        parts = [describe_type(alt) for alt in alternatives]
+        parts = [p for p in parts if p]
+        if parts:
+            return " or ".join(dict.fromkeys(parts))
+
+    declared = definition.get("type", "")
+    bits = []
+
+    if declared == "array":
+        items = definition.get("items")
+        inner = describe_type(items) if isinstance(items, dict) else "value"
+        bits.append(f"an array of {inner}" if inner else "an array")
+        if "minItems" in definition:
+            bits.append(f"minimum {definition['minItems']} item(s)")
+        if "maxItems" in definition:
+            bits.append(f"maximum {definition['maxItems']} item(s)")
+    elif declared:
+        bits.append(f"a {declared}")
+
+    if "unit" in definition:
+        bits.append(f"in {definition['unit']}")
+    if "units" in definition:
+        bits.append(f"in {definition['units']}")
+    if "minimum" in definition:
+        bits.append(f"minimum {definition['minimum']}")
+    if "exclusiveMinimum" in definition:
+        bits.append(f"greater than {definition['exclusiveMinimum']}")
+    if "maximum" in definition:
+        bits.append(f"maximum {definition['maximum']}")
+    if "pattern" in definition:
+        bits.append(f"matching the pattern {definition['pattern']}")
+    if "format" in definition:
+        bits.append(f"of format {definition['format']}")
+
+    return ", ".join(bits)
+
+
+def allowed_values_of(definition):
+    """The list of values a field or column accepts, with refs resolved."""
+    if not isinstance(definition, dict):
+        return None
+
+    collected = []
+    for source in (definition.get("enum"), definition.get("values")):
+        if isinstance(source, list):
+            for item in source:
+                resolved = resolve_enum(item)
+                if resolved is not None and resolved not in collected:
+                    collected.append(resolved)
+
+    alternatives = definition.get("anyOf")
+    if isinstance(alternatives, list):
+        for alt in alternatives:
+            for item in (allowed_values_of(alt) or []):
+                if item not in collected:
+                    collected.append(item)
+
+    items = definition.get("items")
+    if isinstance(items, dict):
+        for item in (allowed_values_of(items) or []):
+            if item not in collected:
+                collected.append(item)
+
+    return collected or None
+
+
+# ------------------------------------------------------------
+# Rendering schema expressions as prose
+#
+# Selectors and checks are written in the schema's own expression language.
+# "suffix == 'T1w'" is readable enough, but "nifti_header.dim[0] == 3" and
+# 'match(extension, "^\.nii(\.gz)?$")' are not, and they are exactly the part a
+# user needs explained when a check fails.
+# ------------------------------------------------------------
+
+EXPRESSION_GLOSSARY = [
+    (r'^match\(extension,\s*"\^\\\.nii\(\\\.gz\)\?\$"\)$',
+     "the file is a NIfTI image (.nii or .nii.gz)"),
+    (r'^datatype\s*==\s*[\'"](\w+)[\'"]$',
+     r"the file is in the \1 datatype directory"),
+    (r'^suffix\s*==\s*[\'"]([\w\-]+)[\'"]$',
+     r"the file's suffix is \1"),
+    (r'^extension\s*==\s*[\'"]([\w.\-]+)[\'"]$',
+     r"the file extension is \1"),
+    (r'^modality\s*==\s*[\'"](\w+)[\'"]$',
+     r"the file belongs to the \1 modality"),
+    (r'^nifti_header\s*!=\s*null$',
+     "the NIfTI header could be read"),
+    (r'^sidecar\s*!=\s*null$',
+     "a JSON sidecar was found for the file"),
+    (r'^"(\w+)"\s+in\s+sidecar$',
+     r"the sidecar defines \1"),
+    (r'^!\("(\w+)"\s+in\s+sidecar\)$',
+     r"the sidecar does not define \1"),
+    (r'^nifti_header\.dim\[0\]\s*==\s*(\d+)$',
+     r"the image has exactly \1 dimensions"),
+    (r'^nifti_header\.dim\[(\d+)\]\s*==\s*(\d+)$',
+     r"dimension \1 of the image is exactly \2"),
+    (r'^nifti_header\.dim\[(\d+)\]\s*>\s*(\d+)$',
+     r"dimension \1 of the image is greater than \2"),
+    (r'^type\s*==\s*[\'"](\w+)[\'"]$',
+     r"the entry is a \1"),
+]
+
+
+def explain_expression(expression) -> str:
+    """Render one schema expression in plain language, best effort.
+
+    Anything not recognised is returned unchanged rather than dropped: a raw
+    expression is still useful, an omission is not.
+    """
+    text = str(expression or "").strip()
+    if not text:
+        return ""
+
+    for pattern, replacement in EXPRESSION_GLOSSARY:
+        match = re.match(pattern, text)
+        if match:
+            return re.sub(pattern, replacement, text)
+
+    readable = text
+    readable = re.sub(r'\bintersects\(([^,]+),\s*([^)]+)\)', r"\1 shares a value with \2", readable)
+    readable = re.sub(r'\bmatch\(([^,]+),\s*"([^"]+)"\)', r"\1 matches \2", readable)
+    readable = re.sub(r'\bexists\(([^,]+),\s*"([^"]+)"\)', r"\1 exists relative to the \2", readable)
+    readable = re.sub(r'\bcount\(([^)]+)\)', r"the number of \1", readable)
+    readable = re.sub(r'\blength\(([^)]+)\)', r"the length of \1", readable)
+    readable = readable.replace("&&", "and").replace("||", "or")
+    return readable
+
+
+def explain_expressions(expressions, joiner="; ") -> str:
+    """Render a list of schema expressions as one readable clause."""
+    if not expressions:
+        return ""
+    if isinstance(expressions, str):
+        expressions = [expressions]
+    parts = [explain_expression(e) for e in expressions]
+    return joiner.join(p for p in parts if p)
+
+
+def as_list(value):
+    """Coerce a schema value that may be a scalar or a list into a list."""
+    if value is None:
+        return []
+    if isinstance(value, list):
+        return value
+    return [value]
+
+
+def resolve_schema_ref(ref: str):
+    """Resolve a dotted intra-schema reference such as
+    ``rules.checks.deprecations.AnatomicalLandmarkCoordinateSystemDeprecation``.
+
+    A check may inherit its whole ``issue`` block from a sibling this way. Left
+    unresolved, the inheriting check has no code, no message and no severity, so
+    it silently falls back to the default of "error" and becomes unfindable
+    under the code it actually reports.
+    """
+    parts = [p for p in str(ref or "").split(".") if p]
+    if len(parts) < 2:
+        return None
+
+    # The longest leading run of path components that names a real file wins,
+    # because a schema key may itself contain no dots but a path may be nested.
+    for split_at in range(len(parts) - 1, 0, -1):
+        base = SRC_DIR.joinpath(*parts[:split_at])
+        for candidate in (base.with_suffix(".yaml"), base.with_suffix(".yml")):
+            if candidate.exists():
+                data = safe_load_yaml(str(candidate))
+                node = data
+                for key in parts[split_at:]:
+                    if not isinstance(node, dict) or key not in node:
+                        node = None
+                        break
+                    node = node[key]
+                if node is not None:
+                    return node
+    return None
+
+
+def expand_schema_ref(entry):
+    """Merge a ``$ref`` target into an entry, with local keys winning."""
+    if not isinstance(entry, dict) or "$ref" not in entry:
+        return entry
+
+    target = resolve_schema_ref(entry["$ref"])
+    if not isinstance(target, dict):
+        return entry
+
+    merged = dict(target)
+    for key, value in entry.items():
+        if key != "$ref":
+            merged[key] = value
+    return merged
+
+
+def rel_source(path) -> str:
+    """Path of a schema file relative to the schema root, POSIX-style.
+
+    Always POSIX: the knowledge base is generated on one machine and read on
+    another, and a backslash in a source path silently splits one file into two
+    entries in the source inventory.
+    """
+    try:
+        return Path(path).resolve().relative_to(SRC_DIR).as_posix()
+    except (ValueError, OSError):
+        return Path(path).as_posix()
 
 
 # ============================================================
@@ -1125,13 +1477,30 @@ def extract_errors():
                 else:
                     apply_msg = ""
                 
+                message = clean_text(message)
+
+                severity_text = (
+                    "This is reported as an ERROR and makes the dataset invalid."
+                    if level == "error"
+                    else "This is reported as a WARNING. The dataset remains "
+                    "valid, but the standard advises against the situation."
+                )
+
                 save_record({
-                    "id": make_id("err", err_key),
+                    "id": make_id("err", code.lower()),
                     "knowledge_type": knowledge_type,
-                    "title": f"{level.upper()}: {code}",
-                    "summary": message[:200] + "..." if len(message) > 200 else message,
-                    "retrieval_text": f"{code}: {message}. Severity: {level}. {apply_msg}",
-                    "scope": {"severity": level},
+                    "title": f"{level.upper()} {code}",
+                    "summary": f"{code}: {message}" if message else f"{code} ({level}).",
+                    "retrieval_text": " ".join(p for p in [
+                        f"Validation issue code {code} ({level}).",
+                        message,
+                        severity_text,
+                        apply_msg,
+                        f"{code} is a built-in validator issue rather than a "
+                        f"schema rule check; it is raised by the validator "
+                        f"itself while reading the dataset.",
+                    ] if p),
+                    "scope": {"issue_code": code, "severity": level},
                     "conditions": selectors,
                     "requirements": {"code": code},
                     "severity": level,
@@ -1148,7 +1517,7 @@ def extract_errors():
                 
                 if selectors:
                     save_relationship({
-                        "source": f"err_{err_key}",
+                        "source": make_id("err", code.lower()),
                         "relation": "applies_to",
                         "target": "file_context",
                         "source_reference": "rules/errors.yaml",
@@ -1272,64 +1641,214 @@ def extract_file_rules():
 # Sidecar & JSON metadata rules
 # ============================================================
 
+# Where a field or column is required, collected while the rules are read and
+# joined into the object's own definition record afterwards.
+FIELD_REQUIREMENTS = defaultdict(list)
+COLUMN_REQUIREMENTS = defaultdict(list)
+
+
+def _field_level(field_spec):
+    """The requirement level of one field inside a rule group.
+
+    The schema writes a field either as a bare level (``TaskName: required``) or
+    as a mapping carrying the level plus addenda. Both forms mean the same thing
+    and both occur in the same file.
+    """
+    if isinstance(field_spec, str):
+        return field_spec.strip().lower(), {}
+    if isinstance(field_spec, dict):
+        level = str(field_spec.get("level", "optional")).strip().lower()
+        return level, field_spec
+    return "optional", {}
+
+
 def extract_sidecar_rules():
-    """Extract sidecar/metadata rules from rules/sidecars/ directory."""
+    """Extract JSON sidecar metadata rules from rules/sidecars/.
+
+    The top-level keys of these files are RULE GROUPS, not field names. A group
+    such as ``MRIFuncRepetitionTime`` carries ``selectors`` saying which files it
+    governs and ``fields`` naming the metadata that those files must, should or
+    may define. Treating the group name as a field name produces records for
+    things that are not metadata fields, while the fields users are actually told
+    about (RepetitionTime, EchoTime, TaskName) get no record at all.
+
+    One record is emitted per (rule group, field) pair, keyed on the real field
+    name, carrying the requirement level and the conditions under which it
+    applies. The group itself also gets a record, because "which fields does a
+    BOLD file need" is a question about the group.
+    """
     sidecars_dir = SRC_DIR / "rules" / "sidecars"
-    
+
     if not sidecars_dir.exists():
         return
-    
-    for rule_file in sidecars_dir.rglob("*.yaml"):
+
+    for rule_file in sorted(sidecars_dir.rglob("*.y*ml")):
         data = safe_load_yaml(str(rule_file))
-        record_source(f"rules/sidecars/{rule_file.relative_to(sidecars_dir)}", "sidecar_rules")
-        
-        if isinstance(data, dict):
-            for field_name, field_data in data.items():
-                if not isinstance(field_data, dict):
-                    continue
-                
-                # This is a metadata field definition
-                definition = field_data.get("definition", field_data.get("description", ""))
-                type_ = field_data.get("type", "string")
-                required = field_data.get("required", False)
-                values = field_data.get("values", [])
-                units = field_data.get("unit", None)
-                applicable = field_data.get("applicable_to", [])
-                
+        source_file = rel_source(rule_file)
+        record_source(source_file, "sidecar_rules")
+
+        if not isinstance(data, dict):
+            continue
+
+        is_derivative = "derivatives" in rule_file.parts
+
+        for group_name, group_data in data.items():
+            if not isinstance(group_data, dict):
+                continue
+
+            selectors = as_list(group_data.get("selectors"))
+            fields = group_data.get("fields")
+
+            if not isinstance(fields, dict):
+                continue
+
+            when_text = explain_expressions(selectors, joiner=" and ")
+            scope_text = when_text or "any file the group matches"
+
+            # ---- one record per field in the group --------------------
+            group_field_summary = []
+
+            for field_name, field_spec in fields.items():
+                level, extra = _field_level(field_spec)
+                definition = METADATA_OBJECTS.get(field_name, {})
+
+                description = clean_text(definition.get("description", ""))
+                addendum = clean_text(extra.get("description_addendum", ""))
+                level_addendum = clean_text(extra.get("level_addendum", ""))
+                type_text = describe_type(definition)
+                values = allowed_values_of(definition)
+                unit = definition.get("unit") or (
+                    (definition.get("anyOf") or [{}])[0].get("unit")
+                    if isinstance(definition.get("anyOf"), list)
+                    else None
+                )
+
+                group_field_summary.append(f"{field_name} ({level})")
+
+                FIELD_REQUIREMENTS[field_name].append({
+                    "level": level,
+                    "rule_group": group_name,
+                    "selectors": selectors,
+                    "source_file": source_file,
+                    "derivative": is_derivative,
+                })
+
+                retrieval_parts = [
+                    f"The JSON sidecar metadata field {field_name} is "
+                    f"{LEVEL_PHRASING.get(level, level)} when {scope_text}.",
+                    description,
+                    f"Its value is {type_text}." if type_text else "",
+                    f"Allowed values: {', '.join(str(v) for v in values)}." if values else "",
+                    f"It is expressed in {unit}."
+                    if unit and f"in {unit}" not in type_text else "",
+                    level_addendum,
+                    addendum,
+                    f"This requirement comes from the {group_name} rule group in "
+                    f"the BIDS schema"
+                    + (" for derivative datasets." if is_derivative else "."),
+                ]
+
                 save_record({
-                    "id": make_id("meta", field_name),
+                    "id": make_id("metafield", f"{group_name}_{field_name}"),
                     "knowledge_type": "MetadataRule",
-                    "title": f"Metadata Field: {field_name}",
-                    "summary": f"JSON sidecar field '{field_name}' of type {type_}.{' Required' if required else ' Optional'}.",
-                    "retrieval_text": f"The JSON sidecar metadata field '{field_name}' is{' required' if required else ' optional'} "
-                                    f"with type '{type_}'.{f' Definition: {definition}' if definition else ''}. "
-                                    f"{'Applicable to: ' + ', '.join(applicable) if applicable else 'Applies broadly to sidecar files.'}",
+                    "title": f"Sidecar field {field_name} is {level} ({group_name})",
+                    "summary": (
+                        f"The JSON sidecar field '{field_name}' is {level} when "
+                        f"{scope_text}."
+                    ),
+                    "retrieval_text": " ".join(p for p in retrieval_parts if p),
                     "scope": {
                         "metadata_fields": [field_name],
-                        "applicable_to": applicable
+                        "rule_group": group_name,
+                        "level": level,
+                        "dataset_types": ["derivative"] if is_derivative else ["raw"],
                     },
-                    "conditions": [{"required": required}] if required else [{"required": required}],
-                    "requirements": [{"type": type_, "required": required}],
-                    "allowed_values": [v.get("value", v) if isinstance(v, dict) else v for v in values] if values else None,
-                    "unit": units,
+                    "conditions": selectors,
+                    "requirements": {
+                        "field": field_name,
+                        "level": level,
+                        "applies_when": selectors,
+                        "type": type_text or None,
+                    },
+                    "allowed_values": values,
+                    "unit": unit,
+                    "severity": "error" if level == "required" else (
+                        "warning" if level == "recommended" else None
+                    ),
                     "bids_version": BIDS_VERSION,
                     "schema_version": SCHEMA_VERSION,
                     "source": {
-                        "file": f"rules/sidecars/{rule_file.relative_to(sidecars_dir)}",
+                        "file": source_file,
                         "path": str(rule_file),
-                        "section": "metadata_fields",
-                        "key": field_name
+                        "section": group_name,
+                        "key": field_name,
                     },
-                    "raw_content": field_data
+                    "raw_content": {
+                        "rule_group": group_name,
+                        "selectors": selectors,
+                        "field": field_name,
+                        "spec": field_spec,
+                    },
                 })
-                
+
                 save_relationship({
-                    "source": "json_sidecars",
-                    "relation": "defines",
-                    "target": f"meta_{field_name}",
-                    "source_reference": f"rules/sidecars/{rule_file.name}",
-                    "confidence": "explicit"
+                    "source": make_id("metafield", f"{group_name}_{field_name}"),
+                    "relation": "requires" if level == "required" else "applies_to",
+                    "target": make_id("meta", field_name),
+                    "source_reference": source_file,
+                    "confidence": "explicit",
                 })
+
+            # ---- the rule group as a whole ----------------------------
+            required_fields = [
+                name for name, spec in fields.items() if _field_level(spec)[0] == "required"
+            ]
+            recommended_fields = [
+                name for name, spec in fields.items() if _field_level(spec)[0] == "recommended"
+            ]
+
+            group_parts = [
+                f"The BIDS sidecar rule group {group_name} applies when "
+                f"{scope_text}." if when_text else
+                f"The BIDS sidecar rule group {group_name} groups related "
+                f"metadata fields.",
+                f"It makes these fields REQUIRED: {', '.join(required_fields)}."
+                if required_fields else "",
+                f"It RECOMMENDS these fields: {', '.join(recommended_fields)}."
+                if recommended_fields else "",
+                f"All fields in the group: {', '.join(group_field_summary)}.",
+            ]
+
+            save_record({
+                "id": make_id("sidecargroup", group_name),
+                "knowledge_type": "MetadataRule",
+                "title": f"Sidecar rule group: {group_name}",
+                "summary": (
+                    f"Rule group '{group_name}' defines {len(fields)} sidecar "
+                    f"field(s) for files where {scope_text}."
+                ),
+                "retrieval_text": " ".join(p for p in group_parts if p),
+                "scope": {
+                    "rule_group": group_name,
+                    "metadata_fields": list(fields.keys()),
+                    "dataset_types": ["derivative"] if is_derivative else ["raw"],
+                },
+                "conditions": selectors,
+                "requirements": {
+                    "required": required_fields,
+                    "recommended": recommended_fields,
+                    "applies_when": selectors,
+                },
+                "bids_version": BIDS_VERSION,
+                "schema_version": SCHEMA_VERSION,
+                "source": {
+                    "file": source_file,
+                    "path": str(rule_file),
+                    "section": "rule_groups",
+                    "key": group_name,
+                },
+                "raw_content": group_data,
+            })
 
 
 # ============================================================
@@ -1337,58 +1856,214 @@ def extract_sidecar_rules():
 # ============================================================
 
 def extract_tabular_rules():
-    """Extract TSV/CSV column rules from rules/tabular_data/ directory."""
+    """Extract TSV column rules from rules/tabular_data/.
+
+    A column is written either as a bare level (``age: recommended``) or as a
+    mapping carrying the level. Reading the bare form as a description turns the
+    word "recommended" into the column's documentation and loses the requirement
+    level entirely, so every column ends up described as optional including the
+    ones the standard requires.
+
+    The column's meaning lives in objects/columns.yaml, not here, so the two are
+    joined. A table also carries rules about the table as a whole (which columns
+    must come first, which must be unique, whether extra columns are allowed),
+    and those are what several validator messages are about.
+    """
     tabular_dir = SRC_DIR / "rules" / "tabular_data"
-    
+
     if not tabular_dir.exists():
         return
-    
-    for rule_file in tabular_dir.rglob("*.yaml"):
+
+    for rule_file in sorted(tabular_dir.rglob("*.y*ml")):
         data = safe_load_yaml(str(rule_file))
-        record_source(f"rules/tabular_data/{rule_file.relative_to(tabular_dir)}", "tabular_rules")
-        
-        if isinstance(data, dict):
-            for file_name, file_data in data.items():
-                if not isinstance(file_data, dict):
-                    continue
-                
-                columns = file_data.get("columns", file_data)
-                
-                if isinstance(columns, dict):
-                    for col_name, col_data in columns.items():
-                        if not isinstance(col_data, dict):
-                            col_data = {"description": col_data if isinstance(col_data, str) else ""}
-                        
-                        description = col_data.get("description", "")
-                        required = col_data.get("required", False)
-                        type_ = col_data.get("type", "string")
-                        values = col_data.get("values", [])
-                        
-                        save_record({
-                            "id": make_id("tabcol", file_name, col_name),
-                            "knowledge_type": "TabularRule",
-                            "title": f"Column '{col_name}' in {file_name}",
-                            "summary": f"Column '{col_name}' in {file_name} is{' required' if required else ' optional'}.",
-                            "retrieval_text": f"The TSV file '{file_name}' has a column named '{col_name}'. "
-                                            f"It is {'required' if required else 'optional'} "
-                                            f"with data type '{type_}'. "
-                                            f"Description: {description[:100]}.",
-                            "scope": {
-                                "tabular_files": [file_name],
-                                "columns": [col_name]
-                            },
-                            "requirements": [{"type": type_, "required": required}],
-                            "allowed_values": [v.get("value", v) if isinstance(v, dict) else v for v in values] if values else None,
-                            "bids_version": BIDS_VERSION,
-                            "schema_version": SCHEMA_VERSION,
-                            "source": {
-                                "file": f"rules/tabular_data/{rule_file.relative_to(tabular_dir)}",
-                                "path": str(rule_file),
-                                "section": "tabular_columns",
-                                "key": col_name
-                            },
-                            "raw_content": col_data
-                        })
+        source_file = rel_source(rule_file)
+        record_source(source_file, "tabular_rules")
+
+        if not isinstance(data, dict):
+            continue
+
+        for table_name, table_data in data.items():
+            if not isinstance(table_data, dict):
+                continue
+
+            columns = table_data.get("columns")
+            if not isinstance(columns, dict):
+                continue
+
+            selectors = as_list(table_data.get("selectors"))
+            initial_columns = as_list(table_data.get("initial_columns"))
+            index_columns = as_list(table_data.get("index_columns"))
+            additional = table_data.get("additional_columns", "not_allowed")
+
+            when_text = explain_expressions(selectors, joiner=" and ")
+            scope_text = when_text or f"the {table_name} table"
+
+            # ---- one record per column --------------------------------
+            for col_name, col_spec in columns.items():
+                level, extra = _field_level(col_spec)
+                definition = COLUMN_OBJECTS.get(col_name, {})
+
+                # Column keys carry a disambiguating suffix (type__channels)
+                # because the same column name means different things in
+                # different tables. The name written in the file is the part
+                # before the double underscore.
+                header_name = definition.get("name") or col_name.split("__")[0]
+
+                description = clean_text(definition.get("description", ""))
+                addendum = clean_text(extra.get("description_addendum", ""))
+                level_addendum = clean_text(extra.get("level_addendum", ""))
+                type_text = describe_type(definition)
+                values = allowed_values_of(definition)
+                unit = (definition.get("definition") or {}).get("Units") if isinstance(
+                    definition.get("definition"), dict
+                ) else definition.get("unit")
+
+                COLUMN_REQUIREMENTS[col_name].append({
+                    "level": level,
+                    "table": table_name,
+                    "selectors": selectors,
+                    "source_file": source_file,
+                })
+
+                position_note = ""
+                if header_name in [str(c) for c in initial_columns]:
+                    position = [str(c) for c in initial_columns].index(header_name) + 1
+                    position_note = (
+                        f"It must appear as column number {position} of the file; "
+                        f"the order of the first columns is fixed."
+                    )
+
+                unique_note = (
+                    f"Values in this column must be unique across the file."
+                    if header_name in [str(c) for c in index_columns]
+                    else ""
+                )
+
+                retrieval_parts = [
+                    f"In the {table_name} TSV table, the column {header_name} is "
+                    f"{LEVEL_PHRASING.get(level, level)}.",
+                    f"The table is identified when {when_text}." if when_text else "",
+                    description,
+                    f"Its values are {type_text}." if type_text else "",
+                    f"Allowed values: {', '.join(str(v) for v in values)}." if values else "",
+                    f"It is expressed in {unit}."
+                    if unit and f"in {unit}" not in type_text else "",
+                    position_note,
+                    unique_note,
+                    level_addendum,
+                    addendum,
+                ]
+
+                save_record({
+                    "id": make_id("tabcol", table_name, col_name),
+                    "knowledge_type": "TabularRule",
+                    "title": f"Column {header_name} is {level} in {table_name}",
+                    "summary": (
+                        f"The '{header_name}' column of the {table_name} TSV "
+                        f"table is {level}."
+                    ),
+                    "retrieval_text": " ".join(p for p in retrieval_parts if p),
+                    "scope": {
+                        "tabular_files": [table_name],
+                        "columns": [header_name],
+                        "level": level,
+                    },
+                    "conditions": selectors,
+                    "requirements": {
+                        "column": header_name,
+                        "level": level,
+                        "type": type_text or None,
+                        "must_be_unique": header_name in [str(c) for c in index_columns],
+                        "fixed_position": position_note or None,
+                    },
+                    "allowed_values": values,
+                    "unit": unit,
+                    "severity": "error" if level == "required" else (
+                        "warning" if level == "recommended" else None
+                    ),
+                    "bids_version": BIDS_VERSION,
+                    "schema_version": SCHEMA_VERSION,
+                    "source": {
+                        "file": source_file,
+                        "path": str(rule_file),
+                        "section": table_name,
+                        "key": col_name,
+                    },
+                    "raw_content": {
+                        "table": table_name,
+                        "selectors": selectors,
+                        "column": col_name,
+                        "spec": col_spec,
+                    },
+                })
+
+            # ---- the table as a whole ---------------------------------
+            required_cols = [
+                (COLUMN_OBJECTS.get(c, {}).get("name") or c.split("__")[0])
+                for c, spec in columns.items()
+                if _field_level(spec)[0] == "required"
+            ]
+            recommended_cols = [
+                (COLUMN_OBJECTS.get(c, {}).get("name") or c.split("__")[0])
+                for c, spec in columns.items()
+                if _field_level(spec)[0] == "recommended"
+            ]
+
+            additional_text = {
+                "allowed": "Columns beyond those listed are allowed, but each one "
+                           "should be documented in the accompanying JSON sidecar.",
+                "allowed_if_defined": "Columns beyond those listed are allowed only "
+                                      "if they are defined in the accompanying JSON "
+                                      "sidecar.",
+                "not_allowed": "No columns beyond those listed are allowed.",
+            }.get(str(additional), f"Additional columns: {additional}.")
+
+            table_parts = [
+                f"The {table_name} TSV table is identified when {when_text}."
+                if when_text else f"The {table_name} TSV table.",
+                f"Its REQUIRED columns are: {', '.join(required_cols)}."
+                if required_cols else "This table has no required columns.",
+                f"Its RECOMMENDED columns are: {', '.join(recommended_cols)}."
+                if recommended_cols else "",
+                f"The first columns must be, in this exact order: "
+                f"{', '.join(str(c) for c in initial_columns)}."
+                if initial_columns else "",
+                f"Values must be unique in: {', '.join(str(c) for c in index_columns)}."
+                if index_columns else "",
+                additional_text,
+            ]
+
+            save_record({
+                "id": make_id("tabtable", table_name),
+                "knowledge_type": "TabularRule",
+                "title": f"TSV table: {table_name}",
+                "summary": (
+                    f"The {table_name} TSV table defines {len(columns)} column(s); "
+                    f"{len(required_cols)} required."
+                ),
+                "retrieval_text": " ".join(p for p in table_parts if p),
+                "scope": {
+                    "tabular_files": [table_name],
+                    "columns": list(columns.keys()),
+                },
+                "conditions": selectors,
+                "requirements": {
+                    "required_columns": required_cols,
+                    "recommended_columns": recommended_cols,
+                    "initial_columns": [str(c) for c in initial_columns],
+                    "index_columns": [str(c) for c in index_columns],
+                    "additional_columns": str(additional),
+                },
+                "bids_version": BIDS_VERSION,
+                "schema_version": SCHEMA_VERSION,
+                "source": {
+                    "file": source_file,
+                    "path": str(rule_file),
+                    "section": "tables",
+                    "key": table_name,
+                },
+                "raw_content": table_data,
+            })
 
 
 # ============================================================
@@ -1432,70 +2107,461 @@ def extract_derivative_rules():
 
 
 # ============================================================
+# Object definitions: metadata fields and tabular columns
+#
+# These two files are the specification's dictionary. Every message a validator
+# prints about a sidecar field or a TSV column names something defined here, so
+# without them the knowledge base can say that a field is required but not what
+# the field is, what it should contain, or what a valid value looks like.
+# ============================================================
+
+def _summarise_requirements(entries, subject: str) -> tuple:
+    """Turn collected rule hits into prose plus the strongest level seen."""
+    if not entries:
+        return "", None
+
+    by_level = defaultdict(list)
+    for entry in entries:
+        context = explain_expressions(entry.get("selectors"), joiner=" and ")
+        by_level[entry["level"]].append(context or entry.get("rule_group") or entry.get("table") or "")
+
+    strongest = next((lv for lv in LEVEL_ORDER if lv in by_level), None)
+
+    sentences = []
+    for level in LEVEL_ORDER:
+        contexts = [c for c in dict.fromkeys(by_level.get(level, [])) if c]
+        if not contexts:
+            continue
+        shown = contexts[:4]
+        more = len(contexts) - len(shown)
+        tail = f", and {more} further context(s)" if more > 0 else ""
+        sentences.append(
+            f"{subject} is {level.upper()} when {'; or when '.join(shown)}{tail}."
+        )
+
+    return " ".join(sentences), strongest
+
+
+def extract_metadata_objects():
+    """Extract every JSON sidecar metadata field from objects/metadata.yaml.
+
+    Must run after extract_sidecar_rules(), which collects where each field is
+    required so the definition and its requirement contexts land in one record.
+    """
+    objs_path = SRC_DIR / "objects" / "metadata.yaml"
+
+    if not objs_path.exists():
+        return
+
+    data = safe_load_yaml(str(objs_path))
+    source_file = rel_source(objs_path)
+    record_source(source_file, "metadata_field_definitions")
+
+    if not isinstance(data, dict):
+        return
+
+    for field_key, definition in data.items():
+        if not isinstance(definition, dict):
+            continue
+
+        name = definition.get("name", field_key)
+        display = definition.get("display_name", name)
+        description = clean_text(definition.get("description", ""))
+
+        # The schema disambiguates a field that means different things in
+        # different places by suffixing the key: EchoTime__fmap is EchoTime as it
+        # applies to fieldmaps. The suffix is not part of the name written into a
+        # sidecar, but it does have to stay in the id or the variants collide.
+        context = field_key.split("__", 1)[1] if "__" in field_key else ""
+        type_text = describe_type(definition)
+        values = allowed_values_of(definition)
+        unit = definition.get("unit")
+        if not unit and isinstance(definition.get("anyOf"), list):
+            for alt in definition["anyOf"]:
+                if isinstance(alt, dict) and alt.get("unit"):
+                    unit = alt["unit"]
+                    break
+
+        requirement_text, strongest = _summarise_requirements(
+            FIELD_REQUIREMENTS.get(name, []),
+            f"The {name} field",
+        )
+
+        if not requirement_text:
+            requirement_text = (
+                f"No sidecar rule group in this schema version makes {name} "
+                f"required or recommended, so it is optional wherever it is "
+                f"permitted."
+            )
+
+        retrieval_parts = [
+            f"{name} ({display}) is a BIDS JSON sidecar metadata field.",
+            f"This entry covers {name} as it applies to {context}."
+            if context else "",
+            description,
+            f"Its value is {type_text}." if type_text else "",
+            f"Allowed values: {', '.join(str(v) for v in values)}." if values else "",
+            f"It is expressed in {unit}." if unit and f"in {unit}" not in type_text else "",
+            requirement_text,
+            f"In a JSON sidecar it is written as \"{name}\": <value>.",
+        ]
+
+        save_record({
+            "id": make_id("meta", field_key),
+            "knowledge_type": "MetadataRule",
+            "title": (
+                f"Metadata field: {name} (in {context})" if context
+                else f"Metadata field: {name}"
+            ),
+            "summary": (
+                f"'{name}' ({display}) is a BIDS JSON sidecar field"
+                + (f" holding {type_text}." if type_text else ".")
+            ),
+            "retrieval_text": " ".join(p for p in retrieval_parts if p),
+            "scope": {
+                "metadata_fields": [name],
+                "display_name": display,
+                "level": strongest,
+            },
+            "requirements": {
+                "field": name,
+                "type": type_text or None,
+                "strongest_level": strongest,
+                "required_in": [
+                    e["rule_group"] for e in FIELD_REQUIREMENTS.get(name, [])
+                    if e["level"] == "required"
+                ],
+            },
+            "allowed_values": values,
+            "unit": unit,
+            "bids_version": BIDS_VERSION,
+            "schema_version": SCHEMA_VERSION,
+            "source": {
+                "file": source_file,
+                "path": str(objs_path),
+                "section": "metadata",
+                "key": field_key,
+            },
+            "raw_content": definition,
+        })
+
+
+def extract_column_objects():
+    """Extract every TSV column definition from objects/columns.yaml.
+
+    Must run after extract_tabular_rules() for the same reason as metadata
+    fields: the definition says what the column means, the rules say where it is
+    required, and a user needs both at once.
+    """
+    objs_path = SRC_DIR / "objects" / "columns.yaml"
+
+    if not objs_path.exists():
+        return
+
+    data = safe_load_yaml(str(objs_path))
+    source_file = rel_source(objs_path)
+    record_source(source_file, "column_definitions")
+
+    if not isinstance(data, dict):
+        return
+
+    for col_key, definition in data.items():
+        if not isinstance(definition, dict):
+            continue
+
+        name = definition.get("name", col_key.split("__")[0])
+        display = definition.get("display_name", name)
+        description = clean_text(definition.get("description", ""))
+        type_text = describe_type(definition)
+        values = allowed_values_of(definition)
+
+        embedded = definition.get("definition")
+        unit = embedded.get("Units") if isinstance(embedded, dict) else definition.get("unit")
+
+        requirement_text, strongest = _summarise_requirements(
+            COLUMN_REQUIREMENTS.get(col_key, []),
+            f"The {name} column",
+        )
+
+        tables = sorted({
+            e["table"] for e in COLUMN_REQUIREMENTS.get(col_key, [])
+        })
+
+        retrieval_parts = [
+            f"{name} ({display}) is a column in a BIDS TSV table.",
+            description,
+            f"Its values are {type_text}." if type_text else "",
+            f"Allowed values: {', '.join(str(v) for v in values)}." if values else "",
+            f"It is expressed in {unit}." if unit and f"in {unit}" not in type_text else "",
+            f"It appears in these tables: {', '.join(tables)}." if tables else "",
+            requirement_text,
+        ]
+
+        save_record({
+            "id": make_id("column", col_key),
+            "knowledge_type": "TabularRule",
+            "title": f"TSV column: {name}",
+            "summary": (
+                f"'{name}' ({display}) is a BIDS TSV column"
+                + (f" holding {type_text}." if type_text else ".")
+            ),
+            "retrieval_text": " ".join(p for p in retrieval_parts if p),
+            "scope": {
+                "columns": [name],
+                "tabular_files": tables,
+                "display_name": display,
+                "level": strongest,
+            },
+            "requirements": {
+                "column": name,
+                "type": type_text or None,
+                "strongest_level": strongest,
+                "tables": tables,
+            },
+            "allowed_values": values,
+            "unit": unit,
+            "bids_version": BIDS_VERSION,
+            "schema_version": SCHEMA_VERSION,
+            "source": {
+                "file": source_file,
+                "path": str(objs_path),
+                "section": "columns",
+                "key": col_key,
+            },
+            "raw_content": definition,
+        })
+
+
+# ============================================================
 # Check extraction (validation procedures)
 # ============================================================
 
 def extract_validation_checks():
-    """Extract validation check definitions from rules/checks/ directory."""
+    """Extract validation check definitions from rules/checks/ directory.
+
+    A check is the unit a validator actually reports. Each one carries an
+    ``issue`` block holding the CODE the user sees in the validator output, the
+    message shown next to it, and the severity. Those three live one level down
+    from the check body, so the code, the message and the real severity must be
+    read from ``check_data["issue"]`` rather than from the check itself.
+
+    The code is put into the record id, title, summary and retrieval text on
+    purpose. A user asking about a failed validation pastes the code and nothing
+    else, so any record whose code is reachable only through nested raw content
+    cannot be found by the one query that matters.
+    """
     checks_dir = SRC_DIR / "rules" / "checks"
-    
+
     if not checks_dir.exists():
         return
-    
-    for check_file in checks_dir.rglob("*.yaml"):
+
+    # ---- pass 1: gather every check, grouped by the code it reports ----
+    #
+    # One code can be reached from several checks. IntendedFor is verified
+    # separately for four kinds of reference, and the deprecated-coordinate-system
+    # warning is repeated once per coordinate field. They are one answer to the
+    # user, who sees one code and asks one question, so they are aggregated into
+    # one record rather than several records competing for the same identifier.
+    by_code = {}
+
+    for check_file in sorted(checks_dir.rglob("*.y*ml")):
         data = safe_load_yaml(str(check_file))
-        record_source(f"rules/checks/{check_file.relative_to(checks_dir)}", "validation_checks")
-        
-        if isinstance(data, dict):
-            for check_name, check_data in data.items():
-                if not isinstance(check_data, dict):
-                    continue
-                
-                check_type = check_data.get("type", "check")
-                description = check_data.get("description", "")
-                condition = check_data.get("condition", "")
-                on_failure = check_data.get("on_failure", None)
-                on_success = check_data.get("on_success", None)
-                selectors = check_data.get("selectors", [])
-                level = check_data.get("level", "error")
-                message = check_data.get("message", "")
-                
-                knowledge_type = "Check" if check_type == "check" else ("Error" if level == "error" else "Warning")
-                
-                save_record({
-                    "id": make_id("check", check_file.stem, check_name),
-                    "knowledge_type": knowledge_type,
-                    "title": f"Validation Check: {check_name}",
-                    "summary": description or f"Checks {check_name} compliance.",
-                    "retrieval_text": f"This BIDS validation check verifies {check_name}: {description}. "
-                                    f"Failure produces a {'warning' if level == 'warning' else 'error'}.",
-                    "scope": {
-                        "check_type": check_type,
-                        "severity": level
-                    },
-                    "conditions": [condition] if condition else selectors,
-                    "requirements": {"on_failure": on_failure, "on_success": on_success},
-                    "severity": level,
-                    "expression": condition if condition else None,
-                    "bids_version": BIDS_VERSION,
-                    "schema_version": SCHEMA_VERSION,
-                    "source": {
-                        "file": f"rules/checks/{check_file.name}",
-                        "path": str(check_file),
-                        "section": "checks",
-                        "key": check_name
-                    },
-                    "raw_content": check_data
+        source_file = rel_source(check_file)
+        record_source(source_file, "validation_checks")
+
+        if not isinstance(data, dict):
+            continue
+
+        # The datatype a check belongs to is the file it is defined in:
+        # rules/checks/func.yaml holds the checks for functional data.
+        check_group = check_file.stem
+
+        for check_name, check_data in data.items():
+            if not isinstance(check_data, dict):
+                continue
+
+            # A check may inherit its issue block from a sibling via $ref.
+            check_data = expand_schema_ref(check_data)
+
+            issue = check_data.get("issue") or {}
+            if not isinstance(issue, dict):
+                issue = {}
+
+            code = issue.get("code") or check_data.get("code") or check_name
+            message = clean_text(issue.get("message") or check_data.get("message", ""))
+            level = (issue.get("level") or check_data.get("level") or "error").lower()
+
+            entry = by_code.setdefault(code, {
+                "code": code,
+                "message": message,
+                "level": level,
+                "variants": [],
+                "groups": [],
+                "source_file": source_file,
+                "path": str(check_file),
+                "first_name": check_name,
+            })
+
+            # The strongest severity wins: if any route to this code reports an
+            # error, a user seeing the code is looking at an error.
+            if level == "error":
+                entry["level"] = "error"
+            if message and not entry["message"]:
+                entry["message"] = message
+            if check_group not in entry["groups"]:
+                entry["groups"].append(check_group)
+
+            entry["variants"].append({
+                "check_name": check_name,
+                "check_group": check_group,
+                "selectors": as_list(check_data.get("selectors")),
+                "checks": as_list(check_data.get("checks") or check_data.get("condition")),
+                "source_file": source_file,
+                "raw": check_data,
+            })
+
+    # ---- pass 2: one record per code -----------------------------------
+    for code, entry in sorted(by_code.items()):
+        level = entry["level"]
+        message = entry["message"]
+        variants = entry["variants"]
+        knowledge_type = "Warning" if level == "warning" else "Check"
+
+        all_selectors = []
+        all_assertions = []
+        for variant in variants:
+            for item in variant["selectors"]:
+                if item not in all_selectors:
+                    all_selectors.append(item)
+            for item in variant["checks"]:
+                if item not in all_assertions:
+                    all_assertions.append(item)
+
+        severity_text = (
+            "Failing this check is reported as an ERROR, which makes the "
+            "dataset invalid."
+            if level == "error"
+            else "Failing this check is reported as a WARNING. The dataset "
+            "is still valid, but the standard recommends against it."
+        )
+
+        # Each route to the code is described on its own, because "when does
+        # this fire" has a different answer per route.
+        context_sentences = []
+        for variant in variants:
+            when_text = explain_expressions(variant["selectors"], joiner=" and ")
+            must_text = explain_expressions(variant["checks"], joiner=" and ")
+            if when_text and must_text:
+                context_sentences.append(
+                    f"When {when_text}, it requires that {must_text}."
+                )
+            elif must_text:
+                context_sentences.append(f"It requires that {must_text}.")
+            elif when_text:
+                context_sentences.append(f"It is evaluated when {when_text}.")
+
+        variant_note = (
+            f"This code is reported from {len(variants)} separate checks in the "
+            f"BIDS schema ({', '.join(v['check_name'] for v in variants)}), so it "
+            f"can be raised in more than one situation."
+            if len(variants) > 1
+            else f"The check is named {entry['first_name']} in the BIDS schema."
+        )
+
+        retrieval_parts = [
+            f"Validation issue code {code} ({level}).",
+            message,
+            " ".join(context_sentences),
+            severity_text,
+            variant_note,
+            f"It concerns {', '.join(entry['groups'])} data.",
+        ]
+
+        record_id = make_id("check", code.lower())
+
+        save_record({
+            "id": record_id,
+            "knowledge_type": knowledge_type,
+            "title": f"{level.upper()} {code}",
+            "summary": (
+                f"{code}: {message}"
+                if message
+                else f"{code}: validation check '{entry['first_name']}' ({level})."
+            ),
+            "retrieval_text": " ".join(p for p in retrieval_parts if p),
+            "scope": {
+                "issue_code": code,
+                "check_name": entry["first_name"],
+                "check_group": entry["groups"][0] if entry["groups"] else "",
+                "check_groups": entry["groups"],
+                "severity": level,
+            },
+            "conditions": all_selectors,
+            "requirements": {
+                "issue_code": code,
+                "message": message,
+                "level": level,
+                "applies_when": all_selectors,
+                "asserts": all_assertions,
+                "variants": [
+                    {
+                        "check_name": v["check_name"],
+                        "selectors": v["selectors"],
+                        "checks": v["checks"],
+                    }
+                    for v in variants
+                ],
+            },
+            "allowed_values": None,
+            "severity": level,
+            "expression": " AND ".join(str(a) for a in all_assertions) or None,
+            "bids_version": BIDS_VERSION,
+            "schema_version": SCHEMA_VERSION,
+            "source": {
+                "file": entry["source_file"],
+                "path": entry["path"],
+                "section": "checks",
+                "key": entry["first_name"],
+            },
+            "raw_content": (
+                variants[0]["raw"] if len(variants) == 1
+                else {v["check_name"]: v["raw"] for v in variants}
+            ),
+        })
+
+        # A check constrains the datatype and suffix named in its selectors.
+        # Recording that lets a question about a datatype reach every check
+        # that can fire on it.
+        for selector in all_selectors:
+            datatype_match = re.match(r'^datatype\s*==\s*[\'"](\w+)[\'"]$', str(selector).strip())
+            if datatype_match:
+                save_relationship({
+                    "source": record_id,
+                    "relation": "applies_to",
+                    "target": f"dt_{datatype_match.group(1)}",
+                    "source_reference": entry["source_file"],
+                    "confidence": "explicit",
                 })
-                
-                if on_failure:
-                    save_relationship({
-                        "source": f"check_{check_name}",
-                        "relation": "triggers",
-                        "target": "error_condition",
-                        "source_reference": f"rules/checks/{check_file.name}",
-                        "confidence": "explicit"
-                    })
+            suffix_match = re.match(r'^suffix\s*==\s*[\'"]([\w\-]+)[\'"]$', str(selector).strip())
+            if suffix_match:
+                save_relationship({
+                    "source": record_id,
+                    "relation": "applies_to",
+                    "target": f"suff_{suffix_match.group(1)}",
+                    "source_reference": entry["source_file"],
+                    "confidence": "explicit",
+                })
+
+        # The sidecar fields a check reads are the fields a user must look at.
+        for expression in all_selectors + all_assertions:
+            for field in re.findall(r'sidecar\.(\w+)', str(expression)):
+                save_relationship({
+                    "source": record_id,
+                    "relation": "requires",
+                    "target": make_id("meta", field),
+                    "source_reference": entry["source_file"],
+                    "confidence": "explicit",
+                })
 
 
 # ============================================================
@@ -1555,28 +2621,54 @@ def main():
     print("=" * 70)
     print("BIDS Knowledge Base Extraction")
     print("=" * 70)
+    print(f"Schema source: {SRC_DIR}")
     print(f"BIDS Version: {BIDS_VERSION}")
     print(f"Schema Version: {SCHEMA_VERSION}")
     print()
-    
+
+    if not SRC_DIR.exists():
+        raise SystemExit(
+            f"Raw BIDS schema not found at {SRC_DIR}.\n"
+            f"Set BIDS_RULES_DIR to the directory holding objects/ and rules/."
+        )
+
+    # Reset the module-level accumulators, so calling main() twice in one
+    # process produces the same output as running the script twice.
+    knowledge_records.clear()
+    relationship_records.clear()
+    source_registry.clear()
+    _used_ids.clear()
+    FIELD_REQUIREMENTS.clear()
+    COLUMN_REQUIREMENTS.clear()
+    for key in stats:
+        stats[key] = 0
+
+    # 0. The object definitions that rules refer to by name. Loaded up front
+    #    because the rule extractors join against them.
+    load_schema_objects()
+    print(
+        f"Loaded schema objects: {len(METADATA_OBJECTS)} metadata fields, "
+        f"{len(COLUMN_OBJECTS)} columns, {len(ENUM_OBJECTS)} enumerations."
+    )
+
     # 1. Version Information
-    print("[1/11] Extracting version information...")
+    print("[1/12] Extracting version information...")
     extract_version_info()
     
     # 2. Context & Associates
-    print("[2/11] Extracting context and association definitions...")
+    print("[2/12] Extracting context and association definitions...")
     extract_context()
     
     # 3. Expression Tests
-    print("[3/11] Extracting expression tests...")
+    print("[3/12] Extracting expression tests...")
     extract_expression_tests()
     
     # 4. Templates
-    print("[4/11] Extracting filename templates...")
+    print("[4/12] Extracting filename templates...")
     extract_templates()
     
     # 5. Objects - Concepts & Definitions
-    print("[5/11] Extracting objects (concepts & definitions)...")
+    print("[5/12] Extracting objects (concepts & definitions)...")
     extract_common_principles()
     extract_entities()
     extract_entity_order()
@@ -1588,32 +2680,39 @@ def main():
     extract_formats()
     
     # 6. Objects - Top-level files
-    print("[6/11] Extracting top-level file definitions...")
+    print("[6/12] Extracting top-level file definitions...")
     extract_top_level_files()
     
     # 7. Rules
-    print("[7/11] Extracting rules (directory layouts, errors, modalities)...")
+    print("[7/12] Extracting rules (directory layouts, errors, modalities)...")
     extract_directory_rules()
     extract_errors()
     extract_modality_rules()
     extract_file_rules()
     
     # 8. Sidecar & JSON metadata
-    print("[8/11] Extracting sidecar/metadata rules...")
+    print("[8/12] Extracting sidecar/metadata rules...")
     extract_sidecar_rules()
-    
+
     # 9. Tabular data rules
-    print("[9/11] Extracting tabular data rules...")
+    print("[9/12] Extracting tabular data rules...")
     extract_tabular_rules()
-    
-    # 10. Derivative rules
-    print("[10/11] Extracting derivative rules...")
+
+    # 10. Object definitions for the fields and columns the rules name.
+    #     Runs after the rules so each definition can state where it is
+    #     required as well as what it means.
+    print("[10/12] Extracting metadata field and column definitions...")
+    extract_metadata_objects()
+    extract_column_objects()
+
+    # 11. Derivative rules
+    print("[11/12] Extracting derivative rules...")
     extract_derivative_rules()
-    
-    # 11. Validation checks
-    print("[11/11] Extracting validation checks...")
+
+    # 12. Validation checks
+    print("[12/12] Extracting validation checks...")
     extract_validation_checks()
-    
+
     # Enums
     extract_enums()
     

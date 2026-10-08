@@ -5,28 +5,28 @@
 - **Schema Version**: 2.0.0-dev
 
 ## What Was Extracted
-The BIDS specification YAML files were processed into **1272 atomic knowledge records** and
-**271 relationship edges**.
+The BIDS specification YAML files were processed into **2488 atomic knowledge records** and
+**1026 relationship edges**.
 
 ### Knowledge Categories
 | Category | Count |
 |----------|-------|
 | Association | 13 |
-| Check | 131 |
+| Check | 72 |
 | Concept | 240 |
 | Definition | 36 |
 | DirectoryRule | 33 |
 | Enum | 218 |
 | Error | 22 |
 | FileSpecification | 180 |
-| MetadataRule | 184 |
+| MetadataRule | 1277 |
 | Relationship | 11 |
-| TabularRule | 180 |
+| TabularRule | 309 |
 | Template | 17 |
 | Version | 2 |
-| Warning | 5 |
+| Warning | 58 |
 
-**Total**: 1272 records
+**Total**: 2488 records
 
 ## How Knowledge Was Categorized
 Each source file was classified and knowledge extracted according to its semantic content:

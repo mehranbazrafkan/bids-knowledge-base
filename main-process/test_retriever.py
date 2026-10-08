@@ -49,33 +49,47 @@ def num_items(result: str) -> int:
 
 # ---------------------------------------------------------------------------
 # Validation report entries (subset actually produced for dataset_description.json)
+#
+# A finding always names a field, and the answer a user wants is what that field
+# is and what it should contain. The knowledge base therefore has to carry a
+# record per metadata field, not only per rule. These cases assert exactly that:
+# the field's own definition must come back, rather than some rule that happens
+# to mention the field in passing.
 # ---------------------------------------------------------------------------
 
-# rule_id / field / short query -> expected knowledge record id (if the KB covers it)
+# rule_id / field / short query -> expected knowledge record id
 EXPECTED_KNOWLEDGE = [
     # JSON_SCHEMA_VALIDATION_ERROR: field must be an array
     ("JSON_SCHEMA_VALIDATION_ERROR", "Authors", "Authors must be array",
-     "check_hints_TooFewAuthors"),
+     "meta_authors"),
     ("JSON_SCHEMA_VALIDATION_ERROR", "ReferencesAndLinks", "ReferencesAndLinks must be array",
-     "check_dataset_SingleSourceCitationFields"),
+     "meta_referencesandlinks"),
+    ("JSON_SCHEMA_VALIDATION_ERROR", "Funding", "Funding must be array",
+     "meta_funding"),
+    ("JSON_SCHEMA_VALIDATION_ERROR", "EthicsApprovals", "EthicsApprovals must be array",
+     "meta_ethicsapprovals"),
     # JSON_KEY_RECOMMENDED: recommended field missing
     ("JSON_KEY_RECOMMENDED", "HEDVersion", "missing recommended field HEDVersion",
-     "err_hedversionnotdefined"),
+     "meta_hedversion"),
+    ("JSON_KEY_RECOMMENDED", "SourceDatasets", "missing recommended field SourceDatasets",
+     "meta_sourcedatasets"),
     # bidsmgr.todo_placeholder: field contains a TODO placeholder
     ("bidsmgr.todo_placeholder", "License", "field License contains a TODO placeholder",
-     "file_license"),
-    ("bidsmgr.todo_placeholder", "Authors", "field Authors contains a TODO placeholder",
-     "check_hints_TooFewAuthors"),
+     "meta_license"),
     ("bidsmgr.todo_placeholder", "HowToAcknowledge",
      "field HowToAcknowledge contains a TODO placeholder",
-     "check_dataset_SingleSourceCitationFields"),
+     "meta_howtoacknowledge"),
+    ("bidsmgr.todo_placeholder", "Acknowledgements",
+     "field Acknowledgements contains a TODO placeholder",
+     "meta_acknowledgements"),
 ]
 
-# Fields with NO knowledge-base record -> clean "no relevant knowledge" fallback
-UNCOVERED_FIELDS = [
-    ("Funding", "Funding must be array"),
-    ("EthicsApprovals", "EthicsApprovals must be array"),
-    ("Acknowledgements", "field Acknowledgements contains a TODO placeholder"),
+# Queries about subjects the BIDS specification does not cover. The retriever
+# must say so rather than returning its least-bad match, because a confident
+# answer to a question the knowledge base cannot answer is worse than no answer.
+OUT_OF_SCOPE_QUERIES = [
+    ("unrelated science", "quantum chromodynamics lattice gauge theory"),
+    ("unrelated software", "how do I configure a kubernetes ingress controller"),
 ]
 
 
@@ -89,12 +103,13 @@ class RetrieverKnowledgeCoverageTest(unittest.TestCase):
                 self.assertIn(
                     f"ID: {expected_id}",
                     result,
-                    f"query {query!r} should retrieve {expected_id}",
+                    f"query {query!r} should retrieve {expected_id}, "
+                    f"got: {item_ids(result)}",
                 )
 
-    def test_uncovered_fields_return_clean_fallback(self):
-        for field, query in UNCOVERED_FIELDS:
-            with self.subTest(field=field):
+    def test_out_of_scope_queries_return_clean_fallback(self):
+        for label, query in OUT_OF_SCOPE_QUERIES:
+            with self.subTest(label=label):
                 result = KB.retrieve(query, top_k=3)
                 self.assertTrue(
                     result.startswith(NO_MATCH_PREFIX),
@@ -104,11 +119,11 @@ class RetrieverKnowledgeCoverageTest(unittest.TestCase):
 
     def test_json_schema_validation_error_rule(self):
         result = KB.retrieve("JSON_SCHEMA_VALIDATION_ERROR", top_k=2)
-        self.assertIn("ID: err_jsonschemavalidationerror", result)
+        self.assertIn("ID: err_json_schema_validation_error", result)
 
     def test_hed_version_rule_code(self):
         result = KB.retrieve("HED_VERSION_NOT_DEFINED", top_k=2)
-        self.assertIn("ID: err_hedversionnotdefined", result)
+        self.assertIn("ID: err_hed_version_not_defined", result)
 
 
 # The 10 demonstration queries, one per validation warning/error, phrased
@@ -118,34 +133,34 @@ class RetrieverKnowledgeCoverageTest(unittest.TestCase):
 DEMO_QUERIES = [
     ("warn JSON_KEY_RECOMMENDED HEDVersion",
      "What is the HEDVersion field used for?",
-     ["err_hedversionnotdefined"]),
+     ["meta_hedversion"]),
     ("warn JSON_KEY_RECOMMENDED SourceDatasets",
      "What is SourceDatasets?",
-     None),
+     ["meta_sourcedatasets"]),
     ("err JSON_SCHEMA_VALIDATION_ERROR Authors",
      "What is the Authors field?",
-     ["check_dataset_SingleSourceAuthors", "check_hints_TooFewAuthors"]),
+     ["meta_authors"]),
     ("err JSON_SCHEMA_VALIDATION_ERROR Funding",
      "What is the Funding field?",
-     None),
+     ["meta_funding"]),
     ("err JSON_SCHEMA_VALIDATION_ERROR EthicsApprovals",
      "What is EthicsApprovals?",
-     None),
+     ["meta_ethicsapprovals"]),
     ("err JSON_SCHEMA_VALIDATION_ERROR ReferencesAndLinks",
      "What is ReferencesAndLinks?",
-     ["check_dataset_SingleSourceCitationFields"]),
+     ["meta_referencesandlinks"]),
     ("warn bidsmgr.todo_placeholder License",
      "What is the License field?",
-     ["file_license"]),
+     ["meta_license"]),
     ("warn bidsmgr.todo_placeholder Authors",
      "What should the Authors field contain?",
-     ["check_dataset_SingleSourceAuthors", "check_hints_TooFewAuthors"]),
+     ["meta_authors"]),
     ("warn bidsmgr.todo_placeholder Acknowledgements",
      "What is Acknowledgements?",
-     None),
+     ["meta_acknowledgements"]),
     ("warn bidsmgr.todo_placeholder HowToAcknowledge",
      "What is HowToAcknowledge?",
-     ["check_dataset_SingleSourceCitationFields"]),
+     ["meta_howtoacknowledge"]),
 ]
 
 
@@ -168,6 +183,278 @@ class DemoQueriesTest(unittest.TestCase):
                             result,
                             f"query {query!r} should retrieve {expected_id}, got: {item_ids(result)}",
                         )
+
+
+class IssueCodeLookupTest(unittest.TestCase):
+    """A pasted validator issue code must reach its own record, exactly.
+
+    This is the single most common query an agent explaining a validation report
+    will ever receive, and it is the one token scoring handles worst: a code
+    splits into ordinary words that occur in hundreds of records, so scoring
+    alone returns a confident answer about a different rule.
+    """
+
+    # One code per source, chosen because their word forms collide with a lot of
+    # other content and so would be misrouted by scoring alone.
+    SAMPLE_CODES = [
+        "T1W_FILE_WITH_TOO_MANY_DIMENSIONS",
+        "BOLD_NOT_4D",
+        "EVENTS_TSV_MISSING",
+        "DWI_MISSING_BVEC",
+        "INTENDED_FOR",
+        "MISSING_SESSION",
+        "NIFTI_TOO_SMALL",
+        "REPETITION_TIME_MISMATCH",
+        "SLICETIMING_VALUES_GREATER_THAN_REPETITION_TIME",
+        "ELEKTA_NEUROMAG_DEPRECATED",
+    ]
+
+    def test_every_sample_code_resolves_to_its_own_record(self):
+        for code in self.SAMPLE_CODES:
+            with self.subTest(code=code):
+                result = KB.retrieve(code, top_k=1)
+                self.assertIn(
+                    f"Title: ", result,
+                    f"code {code} returned no record",
+                )
+                self.assertIn(
+                    code, result,
+                    f"code {code} did not return the record carrying that code, "
+                    f"got: {item_ids(result)}",
+                )
+
+    def test_code_embedded_in_a_sentence_is_found(self):
+        result = KB.retrieve(
+            "my validator says BOLD_NOT_4D, what do I do about it?", top_k=1
+        )
+        self.assertIn("BOLD_NOT_4D", result)
+
+    def test_lookup_code_helper(self):
+        found = KB.lookup_code("BOLD_NOT_4D")
+        self.assertIsNotNone(found)
+        self.assertIn("BOLD_NOT_4D", found)
+        self.assertIsNone(KB.lookup_code("NOT_A_REAL_BIDS_CODE"))
+
+    def test_known_codes_is_non_trivial(self):
+        codes = KB.known_codes()
+        self.assertGreater(len(codes), 100)
+        self.assertEqual(codes, sorted(codes))
+
+    def test_every_code_in_the_knowledge_base_resolves_to_itself(self):
+        # The whole set, not a sample. Pasting a code is the commonest query an
+        # explaining agent receives, so a code that does not resolve is a
+        # question the agent answers with the wrong rule.
+        wrong = []
+        for code in KB.known_codes():
+            ids = item_ids(KB.retrieve(code, top_k=1))
+            expected = KB.records[KB._code_index[code]].id
+            if not ids or ids[0] != expected:
+                wrong.append((code, ids))
+        self.assertEqual(wrong, [], f"codes not resolving to their own record: {wrong[:5]}")
+
+    def test_mixed_case_code_is_recognised(self):
+        # Not every code is upper case: the schema defines M0Type_SET_INCORRECTLY.
+        # An upper-case-only pattern skipped it, and scoring then preferred the
+        # longer codes sharing its prefix.
+        result = KB.retrieve("M0Type_SET_INCORRECTLY", top_k=1)
+        self.assertIn("ID: check_m0type_set_incorrectly\n", result + "\n")
+
+    def test_code_prefix_does_not_shadow_the_exact_code(self):
+        # Several codes are prefixes of longer ones. The exact code must win.
+        for shorter in ("M0Type_SET_INCORRECTLY", "PET_FRAME_CONSISTENCY"):
+            with self.subTest(code=shorter):
+                ids = item_ids(KB.retrieve(shorter, top_k=1))
+                expected = KB.records[KB._code_index[shorter.upper()]].id
+                self.assertEqual(ids[:1], [expected])
+
+
+class FieldDefinitionLookupTest(unittest.TestCase):
+    """Naming a metadata field or column must return that field's definition.
+
+    A validation finding always names a field, so "what is <field>" is the second
+    most common question an explaining agent receives. Without a direct lookup,
+    the validation checks that merely mention a field outrank the field's own
+    definition, because they repeat its name in more places.
+    """
+
+    NAMED_FIELDS = [
+        ("what does EffectiveEchoSpacing mean", "meta_effectiveechospacing"),
+        ("what is RepetitionTime", "meta_repetitiontime"),
+        ("what is SliceTiming", "meta_slicetiming"),
+        ("PowerLineFrequency for EEG", "meta_powerlinefrequency"),
+        ("what is participant_id", "column_participant_id"),
+        ("explain IntendedFor", "meta_intendedfor"),
+    ]
+
+    def test_named_field_returns_its_definition(self):
+        for query, expected_id in self.NAMED_FIELDS:
+            with self.subTest(query=query):
+                result = KB.retrieve(query, top_k=2)
+                self.assertIn(
+                    f"ID: {expected_id}", result,
+                    f"query {query!r} should surface {expected_id}, "
+                    f"got: {item_ids(result)}",
+                )
+
+    def test_ordinary_words_that_are_field_names_do_not_hijack(self):
+        # BIDS defines fields called Type, Name, Columns and Units. A sentence
+        # containing one of those words is not a question about that field.
+        result = KB.retrieve("which columns are required in participants.tsv", top_k=2)
+        self.assertNotIn("ID: meta_columns", result)
+        result = KB.retrieve("channels.tsv type column allowed values", top_k=2)
+        self.assertNotIn("ID: meta_type", result)
+
+    def test_symptom_queries_still_reach_the_checks(self):
+        # Promotion must not displace the checks when a user describes a failure
+        # rather than asking for a definition.
+        result = KB.retrieve("how do I fix a missing events file", top_k=2)
+        self.assertIn("ID: check_events_tsv_missing", result)
+
+
+class EnrichmentTest(unittest.TestCase):
+    """Explanations must reach the formatted output, or they serve no purpose."""
+
+    def test_enrichment_is_merged_onto_records(self):
+        enriched = [r for r in KB.records if r.enrichment]
+        self.assertGreater(
+            len(enriched), 100,
+            "no enrichment was merged; check enriched_knowledge.jsonl",
+        )
+
+    def test_enrichment_appears_in_formatted_output(self):
+        result = KB.retrieve("BOLD_NOT_4D", top_k=1)
+        self.assertIn("How to resolve:", result)
+        self.assertIn("Common causes:", result)
+
+    def test_enrichment_is_labelled_as_explanation(self):
+        # The explanatory text is not specification text, and the output has to
+        # say so, or a model reading it will quote it as though the standard did.
+        result = KB.retrieve("BOLD_NOT_4D", top_k=1)
+        self.assertIn("not normative specification text", result)
+
+    def test_every_issue_code_record_carries_an_explanation(self):
+        missing = [
+            record.id
+            for record in KB.records
+            if (record.scope or {}).get("issue_code") and not record.enrichment
+        ]
+        self.assertEqual(
+            missing, [],
+            f"{len(missing)} validation issue record(s) have no explanation",
+        )
+
+
+class PostingsIndexTest(unittest.TestCase):
+    """The postings index must make scoring faster without changing it.
+
+    Scoring is linear in the size of the knowledge base, which is the one real
+    cost of holding more records. The index narrows each query to the records
+    that share a term with it. That is only legitimate if it is invisible in the
+    results, so the equivalence is asserted rather than assumed.
+    """
+
+    QUERIES = [
+        "how do I fix a missing events file",
+        "why is my bold not 4d",
+        "what does EffectiveEchoSpacing mean",
+        "which columns are required in participants.tsv",
+        "is RepetitionTime required for bold files",
+        "the validator says my T1w has too many dimensions",
+        "channels.tsv type column allowed values",
+        "quantum chromodynamics lattice gauge theory",
+        # A token that matches only as a prefix, which is the case the index
+        # would break if its prefix keys and the scorer's rule disagreed.
+        "diffus gradient direction",
+    ]
+
+    @staticmethod
+    def _score_every_record(kb, query):
+        """Reference implementation: score all records, ignoring the index."""
+        from retriever import Scorer
+        scored = [
+            (Scorer.score(query, kb.records[i], kb.blocks[i], kb.identities[i], kb._idf), i)
+            for i in range(len(kb.records))
+        ]
+        scored = [(s, i) for s, i in scored if s > 0]
+        scored.sort(key=lambda x: (-x[0], x[1]))
+        return scored
+
+    def test_index_returns_the_same_ranking_as_scoring_everything(self):
+        for query in self.QUERIES:
+            with self.subTest(query=query):
+                fast = [i for _s, i in KB._score_all(query)]
+                slow = [i for _s, i in self._score_every_record(KB, query)]
+                self.assertEqual(
+                    fast, slow,
+                    f"the postings index changed the ranking for {query!r}",
+                )
+
+    def test_prefix_keys_match_the_scorer_rule(self):
+        from retriever import Scorer
+        self.assertEqual(
+            Scorer.MIN_PREFIX_LEN, 3,
+            "the scorer's prefix rule and the index's prefix keys are the same "
+            "length by construction; changing one requires changing the other",
+        )
+
+
+class KnowledgeBaseIntegrityTest(unittest.TestCase):
+    """Properties the generated knowledge base must hold."""
+
+    def test_record_ids_are_unique(self):
+        seen = {}
+        duplicates = []
+        for record in KB.records:
+            if record.id in seen:
+                duplicates.append(record.id)
+            seen[record.id] = True
+        self.assertEqual(
+            duplicates, [],
+            f"duplicate record ids silently shadow each other: {duplicates[:5]}",
+        )
+
+    def test_check_severity_matches_the_schema(self):
+        # The severity a record reports must be the one its source declares.
+        # Reporting an error as a warning tells a user their invalid dataset is
+        # merely untidy.
+        wrong = []
+        for record in KB.records:
+            raw = record.raw_content
+            if not isinstance(raw, dict):
+                continue
+            issue = raw.get("issue")
+            if isinstance(issue, dict) and issue.get("level"):
+                if issue["level"] != record.severity:
+                    wrong.append((record.id, issue["level"], record.severity))
+        self.assertEqual(wrong, [], f"severity misreported: {wrong[:5]}")
+
+    def test_source_paths_are_posix(self):
+        # A backslash in a source path splits one source file into two entries
+        # in the inventory, depending on the machine the extraction ran on.
+        offenders = [
+            record.id for record in KB.records
+            if "\\" in str(record.source.get("file", ""))
+        ]
+        self.assertEqual(offenders, [], f"non-POSIX source paths: {offenders[:5]}")
+
+    def test_required_metadata_fields_are_marked_required(self):
+        # Every metadata field was once reported as optional, because the
+        # requirement level lives in the rules and was never read.
+        required = [
+            record for record in KB.records
+            if record.knowledge_type == "MetadataRule"
+            and isinstance(record.requirements, dict)
+            and record.requirements.get("level") == "required"
+        ]
+        self.assertGreater(
+            len(required), 50,
+            "almost nothing is marked required; the level is not being read",
+        )
+
+    def test_known_required_sidecar_field_is_findable(self):
+        result = KB.retrieve("is RepetitionTime required for bold files?", top_k=3)
+        self.assertIn("RepetitionTime", result)
+        self.assertIn("required", result.lower())
 
 
 class RetrieverBehaviourTest(unittest.TestCase):
