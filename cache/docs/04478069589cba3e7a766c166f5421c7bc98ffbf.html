@@ -1,0 +1,3638 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://bids-specification.readthedocs.io/en/stable/modality-specific-files/near-infrared-spectroscopy.html">
+      
+      
+        <link rel="prev" href="microscopy.html">
+      
+      
+        <link rel="next" href="motion.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>Near-Infrared Spectroscopy - Brain Imaging Data Structure 1.11.2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/tsv.css">
+    
+      <link rel="stylesheet" href="../css/dynamic-width.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-SBWH6YNMPX"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-SBWH6YNMPX",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-SBWH6YNMPX",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  <script async type="text/javascript" src="/_/static/javascript/readthedocs-addons.js"></script><meta name="readthedocs-project-slug" content="bids-specification" /><meta name="readthedocs-version-slug" content="stable" /><meta name="readthedocs-resolver-filename" content="/modality-specific-files/near-infrared-spectroscopy.html" /><meta name="readthedocs-http-status" content="200" /></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#near-infrared-spectroscopy" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Brain Imaging Data Structure 1.11.2" class="md-header__button md-logo" aria-label="Brain Imaging Data Structure 1.11.2" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Brain Imaging Data Structure 1.11.2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Near-Infrared Spectroscopy
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/bids-standard/bids-specification" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Brain Imaging Data Structure 1.11.2" class="md-nav__button md-logo" aria-label="Brain Imaging Data Structure 1.11.2" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    Brain Imaging Data Structure 1.11.2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/bids-standard/bids-specification" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The BIDS Specification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The BIDS Specification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../common-principles.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common principles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_3" id="__nav_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modality agnostic files
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modality agnostic files
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/dataset-description.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dataset description
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/data-summary-files.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data summary files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/phenotypic-and-assessment-data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phenotypic and assessment data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/code.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/events.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Events
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_4" id="__nav_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modality specific files
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modality specific files
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="magnetic-resonance-imaging-data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetic Resonance Imaging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="magnetoencephalography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetoencephalography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="electroencephalography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electroencephalography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="intracranial-electroencephalography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intracranial Electroencephalography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="physiological-recordings.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physiological recordings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="behavioral-experiments.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Behavioral experiments (with no neural recordings)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="genetic-descriptor.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Genetic Descriptor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="positron-emission-tomography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Positron Emission Tomography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="microscopy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Near-Infrared Spectroscopy
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="near-infrared-spectroscopy.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Near-Infrared Spectroscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nirs-recording-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NIRS recording data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NIRS recording data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#terminology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Terminology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sidecar-json-_nirsjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sidecar JSON (*_nirs.json)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sidecar JSON (*_nirs.json)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generic-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generic information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hardware-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardware information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#institution-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Institution information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-_nirsjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example *_nirs.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#channels-description-_channelstsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Channels description (*_channels.tsv)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Channels description (*_channels.tsv)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#restricted-keyword-list-for-the-channel-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Restricted keyword list for the channel types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-_channelstsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example *_channels.tsv
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optode-description-_optodestsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optode description (*_optodes.tsv)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Optode description (*_optodes.tsv)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-_optodestsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example *_optodes.tsv
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coordinate-system-json-_coordsystemjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coordinate System JSON (*_coordsystem.json)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Coordinate System JSON (*_coordsystem.json)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-_coordsystemjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example *_coordsystem.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="motion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Motion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="magnetic-resonance-spectroscopy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetic Resonance Spectroscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="electromyography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electromyography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_5" id="__nav_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Derivatives
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Derivatives
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIDS Derivatives
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/common-data-types.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common data types and metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/imaging.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imaging data types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/atlas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Templates and atlases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../longitudinal-and-multi-site-studies.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Longitudinal and multi-site studies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glossary.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extensions.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIDS Extension Proposals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_9" id="__nav_1_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendix
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/schema.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/contributors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/licenses.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Licenses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/entity-table.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entity table
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/entities.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/file-collections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/units.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Units
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/hed.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hierarchical Event Descriptors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/meg-file-formats.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MEG file formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/meg-systems.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MEG systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/coordinate-systems.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coordinate systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/qmri.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quantitative MRI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/arterial-spin-labeling.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arterial Spin Labeling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/cross-modality-correspondence.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross modality correspondence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CHANGES.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The BIDS Website
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The BIDS Website
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://bids.neuroimaging.io/getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://bids.neuroimaging.io/getting_started/tutorials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nirs-recording-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NIRS recording data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NIRS recording data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#terminology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Terminology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sidecar-json-_nirsjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sidecar JSON (*_nirs.json)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sidecar JSON (*_nirs.json)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generic-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generic information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hardware-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardware information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#institution-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Institution information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-_nirsjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example *_nirs.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#channels-description-_channelstsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Channels description (*_channels.tsv)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Channels description (*_channels.tsv)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#restricted-keyword-list-for-the-channel-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Restricted keyword list for the channel types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-_channelstsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example *_channels.tsv
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optode-description-_optodestsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optode description (*_optodes.tsv)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Optode description (*_optodes.tsv)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-_optodestsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example *_optodes.tsv
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coordinate-system-json-_coordsystemjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coordinate System JSON (*_coordsystem.json)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Coordinate System JSON (*_coordsystem.json)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-_coordsystemjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example *_coordsystem.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/bids-standard/bids-specification/edit/master/src/modality-specific-files/near-infrared-spectroscopy.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="near-infrared-spectroscopy"><a class="toclink" href="#near-infrared-spectroscopy">Near-Infrared Spectroscopy</a></h1>
+<p>Support for Near-Infrared Spectroscopy (NIRS) was developed as a
+<a href="../extensions.html#bids-extension-proposals">BIDS Extension Proposal</a>.
+Please see <a href="../introduction.html#citing-bids">Citing BIDS</a>
+on how to appropriately credit this extension when referring to it in the
+context of the academic literature.</p>
+<div class="admonition example">
+<p class="admonition-title">Example datasets</p>
+<p>Several <a href="https://bids.neuroimaging.io/datasets/examples.html#nirs">example NIRS datasets</a>
+have been formatted using this specification and can be used for practical guidance when curating a new dataset.</p>
+</div>
+<h2 id="nirs-recording-data"><a class="toclink" href="#nirs-recording-data">NIRS recording data</a></h2>
+<!--
+This block generates a filename templates.
+The inputs for this macro can be found in the directory
+  src/schema/rules/files/raw
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<p>Template:</p>
+<div class="highlight"><pre><code><a href="../appendices/entities.html#sub">sub-&lt;label&gt;</a>/
+    [<a href="../appendices/entities.html#ses">ses-&lt;label&gt;</a>/]
+        <a href="../glossary.html#nirs-datatypes">nirs</a>/
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#channels-suffixes">channels</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#channels-suffixes">channels</a><a href="../glossary.html#tsv-extensions">.tsv</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#coordsystem-suffixes">coordsystem</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#optodes-suffixes">optodes</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#optodes-suffixes">optodes</a><a href="../glossary.html#tsv-extensions">.tsv</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#events-suffixes">events</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#events-suffixes">events</a><a href="../glossary.html#tsv-extensions">.tsv</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#nirs-suffixes">nirs</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#nirs-suffixes">nirs</a><a href="../glossary.html#snirf-extensions">.snirf</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#physio-suffixes">physio</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#physio-suffixes">physio</a><a href="../glossary.html#tsv_gz-extensions">.tsv.gz</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#stim-suffixes">stim</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#stim-suffixes">stim</a><a href="../glossary.html#tsv_gz-extensions">.tsv.gz</a>
+</code></pre></div>
+<details>
+<summary><strong>Legend:</strong></summary>
+<ul>
+<li>
+<p>For more information about filename elements (for example, entities, suffixes, extensions),
+follow the links embedded in the filename template.</p>
+</li>
+<li>
+<p><code>&lt;matches&gt;</code> is a placeholder to denote an arbitrary (and valid) sequence of entities
+and labels at the beginning of the filename (only BIDS &quot;raw&quot;).</p>
+</li>
+<li>
+<p><code>&lt;source-entities&gt;</code> is a placeholder to denote an arbitrary sequence of entities and labels
+at the beginning of the filename matching a source file from which the file derives
+(only BIDS-Derivatives).</p>
+</li>
+<li>
+<p>Filename entities or directories between square brackets
+(for example, <code>[_ses-&lt;label&gt;]</code>) are OPTIONAL.</p>
+</li>
+<li>
+<p>Some entities may only allow specific values,
+in which case those values are listed in <code>&lt;&gt;</code>, separated by <code>|</code>.</p>
+</li>
+<li>
+<p><code>_&lt;suffix&gt;</code> means that there are several (&gt;6) valid suffixes for this filename pattern.</p>
+</li>
+<li>
+<p><code>.&lt;extension&gt;</code> means that there are several (&gt;6) valid extensions for this file type.</p>
+</li>
+<li>
+<p><code>[.gz]</code> means that both the unzipped and gzipped versions of the extension are valid.</p>
+</li>
+</ul>
+
+</details>
+
+<p>Only the <em>Shared Near Infrared Spectroscopy Format</em> (<a href="https://github.com/fNIRS/snirf">SNIRF</a>)
+file specification is supported in BIDS. The SNIRF
+specification supports one or more NIRS datasets to be stored in a single
+<code>.snirf</code> file. However, to be BIDS compatible, each SNIRF file MUST contain
+only a single run. A limited set of fields from the SNIRF specification are
+replicated  in the BIDS specification. This redundancy allows the data to be
+easily parsed by humans and machines that do not have a SNIRF reader at hand,
+which improves findability and tooling development.</p>
+<h3 id="terminology"><a class="toclink" href="#terminology">Terminology</a></h3>
+<p>For proper documentation of NIRS recording metadata, it is important
+to understand the difference between a Source, Detector, and Channel as these
+are defined differently to other modalities, such as EEG. The following definitions
+apply in this document:</p>
+<ul>
+<li>
+<p>Source - A light emitting device, sometimes called a transmitter.</p>
+</li>
+<li>
+<p>Detector - A photoelectric transducer, sometimes called a receiver.</p>
+</li>
+<li>
+<p>Optode - Refers to either a source or detector.</p>
+</li>
+<li>
+<p>Channel - A paired coupling of a source and a detector with one specific wavelength of light.
+    It is common for a single Source-Detector pair to result in two or more channels
+    with different wavelengths.</p>
+</li>
+</ul>
+<h3 id="sidecar-json-_nirsjson"><a class="toclink" href="#sidecar-json-_nirsjson">Sidecar JSON (<code>*_nirs.json</code>)</a></h3>
+<p>It is common within the NIRS community for researchers to build their own caps
+and optode holders to position their sources and detectors, or for optodes to
+be directly attached to the scalp with adhesive. To facilitate description of
+the wide variety of possible configurations, several fields are RECOMMENDED within
+the <code>*_nirs.json</code> file.
+Additionally, in certain situations, reserved keywords MUST be used.
+When custom modifications are made to a commercially available cap or a custom cap is used,
+then the reserved keyword <code>custom</code> MUST be used for the <code>CapManufacturersModelName</code> field.
+When a custom-made cap is used, that is, no (modified) commercially available cap,
+the reserved keyword <code>custom</code> MUST be used in the <code>CapManufacturer</code> field.
+If no cap is used, the reserved keyword <code>none</code> MUST be used in the <code>CapManufacturer</code>
+and <code>CapManufacturersModelName</code> field.
+The use of <code>NIRSPlacementScheme</code> is RECOMMENDED when no cap or a customized cap is used,
+and describes the positioning of the optodes.
+This field may also contain a reference to a file providing a graphical depiction of the cap,
+for example a PDF file, a photo, or a bitmap drawing.
+If the referred file is not specified in BIDS, it MAY be placed in the
+<a href="../common-principles.html#source-vs-raw-vs-derived-data"><code>/sourcedata</code></a> directory.
+To clarify the usage and interaction of these fields, the following examples are provided:</p>
+<ul>
+<li>
+<p>If a commercial cap such as EasyCap actiCAP 64 Ch Standard-2 was used:
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;CapManufacturer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EasyCap&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;CapManufacturersModelName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;actiCAP 64 Ch Standard-2&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;NIRSPlacementScheme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10-20&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>If an Artinis Medical Systems cap with custom positions,
+as may be done by cutting custom holes in the cap,
+was used:
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;CapManufacturer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Artinis Medical Systems&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;CapManufacturersModelName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;headcap with print, size L, it was modified by adding holes for the optodes according to the NIRSPlacementScheme and optode_layout.pdf&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;NIRSPlacementScheme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;see optode_layout.pdf: 2 groups over the left and right dlPFC, 2 groups over the left and right PPC, 1 group over the left M1 and PMC&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>If a completely custom cap was knitted:
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;CapManufacturer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;custom&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;CapManufacturersModelName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;custom knitted cap with holes for optodes according to the NIRSPlacementScheme and optode_knitted_layout.jpg&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;NIRSPlacementScheme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;see optode_knitted_layout.jpg: 2 groups over the left and right dlPFC, 2 groups over the left and right PPC.&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>If no cap was used and optodes were taped to the scalp
+    at positions Cz, C1 and C2:
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;CapManufacturer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;CapManufacturersModelName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;NIRSPlacementScheme&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Cz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;C1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;C2&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+    In these cases additional information regarding channels and optodes SHOULD be placed in <code>*_channels.tsv</code> and <code>*_optodes.tsv</code> files.</p>
+</li>
+</ul>
+<p>Closely spaced or short-separation source-detector pairs are often included in NIRS measurements to
+obtain a measure of systemic, rather than neural, activity. These source-detector
+pairs are referred to as <em>short channels</em>. There is variation in how manufacturers
+implement these short channels, some use specialized sources or detectors,
+and the placement mechanisms vary.
+It is beyond the scope of the BIDS specification to define what constitutes a short channel,
+and detailed characteristics of channels may be stored within the SNIRF file
+(for example, in the <code>sourcePower</code> field).
+However, to improve searchability and ease of access for users, it is useful to
+know if short channels were included in the NIRS measurements; the presence of short channels is
+is stored in the field <code>ShortChannelCount</code>.
+If the field <code>ShortChannelCount</code> is populated, then the optional column <code>short_channel</code>
+may be used in <code>*_channels.tsv</code> to describe which channels were specified as short.</p>
+<p>For consistency between studies and institutions, we encourage users to extract
+the values of these fields from the actual raw data. Whenever possible, please
+avoid using ad hoc wording.</p>
+<p>Specific NIRS fields that are REQUIRED or may be REQUIRED depending on other
+metadata values:</p>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SamplingFrequency__nirs">SamplingFrequency</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a> or <code>"n/a"</code></td>
+<td>Sampling frequency (in Hz) of all the data in the recording, regardless of their type (for example, <code>2400</code>).  Sampling frequency (in Hz) of all the data in the recording, regardless of their type (for example, <code>12</code>). If individual channels have different sampling rates, then the field here MUST be specified as <code>n/a</code> and the values MUST be specified in the <code>sampling_frequency</code> column in channels.tsv.")</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.NIRSChannelCount">NIRSChannelCount</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">integer</a></td>
+<td>Total number of NIRS channels, including short channels. Corresponds to the number of rows in <code>channels.tsv</code> with any NIRS type.<br><br>Must be a number greater than or equal to 0.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.NIRSSourceOptodeCount">NIRSSourceOptodeCount</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">integer</a></td>
+<td>Number of NIRS sources. Corresponds to the number of rows in <code>optodes.tsv</code> with type <code>"source"</code>.<br><br>Must be a number greater than or equal to 1.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.NIRSDetectorOptodeCount">NIRSDetectorOptodeCount</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">integer</a></td>
+<td>Number of NIRS detectors. Corresponds to the number of rows in <code>optodes.tsv</code> with type <code>"detector"</code>.<br><br>Must be a number greater than or equal to 1.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.ACCELChannelCount">ACCELChannelCount</a></td>
+<td>OPTIONAL, but REQUIRED if any channel type is ACCEL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">integer</a></td>
+<td>Number of acceleration channels.<br><br>Must be a number greater than or equal to 0.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.GYROChannelCount">GYROChannelCount</a></td>
+<td>OPTIONAL, but REQUIRED if any channel type is GYRO</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">integer</a></td>
+<td>Number of gyrometer channels.<br><br>Must be a number greater than or equal to 0.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.MAGNChannelCount">MAGNChannelCount</a></td>
+<td>OPTIONAL, but REQUIRED if any channel type is MAGN</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">integer</a></td>
+<td>Number of magnetometer channels.<br><br>Must be a number greater than or equal to 0.</td>
+</tr>
+</tbody>
+</table>
+<p>Specific NIRS fields that SHOULD be present:</p>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.CapManufacturer">CapManufacturer</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Name of the cap manufacturer (for example, <code>"EasyCap"</code>).  If no cap was used, such as with optodes that are directly taped to the scalp, then the string <code>none</code> MUST be used and the <code>NIRSPlacementScheme</code> field MAY be used to specify the optode placement.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.CapManufacturersModelName">CapManufacturersModelName</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Manufacturer's designation of the cap model (for example, <code>"actiCAP 64 Ch Standard-2"</code>).  If there is no official model number then a description may be provided (for example, <code>Headband with print (S-M)</code>). If a cap from a manufacturer was modified, then the field MUST be set to <code>custom</code>. If no cap was used, then the <code>CapManufacturer</code> field MUST be <code>none</code> and this field MUST be <code>n/a</code>.")</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SourceType">SourceType</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Type of source. Preferably a specific model/part number is supplied. This is a freeform description, but the following keywords are suggested: <code>"LED"</code>, <code>"LASER"</code>, <code>"VCSEL"</code>. If individual channels have different SourceType, then the field here should be specified as "mixed" and this column should be included in optodes.tsv.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.DetectorType">DetectorType</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Type of detector. This is a free form description with the following suggested terms: <code>"SiPD"</code>, <code>"APD"</code>. Preferably a specific model/part number is supplied. If individual channels have different <code>DetectorType</code>, then the field here should be specified as <code>"mixed"</code> and this column should be included in <code>optodes.tsv</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.ShortChannelCount">ShortChannelCount</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">integer</a></td>
+<td>The number of short channels. 0 indicates no short channels.<br><br>Must be a number greater than or equal to 0.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.NIRSPlacementScheme">NIRSPlacementScheme</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a> or <a href="https://www.w3schools.com/js/js_json_arrays.asp">array</a> of <a href="https://www.w3schools.com/js/js_json_datatypes.asp">strings</a></td>
+<td>Placement scheme of NIRS optodes. Either the name of a standardized placement system (for example, <code>"10-20"</code>) or an array of standardized position names (for example, <code>["Cz", "Pz"]</code>). This field should only be used if a cap was not used. If a standard cap was used, then it should be specified in <code>CapManufacturer</code> and <code>CapManufacturersModelName</code> and this field should be set to <code>"n/a"</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="generic-information"><a class="toclink" href="#generic-information">Generic information</a></h4>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.RecordingDuration">RecordingDuration</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Length of the recording in seconds (for example, <code>3600</code>).</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.HeadCircumference">HeadCircumference</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Circumference of the participant's head, expressed in cm (for example, <code>58</code>).<br><br>Must be a number greater than 0.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.HardwareFilters">HardwareFilters</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.json.org/json-en.html">object</a> of <a href="https://www.json.org/json-en.html">objects</a> or <code>"n/a"</code></td>
+<td>Object of temporal hardware filters applied, or <code>"n/a"</code> if the data is not available. Each key-value pair in the JSON object is a name of the filter and an object in which its parameters are defined as key-value pairs. For example, <code>{"Highpass RC filter": {"Half amplitude cutoff (Hz)": 0.0159, "Roll-off": "6dB/Octave"}}</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SubjectArtefactDescription">SubjectArtefactDescription</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Freeform description of the observed subject artifact and its possible cause (for example, <code>"Vagus Nerve Stimulator"</code>, <code>"non-removable implant"</code>). If this field is set to <code>"n/a"</code>, it will be interpreted as absence of major source of artifacts except cardiac and blinks.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="hardware-information"><a class="toclink" href="#hardware-information">Hardware information</a></h4>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.Manufacturer">Manufacturer</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Manufacturer of the equipment that produced the measurements.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.ManufacturersModelName">ManufacturersModelName</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Manufacturer's model name of the equipment that produced the measurements.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SoftwareVersions">SoftwareVersions</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Manufacturer's designation of software version of the equipment that produced the measurements.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.DeviceSerialNumber">DeviceSerialNumber</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The serial number of the equipment that produced the measurements. A pseudonym can also be used to prevent the equipment from being identifiable, so long as each pseudonym is unique within the dataset.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="institution-information"><a class="toclink" href="#institution-information">Institution information</a></h4>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.InstitutionName">InstitutionName</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The name of the institution in charge of the equipment that produced the measurements.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.InstitutionAddress">InstitutionAddress</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The address of the institution in charge of the equipment that produced the measurements.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.InstitutionalDepartmentName">InstitutionalDepartmentName</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The department in the institution in charge of the equipment that produced the measurements.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="task-information"><a class="toclink" href="#task-information">Task information</a></h4>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.TaskName">TaskName</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Name of the task. No two tasks should have the same name. The task label included in the filename MAY be derived from this <code>"TaskName"</code> field by removing all non-alphanumeric or <code>+</code> characters (that is, all except those matching <code>[0-9a-zA-Z+]</code>), and potentially replacing spaces with <code>+</code> to ease readability. For example <code>"TaskName"</code> <code>"faces n-back"</code> or <code>"head nodding"</code> could correspond to task labels <code>faces+n+back</code> or <code>facesnback</code> and <code>head+nodding</code> or <code>headnodding</code>, respectively.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.TaskDescription">TaskDescription</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Longer description of the task.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.Instructions">Instructions</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Text of the instructions given to participants before the recording.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.CogAtlasID">CogAtlasID</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td><a href="../common-principles.html#uniform-resource-indicator">URI</a> of the corresponding <a href="https://www.cognitiveatlas.org/">Cognitive Atlas</a> Task term.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.CogPOID">CogPOID</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td><a href="../common-principles.html#uniform-resource-indicator">URI</a> of the corresponding <a href="http://www.cogpo.org/">CogPO</a> term.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-_nirsjson"><a class="toclink" href="#example-_nirsjson">Example <code>*_nirs.json</code></a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;TaskName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;visual&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;InstitutionName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Macquarie University. Australian Hearing Hub&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;InstitutionAddress&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6 University Ave, Macquarie University NSW 2109 Australia&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;Manufacturer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NIRx&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ManufacturersModelName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NIRScout&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;TaskDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;visual gratings and noise patterns&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;Instructions&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;look at the dot in the center of the screen and press the button when it changes color&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;SamplingFrequency&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.7</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;NIRSChannelCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;NIRSSourceOptodeCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;NIRSDetectorOptodeCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ACCELChannelCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;SoftwareFilters&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;n/a&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;RecordingDuration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">233.639</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;HardwareFilters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;Highpass RC filter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;Half amplitude cutoff (Hz)&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0159</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;Roll-off&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6dBOctave&quot;</span><span class="p">}},</span>
+<span class="w">  </span><span class="nt">&quot;CapManufacturer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NIRx&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;CapManufacturersModelName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Headband with print (S-M)&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;NIRSPlacementScheme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;n/a&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="channels-description-_channelstsv"><a class="toclink" href="#channels-description-_channelstsv">Channels description (<code>*_channels.tsv</code>)</a></h2>
+<!--
+This block generates a filename templates.
+The inputs for this macro can be found in the directory
+  src/schema/rules/files/raw
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<p>Template:</p>
+<div class="highlight"><pre><code><a href="../appendices/entities.html#sub">sub-&lt;label&gt;</a>/
+    [<a href="../appendices/entities.html#ses">ses-&lt;label&gt;</a>/]
+        <a href="../glossary.html#nirs-datatypes">nirs</a>/
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#channels-suffixes">channels</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#channels-suffixes">channels</a><a href="../glossary.html#tsv-extensions">.tsv</a>
+</code></pre></div>
+<details>
+<summary><strong>Legend:</strong></summary>
+<ul>
+<li>
+<p>For more information about filename elements (for example, entities, suffixes, extensions),
+follow the links embedded in the filename template.</p>
+</li>
+<li>
+<p><code>&lt;matches&gt;</code> is a placeholder to denote an arbitrary (and valid) sequence of entities
+and labels at the beginning of the filename (only BIDS &quot;raw&quot;).</p>
+</li>
+<li>
+<p><code>&lt;source-entities&gt;</code> is a placeholder to denote an arbitrary sequence of entities and labels
+at the beginning of the filename matching a source file from which the file derives
+(only BIDS-Derivatives).</p>
+</li>
+<li>
+<p>Filename entities or directories between square brackets
+(for example, <code>[_ses-&lt;label&gt;]</code>) are OPTIONAL.</p>
+</li>
+<li>
+<p>Some entities may only allow specific values,
+in which case those values are listed in <code>&lt;&gt;</code>, separated by <code>|</code>.</p>
+</li>
+<li>
+<p><code>_&lt;suffix&gt;</code> means that there are several (&gt;6) valid suffixes for this filename pattern.</p>
+</li>
+<li>
+<p><code>.&lt;extension&gt;</code> means that there are several (&gt;6) valid extensions for this file type.</p>
+</li>
+<li>
+<p><code>[.gz]</code> means that both the unzipped and gzipped versions of the extension are valid.</p>
+</li>
+</ul>
+
+</details>
+
+<p>This file is RECOMMENDED as it provides easily searchable information across BIDS datasets.
+Channels are a pairing of source and detector optodes with a specific wavelength of light.
+Unlike in other modalities, not all pairings of optodes correspond to meaningful data
+and not all pairs have to be recorded or represented in the data.  Note that the source
+and detector names used in the channel specifications are specified in the <code>*_optodes.tsv</code>
+file below. If a <code>*_channels.tsv</code> file is specified, an <code>*_optodes.tsv</code> file MUST be specified as well.
+The required columns in the <code>*_channels.tsv</code> file MUST be ordered as listed below.</p>
+<p>The BIDS specification supports several types of NIRS devices which output raw data in
+different forms. The type of measurement is specified in the <code>type</code> column. For example,
+when measurements are taken with a continuous wave (CW) device that saves the data
+as optical density, the <code>type</code> should be <code>NIRSCWOPTICALDENSITY</code> and the <code>units</code> should be <code>unitless</code>,
+this is equivalent to SNIRF data type <code>dOD</code>.</p>
+<p>The columns of the channels description table stored in <code>*_channels.tsv</code> are:</p>
+<!-- This block generates a columns table.
+The definitions of these fields can be found in
+  src/schema/rules/tabular_data/*.yaml
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<table>
+<thead>
+<tr>
+<th><strong>Column name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.columns.name__channels">name</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Label of the channel.  <br><br>This column must appear <strong>first</strong> in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.type__channels">type</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Type of channel; MUST use the channel types listed below. Note that the type MUST be in upper-case.  <br><br>This column must appear <strong>second</strong> in the file.<br><br>For a list of valid values for this column, see the <a href="../glossary.html#objects.columns.type__channels">associated glossary entry</a>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.source__channels">source</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Name of the source as specified in the <code>*_optodes.tsv</code> file. <code>n/a</code> for channels that do not contain fNIRS signals (for example, acceleration).  <br><br>This column must appear <strong>third</strong> in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.detector__channels">detector</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Name of the detector as specified in the <code>*_optodes.tsv</code> file. <code>n/a</code> for channels that do not contain NIRS signals (for example, acceleration).  <br><br>This column must appear <strong>fourth</strong> in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.wavelength_nominal">wavelength_nominal</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Specified wavelength of light in nm. <code>n/a</code> for channels that do not contain raw NIRS signals (for example, acceleration). This field is equivalent to <code>/nirs(i)/probe/wavelengths</code> in the SNIRF specification.  <br><br>This column must appear <strong>fifth</strong> in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.units__nirs">units</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Physical unit of the value represented in this channel, specified according to the SI unit symbol and possibly prefix symbol, or as a derived SI unit (for example, <code>V</code>, or unitless for changes in optical densities). For guidelines about units see the <a href="../appendices/units.html">Appendix</a> and <a href="../common-principles.html#units">Common Principles</a> pages.  <br><br>This column must appear <strong>sixth</strong> in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.sampling_frequency">sampling_frequency</a></td>
+<td>OPTIONAL, but REQUIRED if <code>SamplingFrequency</code> is <code>n/a</code> in <code>_nirs.json</code></td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Sampling rate of the channel in Hz.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.component">component</a></td>
+<td>OPTIONAL, but REQUIRED if <code>type</code> is <code>ACCEL</code>, <code>GYRO</code> or <code>MAGN</code></td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Description of the spatial axis or label of quaternion component associated with the channel. For example, <code>x</code>,<code>y</code>,<code>z</code> for position channels, or <code>quat_x</code>, <code>quat_y</code>, <code>quat_z</code>, <code>quat_w</code> for quaternion orientation channels.  <br><br>This column may appear anywhere in the file.<br><br>Must be one of: <code>"x"</code>, <code>"y"</code>, <code>"z"</code>, <code>"quat_x"</code>, <code>"quat_y"</code>, <code>"quat_z"</code>, <code>"quat_w"</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.wavelength_actual">wavelength_actual</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Measured wavelength of light in nm. <code>n/a</code> for channels that do not contain raw NIRS signals (acceleration). This field is equivalent to <code>measurementList.wavelengthActual</code> in the SNIRF specification.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.low_cutoff">low_cutoff</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Frequencies used for the high-pass filter applied to the channel in Hz. If no high-pass filter applied, use <code>n/a</code>.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.high_cutoff">high_cutoff</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Frequencies used for the low-pass filter applied to the channel in Hz. If no low-pass filter applied, use <code>n/a</code>. Note that hardware anti-aliasing in A/D conversion of all MEG/EEG/EMG electronics applies a low-pass filter; specify its frequency here if applicable.  <br><br>This column may appear anywhere in the file.<br><br>Must be a number greater than or equal to 0.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.description">description</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Brief free-text description of the channel, or other information of interest.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.wavelength_emission_actual">wavelength_emission_actual</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Measured emission wavelength of light in nm. <code>n/a</code> for channels that do not contain raw NIRS signals (acceleration). This field is equivalent to <code>measurementList.wavelengthEmissionActual</code> in the SNIRF specification.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.short_channel">short_channel</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">boolean</a></td>
+<td>Is the channel designated as short. The total number of channels listed as short channels SHOULD be stored in <code>ShortChannelCount</code> in <code>*_nirs.json</code>.  <br><br>This column may appear anywhere in the file.<br><br>Must be one of: <code>"true"</code>, <code>"false"</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.status">status</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Data quality observed on the channel. A channel is considered <code>bad</code> if its data quality is compromised by excessive noise. If quality is unknown, then a value of <code>n/a</code> may be used. Description of noise type SHOULD be provided in <code>[status_description]</code>.  <br><br>This column may appear anywhere in the file.<br><br>Must be one of: <code>"good"</code>, <code>"bad"</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.status_description">status_description</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Freeform text description of noise or artifact affecting data quality on the channel. It is meant to explain why the channel was declared bad in the <code>status</code> column.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><strong>Additional Columns</strong></td>
+<td>OPTIONAL</td>
+<td><code>n/a</code></td>
+<td>Additional columns are allowed if they are defined in the associated metadata file.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="restricted-keyword-list-for-the-channel-types"><a class="toclink" href="#restricted-keyword-list-for-the-channel-types">Restricted keyword list for the channel types</a></h3>
+<p>All NIRS channels types MUST correspond to a <a href="https://github.com/fNIRS/snirf/blob/master/snirf_specification.md#appendix">valid SNIRF data type</a>.
+Additional channels that are recorded simultaneously with the NIRS
+device and stored in the same data file SHOULD be included as well.
+However, additional channels that are simultaneously recorded with a different device
+SHOULD be stored according to their appropriate modality specification.
+For example, motion data that was simultaneously recorded with a different device should be specified
+according to the <a href="motion.html">Motion</a> and not according to the NIRS data type.
+Whereas, if the motion data was acquired in with the NIRS device itself, it should be included here with the NIRS data.
+Any of the channel types defined in other BIDS specification MAY be used here as well such as <code>ACCEL</code> or <code>MAGN</code>.
+As several of these data types are commonly acquired using NIRS devices they are included as an example at the base of the table.
+Note that upper-case is REQUIRED.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Keyword</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NIRSCWAMPLITUDE</td>
+<td>Continuous wave amplitude measurements. Equivalent to dataType 001 in SNIRF.</td>
+</tr>
+<tr>
+<td>NIRSCWFLUORESCENSEAMPLITUDE</td>
+<td>Continuous wave fluorescence amplitude measurements. Equivalent to dataType 051 in SNIRF.</td>
+</tr>
+<tr>
+<td>NIRSCWOPTICALDENSITY</td>
+<td>Continuous wave change in optical density measurements. Equivalent to dataTypeLabel dOD in SNIRF.</td>
+</tr>
+<tr>
+<td>NIRSCWHBO</td>
+<td>Continuous wave oxygenated hemoglobin (oxyhemoglobin) concentration measurements. Equivalent to dataTypeLabel HbO in SNIRF.</td>
+</tr>
+<tr>
+<td>NIRSCWHBR</td>
+<td>Continuous wave deoxygenated hemoglobin (deoxyhemoglobin) concentration measurements. Equivalent to dataTypeLabel HbR in SNIRF.</td>
+</tr>
+<tr>
+<td>NIRSCWMUA</td>
+<td>Continuous wave optical absorption  measurements. Equivalent to dataTypeLabel mua in SNIRF.</td>
+</tr>
+<tr>
+<td>ACCEL</td>
+<td>Accelerometer channel, one channel for each spatial axis. An extra column <code>component</code> for the axis MUST be added to the <code>*_channels.tsv</code> file (x, y or z).</td>
+</tr>
+<tr>
+<td>GYRO</td>
+<td>Gyrometer channel, one channel for each spatial axis. An extra column <code>component</code> for the axis MUST be added to the <code>*_channels.tsv</code> file (x, y or z).</td>
+</tr>
+<tr>
+<td>MAGN</td>
+<td>Magnetomenter channel, one channel for each spatial axis. An extra column <code>component</code> for the axis MUST be added to the <code>*_channels.tsv</code> file (x, y or z).</td>
+</tr>
+<tr>
+<td>MISC</td>
+<td>Miscellaneous</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-_channelstsv"><a class="toclink" href="#example-_channelstsv">Example <code>*_channels.tsv</code></a></h3>
+<table class="tsv-table noindex"><thead><tr><th>name</th><th>type</th><th>source</th><th>detector</th><th>wavelength_nominal</th><th>units</th></tr></thead><tbody><tr><td>S1-D1</td><td>NIRSCWAMPLITUDE</td><td>A1</td><td>Fz</td><td>760</td><td>V</td></tr><tr><td>S1-D1</td><td>NIRSCWAMPLITUDE</td><td>A1</td><td>Fz</td><td>850</td><td>V</td></tr><tr><td>S1-D2</td><td>NIRSCWAMPLITUDE</td><td>A1</td><td>Cz</td><td>760</td><td>V</td></tr><tr><td>S2-D1</td><td>NIRSCWAMPLITUDE</td><td>A2</td><td>Fz</td><td>760</td><td>V</td></tr><tr><td>S3-D4</td><td>NIRSCWAMPLITUDE</td><td>VisS2</td><td>VisD4</td><td>760</td><td>V</td></tr></tbody></table>
+<h2 id="optode-description-_optodestsv"><a class="toclink" href="#optode-description-_optodestsv">Optode description (<code>*_optodes.tsv</code>)</a></h2>
+<!--
+This block generates a filename templates.
+The inputs for this macro can be found in the directory
+  src/schema/rules/files/raw
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<p>Template:</p>
+<div class="highlight"><pre><code><a href="../appendices/entities.html#sub">sub-&lt;label&gt;</a>/
+    [<a href="../appendices/entities.html#ses">ses-&lt;label&gt;</a>/]
+        <a href="../glossary.html#nirs-datatypes">nirs</a>/
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#optodes-suffixes">optodes</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#optodes-suffixes">optodes</a><a href="../glossary.html#tsv-extensions">.tsv</a>
+</code></pre></div>
+<details>
+<summary><strong>Legend:</strong></summary>
+<ul>
+<li>
+<p>For more information about filename elements (for example, entities, suffixes, extensions),
+follow the links embedded in the filename template.</p>
+</li>
+<li>
+<p><code>&lt;matches&gt;</code> is a placeholder to denote an arbitrary (and valid) sequence of entities
+and labels at the beginning of the filename (only BIDS &quot;raw&quot;).</p>
+</li>
+<li>
+<p><code>&lt;source-entities&gt;</code> is a placeholder to denote an arbitrary sequence of entities and labels
+at the beginning of the filename matching a source file from which the file derives
+(only BIDS-Derivatives).</p>
+</li>
+<li>
+<p>Filename entities or directories between square brackets
+(for example, <code>[_ses-&lt;label&gt;]</code>) are OPTIONAL.</p>
+</li>
+<li>
+<p>Some entities may only allow specific values,
+in which case those values are listed in <code>&lt;&gt;</code>, separated by <code>|</code>.</p>
+</li>
+<li>
+<p><code>_&lt;suffix&gt;</code> means that there are several (&gt;6) valid suffixes for this filename pattern.</p>
+</li>
+<li>
+<p><code>.&lt;extension&gt;</code> means that there are several (&gt;6) valid extensions for this file type.</p>
+</li>
+<li>
+<p><code>[.gz]</code> means that both the unzipped and gzipped versions of the extension are valid.</p>
+</li>
+</ul>
+
+</details>
+
+<p>File that provides the location and type of optodes. Note that coordinates MUST be
+expressed  in Cartesian coordinates according to the NIRSCoordinateSystem and
+NIRSCoordinateSystemUnits fields in <code>*_coordsystem.json</code>. If an <code>*_optodes.tsv</code>
+file is specified, a <code>*_coordsystem.json</code> file MUST be specified as well.
+The order of the required columns in the <code>*_optodes.tsv</code> file MUST be as listed below.</p>
+<p>The x, y, and z positions are for measured locations, for example, with a polhemus
+digitizer. If you also have idealized positions, where you wish the optodes to be
+placed, these can be listed in the template values
+(for example for "template positions" computed on a sphere).
+SNIRF contains arrays for both
+the 3D and 2D locations of data. In BIDS the <code>*_optodes.tsv</code> file MUST contain the 3D locations. Only in case 3D positions are unavailable the 2D locations should be used, setting the z field to an <code>n/a</code> value.</p>
+<p>The columns of the optodes description table stored in <code>*_optodes.tsv</code> are:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Column name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.columns.name__optodes">name</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Name of the optode, must be unique.  <br><br>This column must appear <strong>first</strong> in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.type__optodes">type</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The type of the optode.  <br><br>This column must appear <strong>second</strong> in the file.<br><br>Must be one of: <code>"source"</code>, <code>"detector"</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.x__optodes">x</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Recorded position along the x-axis. <code>"n/a"</code> if not available.  <br><br>This column must appear <strong>third</strong> in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.y__optodes">y</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Recorded position along the y-axis. <code>"n/a"</code> if not available.  <br><br>This column must appear <strong>fourth</strong> in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.z__optodes">z</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Recorded position along the z-axis. <code>"n/a"</code> if not available.  <br><br>This column must appear <strong>fifth</strong> in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.template_x">template_x</a></td>
+<td>OPTIONAL, but REQUIRED if <code>x</code> is <code>n/a</code></td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Assumed or ideal position along the x axis.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.template_y">template_y</a></td>
+<td>OPTIONAL, but REQUIRED if <code>y</code> is <code>n/a</code></td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Assumed or ideal position along the y axis.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.template_z">template_z</a></td>
+<td>OPTIONAL, but REQUIRED if <code>z</code> is <code>n/a</code></td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Assumed or ideal position along the z axis.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.description__optode">description</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Free-form text description of the optode, or other information of interest.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.detector_type">detector_type</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The type of detector. Only to be used if the field <code>DetectorType</code> in <code>*_nirs.json</code> is set to <code>mixed</code>.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.source__optodes">source_type</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The type of source. Only to be used if the field <code>SourceType</code> in <code>*_nirs.json</code> is set to <code>mixed</code>.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><strong>Additional Columns</strong></td>
+<td>OPTIONAL</td>
+<td><code>n/a</code></td>
+<td>Additional columns are allowed if they are defined in the associated metadata file.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-_optodestsv"><a class="toclink" href="#example-_optodestsv">Example <code>*_optodes.tsv</code></a></h3>
+<table class="tsv-table noindex"><thead><tr><th>name</th><th>type</th><th>x</th><th>y</th><th>z</th><th>template_x</th><th>template_y</th><th>template_z</th></tr></thead><tbody><tr><td>A1</td><td>source</td><td>-0.0707</td><td>0</td><td>-0.0707</td><td>-0.07</td><td>0</td><td>0.07</td></tr><tr><td>Fz</td><td>detector</td><td>0</td><td>0.0714</td><td>0.0699</td><td>0</td><td>0.07</td><td>0.07</td></tr><tr><td>S1</td><td>source</td><td>-0.2707</td><td>0.02</td><td>-0.1707</td><td>-0.03</td><td>0.02</td><td>-0.2</td></tr><tr><td>D2</td><td>detector</td><td>0.0022</td><td>0.1214</td><td>0.0299</td><td>0</td><td>0.12</td><td>0.03</td></tr><tr><td>VisS2</td><td>source</td><td>-0.1707</td><td>0.12</td><td>-0.3707</td><td>-0.1</td><td>0.1</td><td>-0.4</td></tr><tr><td>VisD4</td><td>detector</td><td>0.0322</td><td>0.2214</td><td>0.2299</td><td>0.02</td><td>0.22</td><td>0.23</td></tr></tbody></table>
+<h2 id="coordinate-system-json-_coordsystemjson"><a class="toclink" href="#coordinate-system-json-_coordsystemjson">Coordinate System JSON (<code>*_coordsystem.json</code>)</a></h2>
+<!--
+This block generates a filename templates.
+The inputs for this macro can be found in the directory
+  src/schema/rules/files/raw
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<p>Template:</p>
+<div class="highlight"><pre><code><a href="../appendices/entities.html#sub">sub-&lt;label&gt;</a>/
+    [<a href="../appendices/entities.html#ses">ses-&lt;label&gt;</a>/]
+        <a href="../glossary.html#nirs-datatypes">nirs</a>/
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#coordsystem-suffixes">coordsystem</a><a href="../glossary.html#json-extensions">.json</a>
+</code></pre></div>
+<details>
+<summary><strong>Legend:</strong></summary>
+<ul>
+<li>
+<p>For more information about filename elements (for example, entities, suffixes, extensions),
+follow the links embedded in the filename template.</p>
+</li>
+<li>
+<p><code>&lt;matches&gt;</code> is a placeholder to denote an arbitrary (and valid) sequence of entities
+and labels at the beginning of the filename (only BIDS &quot;raw&quot;).</p>
+</li>
+<li>
+<p><code>&lt;source-entities&gt;</code> is a placeholder to denote an arbitrary sequence of entities and labels
+at the beginning of the filename matching a source file from which the file derives
+(only BIDS-Derivatives).</p>
+</li>
+<li>
+<p>Filename entities or directories between square brackets
+(for example, <code>[_ses-&lt;label&gt;]</code>) are OPTIONAL.</p>
+</li>
+<li>
+<p>Some entities may only allow specific values,
+in which case those values are listed in <code>&lt;&gt;</code>, separated by <code>|</code>.</p>
+</li>
+<li>
+<p><code>_&lt;suffix&gt;</code> means that there are several (&gt;6) valid suffixes for this filename pattern.</p>
+</li>
+<li>
+<p><code>.&lt;extension&gt;</code> means that there are several (&gt;6) valid extensions for this file type.</p>
+</li>
+<li>
+<p><code>[.gz]</code> means that both the unzipped and gzipped versions of the extension are valid.</p>
+</li>
+</ul>
+
+</details>
+
+<p>A <code>*_coordsystem.json</code> file is used to specify the fiducials, the location of anatomical landmarks,
+and the coordinate system and units in which the position of optodes and landmarks is expressed.
+Fiducials are objects with a well-defined location used to facilitate the localization of sensors
+and co-registration, anatomical landmarks are locations on a research subject such as the nasion
+(for a detailed definition see <a href="../appendices/coordinate-systems.html">coordinate system appendix</a>).
+The <code>*_coordsystem.json</code> is REQUIRED if the optional <code>*_optodes.tsv</code> is present. If a corresponding
+anatomical MRI is available, the locations of anatomical landmarks in that scan should also be stored
+in the <code>*_T1w.json</code> file which goes alongside the NIRS data.</p>
+<p>Not all NIRS systems provide 3D coordinate information or digitization capabilities.
+In this case, only x and y are specified and z is <code>"n/a"</code>.</p>
+<p>General fields:</p>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/json
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.IntendedFor">IntendedFor</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a> or <a href="https://www.w3schools.com/js/js_json_arrays.asp">array</a></td>
+<td>The paths to files for which the associated file is intended to be used. Contains one or more <a href="../common-principles.html#bids-uri">BIDS URIs</a>. Using forward-slash separated paths relative to the participant subdirectory is <a href="../common-principles.html#definitions">DEPRECATED</a>.  This identifies the MRI or CT scan associated with the optodes, landmarks, and fiducials.</td>
+</tr>
+</tbody>
+</table>
+<p>Fields relating to the NIRS optode positions:</p>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/json
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.NIRSCoordinateSystem">NIRSCoordinateSystem</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Defines the coordinate system in which the optode positions are expressed.<br>See <a href="../appendices/coordinate-systems.html">Appendix VIII</a> for a list of restricted keywords for coordinate systems. If <code>"Other"</code>, a definition of the coordinate system MUST be provided in <code>NIRSCoordinateSystemDescription</code>.<br><br>For a list of valid values for this field, see the <a href="../glossary.html#objects.metadata.NIRSCoordinateSystem">associated glossary entry</a>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.NIRSCoordinateUnits">NIRSCoordinateUnits</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Units of the coordinates of <code>NIRSCoordinateSystem</code>.<br><br>Must be one of: <code>"m"</code>, <code>"mm"</code>, <code>"cm"</code>, <code>"n/a"</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.NIRSCoordinateProcessingDescription">NIRSCoordinateProcessingDescription</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Has any post-processing (such as projection) been done on the optode positions (for example, <code>"surface_projection"</code>, <code>"n/a"</code>).</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.NIRSCoordinateSystemDescription">NIRSCoordinateSystemDescription</a></td>
+<td>RECOMMENDED, but REQUIRED if NIRSCoordinateSystem is "other"</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Free-form text description of the coordinate system. May also include a link to a documentation page or paper describing the system in greater detail.</td>
+</tr>
+</tbody>
+</table>
+<p>Fields relating to the position of fiducials measured during an NIRS session/run:</p>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/json
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.FiducialsDescription">FiducialsDescription</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Free-form text description of how the fiducials such as vitamin-E capsules were placed relative to anatomical landmarks, and how the position of the fiducials were measured (for example, <code>"both with Polhemus and with T1w MRI"</code>).</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.FiducialsCoordinates">FiducialsCoordinates</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.json.org/json-en.html">object</a> of <a href="https://www.w3schools.com/js/js_json_arrays.asp">arrays</a></td>
+<td>Key-value pairs of the labels and 3-D digitized position of anatomical landmarks, interpreted following the <code>"FiducialsCoordinateSystem"</code> (for example, <code>{"NAS": [12.7,21.3,13.9], "LPA": [5.2,11.3,9.6], "RPA": [20.2,11.3,9.1]}</code>). Each array MUST contain three numeric values corresponding to x, y, and z axis of the coordinate system in that exact order.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.FiducialsCoordinateUnits">FiducialsCoordinateUnits</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Units in which the coordinates that are  listed in the field <code>"FiducialsCoordinateSystem"</code> are represented.<br><br>Must be one of: <code>"m"</code>, <code>"mm"</code>, <code>"cm"</code>, <code>"n/a"</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.FiducialsCoordinateSystem">FiducialsCoordinateSystem</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Defines the coordinate system for the fiducials. Preferably the same as the <code>"EEGCoordinateSystem"</code>. See the <a href="../appendices/coordinate-systems.html">Coordinate Systems Appendix</a> for a list of restricted keywords for coordinate systems. If <code>"Other"</code>, provide definition of the coordinate system in <code>"FiducialsCoordinateSystemDescription"</code>.<br><br>For a list of valid values for this field, see the <a href="../glossary.html#objects.metadata.FiducialsCoordinateSystem">associated glossary entry</a>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.FiducialsCoordinateSystemDescription">FiducialsCoordinateSystemDescription</a></td>
+<td>RECOMMENDED, but REQUIRED if FiducialsCoordinateSystem is "other"</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Free-form text description of the coordinate system. May also include a link to a documentation page or paper describing the system in greater detail.</td>
+</tr>
+</tbody>
+</table>
+<p>Fields relating to the position of anatomical landmarks measured during an NIRS session/run:</p>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/json
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.AnatomicalLandmarkCoordinates">AnatomicalLandmarkCoordinates</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.json.org/json-en.html">object</a> of <a href="https://www.w3schools.com/js/js_json_arrays.asp">arrays</a></td>
+<td>Key-value pairs of the labels and 3-D digitized locations of anatomical landmarks, interpreted following the <code>"AnatomicalLandmarkCoordinateSystem"</code> (for example, <code>{"NAS": [12.7,21.3,13.9], "LPA": [5.2,11.3,9.6], "RPA": [20.2,11.3,9.1]}</code>. Each array MUST contain three numeric values corresponding to x, y, and z axis of the coordinate system in that exact order.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.AnatomicalLandmarkCoordinateSystem">AnatomicalLandmarkCoordinateSystem</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Defines the coordinate system for the anatomical landmarks. See the <a href="../appendices/coordinate-systems.html">Coordinate Systems Appendix</a> for a list of restricted keywords for coordinate systems. If <code>"Other"</code>, provide definition of the coordinate system in <code>"AnatomicalLandmarkCoordinateSystemDescription"</code>.<br><br>For a list of valid values for this field, see the <a href="../glossary.html#objects.metadata.AnatomicalLandmarkCoordinateSystem">associated glossary entry</a>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.AnatomicalLandmarkCoordinateUnits">AnatomicalLandmarkCoordinateUnits</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Units of the coordinates of <code>"AnatomicalLandmarkCoordinateSystem"</code>.<br><br>Must be one of: <code>"m"</code>, <code>"mm"</code>, <code>"cm"</code>, <code>"n/a"</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.AnatomicalLandmarkCoordinateSystemDescription">AnatomicalLandmarkCoordinateSystemDescription</a></td>
+<td>RECOMMENDED, but REQUIRED if NIRSCoordinateSystem is "other"</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Free-form text description of the coordinate system. May also include a link to a documentation page or paper describing the system in greater detail.</td>
+</tr>
+</tbody>
+</table>
+<p><code>*_coordsystem.json</code> files SHOULD NOT be duplicated for each data file,
+for example, across multiple tasks.
+The <a href="../common-principles.html#the-inheritance-principle">inheritance principle</a> MUST
+be used to find the appropriate coordinate system description for a given data file.
+If optodes are repositioned, it is RECOMMENDED to use multiple sessions to indicate this.</p>
+<h3 id="example-_coordsystemjson"><a class="toclink" href="#example-_coordsystemjson">Example <code>*_coordsystem.json</code></a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;NIRSCoordinateSystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;NIRSCoordinateUnits&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mm&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;NIRSCoordinateSystemDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RAS orientation: Origin halfway between LPA and RPA, positive x-axis towards RPA, positive y-axis orthogonal to x-axis through Nasion, z-axis orthogonal to xy-plane, pointing in superior direction.&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;FiducialsDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Optodes and fiducials were digitized with Polhemus, fiducials were recorded as the center of vitamin E capsules sticked on the left/right pre-auricular and on the nasion, these are also visible on the T1w MRI&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; BIDS Contributors - <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/bids-standard/bids-specification/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://bsky.app/profile/bidsstandard.bsky.social" target="_blank" rel="noopener" title="bsky.app" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M407.8 294.7c-3.3-.4-6.7-.8-10-1.3 3.4.4 6.7.9 10 1.3M288 227.1c-26.1-50.7-97.1-145.2-163.1-191.8C61.6-9.4 37.5-1.7 21.6 5.5 3.3 13.8 0 41.9 0 58.4S9.1 194 15 213.9c19.5 65.7 89.1 87.9 153.2 80.7 3.3-.5 6.6-.9 10-1.4-3.3.5-6.6 1-10 1.4-93.9 14-177.3 48.2-67.9 169.9C220.6 589.1 265.1 437.8 288 361.1c22.9 76.7 49.2 222.5 185.6 103.4 102.4-103.4 28.1-156-65.8-169.9-3.3-.4-6.7-.8-10-1.3 3.4.4 6.7.9 10 1.3 64.1 7.1 133.6-15.1 153.2-80.7C566.9 194 576 75 576 58.4s-3.3-44.7-21.6-52.9c-15.8-7.1-40-14.9-103.2 29.8C385.1 81.9 314.1 176.4 288 227.1"/></svg>
+    </a>
+  
+    
+    
+      
+    
+    
+    
+      
+      
+    
+    <a href="https://fosstodon.org/@bidsstandard" target="_blank" rel="noopener me" title="fosstodon.org" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M433 179.1c0-97.2-63.7-125.7-63.7-125.7-62.5-28.7-228.6-28.4-290.5 0 0 0-63.7 28.5-63.7 125.7 0 115.7-6.6 259.4 105.6 289.1 40.5 10.7 75.3 13 103.3 11.4 50.8-2.8 79.3-18.1 79.3-18.1l-1.7-36.9s-36.3 11.4-77.1 10.1c-40.4-1.4-83-4.4-89.6-54-.6-4.6-.9-9.3-.9-13.9 85.6 20.9 158.7 9.1 178.7 6.7 56.1-6.7 105-41.3 111.2-72.9 9.8-49.8 9-121.5 9-121.5zm-75.1 125.2h-46.6V190.1c0-49.7-64-51.6-64 6.9v62.5H201V197c0-58.5-64-56.6-64-6.9v114.2H90.3c0-122.1-5.2-147.9 18.4-175 25.9-28.9 79.8-30.8 103.8 6.1l11.6 19.5 11.6-19.5c24.1-37.1 78.1-34.8 103.8-6.1 23.7 27.3 18.4 53 18.4 175"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://groups.google.com/g/bids-discussion" target="_blank" rel="noopener" title="groups.google.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M500 261.8C500 403.3 403.1 504 260 504 122.8 504 12 393.2 12 256S122.8 8 260 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C270.5 52.6 106.3 116.6 106.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H260v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.instagram.com/bidsstandard/" target="_blank" rel="noopener" title="www.instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3 141a115 115 0 1 0-.6 230 115 115 0 1 0 .6-230m-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1-.6-149.2m93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1-53.6 0m129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/channel/UCxZUcYfd_nvIVWAbzRB1tlw" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+  
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../js/jquery-3.6.0.min.js"></script>
+      
+    
+  <script src="https://demo.osc.earth/osa-chat-widget.js"></script>
+  <script>
+    OSAChatWidget.setConfig({ communityId: 'bids' });
+  </script>
+
+  </body>
+</html>

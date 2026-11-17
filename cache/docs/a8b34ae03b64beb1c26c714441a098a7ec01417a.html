@@ -1,0 +1,3263 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://bids-specification.readthedocs.io/en/stable/modality-specific-files/microscopy.html">
+      
+      
+        <link rel="prev" href="positron-emission-tomography.html">
+      
+      
+        <link rel="next" href="near-infrared-spectroscopy.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>Microscopy - Brain Imaging Data Structure 1.11.2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/tsv.css">
+    
+      <link rel="stylesheet" href="../css/dynamic-width.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-SBWH6YNMPX"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-SBWH6YNMPX",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-SBWH6YNMPX",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  <script async type="text/javascript" src="/_/static/javascript/readthedocs-addons.js"></script><meta name="readthedocs-project-slug" content="bids-specification" /><meta name="readthedocs-version-slug" content="stable" /><meta name="readthedocs-resolver-filename" content="/modality-specific-files/microscopy.html" /><meta name="readthedocs-http-status" content="200" /></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#microscopy" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Brain Imaging Data Structure 1.11.2" class="md-header__button md-logo" aria-label="Brain Imaging Data Structure 1.11.2" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Brain Imaging Data Structure 1.11.2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Microscopy
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/bids-standard/bids-specification" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Brain Imaging Data Structure 1.11.2" class="md-nav__button md-logo" aria-label="Brain Imaging Data Structure 1.11.2" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    Brain Imaging Data Structure 1.11.2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/bids-standard/bids-specification" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The BIDS Specification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The BIDS Specification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../common-principles.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common principles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_3" id="__nav_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modality agnostic files
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modality agnostic files
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/dataset-description.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dataset description
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/data-summary-files.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data summary files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/phenotypic-and-assessment-data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phenotypic and assessment data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/code.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/events.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Events
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_4" id="__nav_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modality specific files
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modality specific files
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="magnetic-resonance-imaging-data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetic Resonance Imaging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="magnetoencephalography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetoencephalography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="electroencephalography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electroencephalography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="intracranial-electroencephalography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intracranial Electroencephalography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="physiological-recordings.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physiological recordings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="behavioral-experiments.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Behavioral experiments (with no neural recordings)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="genetic-descriptor.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Genetic Descriptor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="positron-emission-tomography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Positron Emission Tomography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microscopy
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="microscopy.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#microscopy-imaging-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Microscopy imaging data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Microscopy imaging data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File formats
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modality-suffixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modality suffixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filename-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filename entities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#microscopy-metadata-sidecar-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Microscopy metadata (Sidecar JSON)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Microscopy metadata (Sidecar JSON)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#image-acquisition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Image Acquisition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sample
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chunk-transformations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chunk Transformations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hardware-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardware information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#institution-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Institution information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-of-sidecar-json-file-_suffixjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example of sidecar JSON file (*_&lt;suffix&gt;.json)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#required-samples-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required Samples file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-participants-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Participants data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#photos-of-the-samples-_photoextension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Photos of the samples (*_photo.&lt;extension&gt;)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="near-infrared-spectroscopy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Near-Infrared Spectroscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="motion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Motion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="magnetic-resonance-spectroscopy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetic Resonance Spectroscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="electromyography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electromyography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_5" id="__nav_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Derivatives
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Derivatives
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIDS Derivatives
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/common-data-types.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common data types and metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/imaging.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imaging data types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/atlas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Templates and atlases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../longitudinal-and-multi-site-studies.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Longitudinal and multi-site studies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glossary.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extensions.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIDS Extension Proposals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_9" id="__nav_1_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendix
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/schema.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/contributors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/licenses.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Licenses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/entity-table.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entity table
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/entities.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/file-collections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/units.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Units
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/hed.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hierarchical Event Descriptors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/meg-file-formats.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MEG file formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/meg-systems.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MEG systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/coordinate-systems.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coordinate systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/qmri.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quantitative MRI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/arterial-spin-labeling.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arterial Spin Labeling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/cross-modality-correspondence.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross modality correspondence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CHANGES.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The BIDS Website
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The BIDS Website
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://bids.neuroimaging.io/getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://bids.neuroimaging.io/getting_started/tutorials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#microscopy-imaging-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Microscopy imaging data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Microscopy imaging data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File formats
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modality-suffixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modality suffixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filename-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filename entities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#microscopy-metadata-sidecar-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Microscopy metadata (Sidecar JSON)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Microscopy metadata (Sidecar JSON)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#image-acquisition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Image Acquisition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sample
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chunk-transformations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chunk Transformations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hardware-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardware information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#institution-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Institution information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-of-sidecar-json-file-_suffixjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example of sidecar JSON file (*_&lt;suffix&gt;.json)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#required-samples-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required Samples file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-participants-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Participants data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#photos-of-the-samples-_photoextension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Photos of the samples (*_photo.&lt;extension&gt;)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/bids-standard/bids-specification/edit/master/src/modality-specific-files/microscopy.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="microscopy"><a class="toclink" href="#microscopy">Microscopy</a></h1>
+<p>Support for Microscopy was developed as a
+<a href="../extensions.html#bids-extension-proposals">BIDS Extension Proposal</a>.</p>
+<p>Please see <a href="../introduction.html#citing-bids">Citing BIDS</a>
+on how to appropriately credit this extension when referring to it in the
+context of the academic literature.</p>
+<div class="admonition example">
+<p class="admonition-title">Example datasets</p>
+<p>Microscopy datasets formatted using this specification are available on the
+  <a href="https://bids.neuroimaging.io/datasets/examples.html#microscopy">BIDS examples repository</a>
+  and can be used for practical guidance when curating a new dataset.</p>
+<p>Further Microscopy datasets are available:</p>
+<ul>
+<li>In PNG format:  <a href="https://doi.org/10.5281/zenodo.5498378"><code>data_axondeepseg_sem</code></a></li>
+<li>In OME-TIFF format: <a href="https://doi.org/10.5281/zenodo.5517223"><code>Broca's Area Light-Sheet Microscopy</code></a></li>
+</ul>
+</div>
+<h2 id="microscopy-imaging-data"><a class="toclink" href="#microscopy-imaging-data">Microscopy imaging data</a></h2>
+<!--
+This block generates a filename templates.
+The inputs for this macro can be found in the directory
+  src/schema/rules/files/raw
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<p>Template:</p>
+<div class="highlight"><pre><code><a href="../appendices/entities.html#sub">sub-&lt;label&gt;</a>/
+    [<a href="../appendices/entities.html#ses">ses-&lt;label&gt;</a>/]
+        <a href="../glossary.html#micr-datatypes">micr</a>/
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#sample">sample</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#stain">stain</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_&lt;<a href="../glossary.html#suffix-common_principles">suffix</a>&gt;<a href="../glossary.html#extension-common_principles">.&lt;extension&gt;</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#sample">sample</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#stain">stain</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_&lt;<a href="../glossary.html#suffix-common_principles">suffix</a>&gt;<a href="../glossary.html#json-extensions">.json</a>
+</code></pre></div>
+<details>
+<summary><strong>Legend:</strong></summary>
+<ul>
+<li>
+<p>For more information about filename elements (for example, entities, suffixes, extensions),
+follow the links embedded in the filename template.</p>
+</li>
+<li>
+<p><code>&lt;matches&gt;</code> is a placeholder to denote an arbitrary (and valid) sequence of entities
+and labels at the beginning of the filename (only BIDS &quot;raw&quot;).</p>
+</li>
+<li>
+<p><code>&lt;source-entities&gt;</code> is a placeholder to denote an arbitrary sequence of entities and labels
+at the beginning of the filename matching a source file from which the file derives
+(only BIDS-Derivatives).</p>
+</li>
+<li>
+<p>Filename entities or directories between square brackets
+(for example, <code>[_ses-&lt;label&gt;]</code>) are OPTIONAL.</p>
+</li>
+<li>
+<p>Some entities may only allow specific values,
+in which case those values are listed in <code>&lt;&gt;</code>, separated by <code>|</code>.</p>
+</li>
+<li>
+<p><code>_&lt;suffix&gt;</code> means that there are several (&gt;6) valid suffixes for this filename pattern.</p>
+</li>
+<li>
+<p><code>.&lt;extension&gt;</code> means that there are several (&gt;6) valid extensions for this file type.</p>
+</li>
+<li>
+<p><code>[.gz]</code> means that both the unzipped and gzipped versions of the extension are valid.</p>
+</li>
+</ul>
+
+</details>
+
+<p>Microscopy data MUST be stored in the <code>micr</code> directory.</p>
+<h3 id="file-formats"><a class="toclink" href="#file-formats">File formats</a></h3>
+<p>The Microscopy community uses a variety of formats for storing raw data, and there is no single
+standard that all researchers agree on. However, a standardized file structure has been developed
+by the <a href="https://www.openmicroscopy.org/">Open Microscopy Environment</a> for whole-slide imaging with
+the <a href="https://docs.openmicroscopy.org/ome-model/6.1.2/ome-tiff/file-structure.html">OME-TIFF file specifications</a>.
+The OME-TIFF file allows for multi-page TIFF files to store multiple image planes and supports
+multi-resolution pyramidal tiled images. An OME-XML data block is also embedded inside the
+file's header. Further, OME-Zarr (sometimes referred to as OME-NGFF or NGFF) has been developed to provide improved
+access and storage for large data via chunked and compressed N-dimensional arrays.
+For details on using OME-Zarr in BIDS, see the <a href="../common-principles.html#ome-zarr">Common Principles</a>.</p>
+<p>The BIDS standard accepts microscopy data in a number of file formats to accommodate datasets
+stored in 2D image formats and whole-slide imaging formats, to accommodate lossless and lossy
+compression, and to avoid unnecessary conversions of the original data from a non-tiled to a
+tiled format, or vice-versa.</p>
+<p>Microscopy raw data MUST be stored in one of the following formats:</p>
+<ul>
+<li>
+<p><a href="http://www.libpng.org/pub/png/">Portable Network Graphics</a> (<code>.png</code>)</p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/TIFF">Tag Image File Format</a> (<code>.tif</code>)</p>
+</li>
+<li>
+<p><a href="https://docs.openmicroscopy.org/ome-model/6.1.2/ome-tiff/specification.html#">OME-TIFF</a>
+    (<code>.ome.tif</code> for standard TIFF files or <code>.ome.btf</code> for
+    <a href="https://web.archive.org/web/20240706160214/https://www.awaresystems.be/imaging/tiff/bigtiff.html">BigTIFF</a> files)</p>
+</li>
+<li>
+<p><a href="https://ngff.openmicroscopy.org/latest/">OME-Zarr/NGFF</a> (<code>.ome.zarr</code> directories)</p>
+</li>
+</ul>
+<h3 id="modality-suffixes"><a class="toclink" href="#modality-suffixes">Modality suffixes</a></h3>
+<p>Microscopy data currently support the following imaging modalities:</p>
+<!--
+This block generates a suffix table.
+The definitions of these fields can be found in
+  src/schema/rules/files/raw
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Name</strong></th>
+<th><code>suffix</code></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2-photon excitation microscopy</td>
+<td><a href="../glossary.html#objects.suffixes.TwoPE">2PE</a></td>
+<td>2-photon excitation microscopy imaging data</td>
+</tr>
+<tr>
+<td>Bright-field microscopy</td>
+<td><a href="../glossary.html#objects.suffixes.BF">BF</a></td>
+<td>Bright-field microscopy imaging data</td>
+</tr>
+<tr>
+<td>Coherent anti-Stokes Raman spectroscopy</td>
+<td><a href="../glossary.html#objects.suffixes.CARS">CARS</a></td>
+<td>Coherent anti-Stokes Raman spectroscopy imaging data</td>
+</tr>
+<tr>
+<td>Confocal microscopy</td>
+<td><a href="../glossary.html#objects.suffixes.CONF">CONF</a></td>
+<td>Confocal microscopy imaging data</td>
+</tr>
+<tr>
+<td>Differential interference contrast microscopy</td>
+<td><a href="../glossary.html#objects.suffixes.DIC">DIC</a></td>
+<td>Differential interference contrast microscopy imaging data</td>
+</tr>
+<tr>
+<td>Dark-field microscopy</td>
+<td><a href="../glossary.html#objects.suffixes.DF">DF</a></td>
+<td>Dark-field microscopy imaging data</td>
+</tr>
+<tr>
+<td>Fluorescence microscopy</td>
+<td><a href="../glossary.html#objects.suffixes.FLUO">FLUO</a></td>
+<td>Fluorescence microscopy imaging data</td>
+</tr>
+<tr>
+<td>Multi-photon excitation microscopy</td>
+<td><a href="../glossary.html#objects.suffixes.MPE">MPE</a></td>
+<td>Multi-photon excitation microscopy imaging data</td>
+</tr>
+<tr>
+<td>Nonlinear optical microscopy</td>
+<td><a href="../glossary.html#objects.suffixes.NLO">NLO</a></td>
+<td>Nonlinear optical microscopy imaging data</td>
+</tr>
+<tr>
+<td>Optical coherence tomography</td>
+<td><a href="../glossary.html#objects.suffixes.OCT">OCT</a></td>
+<td>Optical coherence tomography imaging data</td>
+</tr>
+<tr>
+<td>Phase-contrast microscopy</td>
+<td><a href="../glossary.html#objects.suffixes.PC">PC</a></td>
+<td>Phase-contrast microscopy imaging data</td>
+</tr>
+<tr>
+<td>Polarized-light microscopy</td>
+<td><a href="../glossary.html#objects.suffixes.PLI">PLI</a></td>
+<td>Polarized-light microscopy imaging data</td>
+</tr>
+<tr>
+<td>Scanning electron microscopy</td>
+<td><a href="../glossary.html#objects.suffixes.SEM">SEM</a></td>
+<td>Scanning electron microscopy imaging data</td>
+</tr>
+<tr>
+<td>Selective plane illumination microscopy</td>
+<td><a href="../glossary.html#objects.suffixes.SPIM">SPIM</a></td>
+<td>Selective plane illumination microscopy imaging data</td>
+</tr>
+<tr>
+<td>Super-resolution microscopy</td>
+<td><a href="../glossary.html#objects.suffixes.SR">SR</a></td>
+<td>Super-resolution microscopy imaging data</td>
+</tr>
+<tr>
+<td>Transmission electron microscopy</td>
+<td><a href="../glossary.html#objects.suffixes.TEM">TEM</a></td>
+<td>Transmission electron microscopy imaging data</td>
+</tr>
+<tr>
+<td>X-ray Phase-Contrast Tomography</td>
+<td><a href="../glossary.html#objects.suffixes.XPCT">XPCT</a></td>
+<td>X-ray phase-contrast tomography imaging data</td>
+</tr>
+<tr>
+<td>Micro-CT</td>
+<td><a href="../glossary.html#objects.suffixes.uCT">uCT</a></td>
+<td>Micro-CT imaging data</td>
+</tr>
+</tbody>
+</table>
+<h3 id="filename-entities"><a class="toclink" href="#filename-entities">Filename entities</a></h3>
+<p>In the context of Microscopy, a session (<a href="../appendices/entities.html#ses"><code>ses-&lt;label&gt;</code></a>)
+can refer to all the acquisitions between the start and the end of an imaging experiment
+for ex vivo imaging, or a subject lab visit for biopsy procedure and/or in vivo imaging.
+Consistent with other data types in BIDS, the session entity is optional.</p>
+<p>The <a href="../appendices/entities.html#sample"><code>sample-&lt;label&gt;</code></a> entity is REQUIRED for
+Microscopy data and is used to distinguish between different samples from the same subject.
+The label MUST be unique per subject and is RECOMMENDED to be unique throughout the dataset.</p>
+<p>For example, three brain slices (<code>sample-01</code> to <code>sample-03</code>) extracted from subject <code>sub-01</code>,
+imaged by scanning electron microscopy (SEM) in PNG format:</p>
+<!-- This block generates a file tree.
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<div class="highlight"><pre><span></span><code>└─ sub-01/
+   └─ micr/
+      ├─ sub-01_sample-01_SEM.png 
+      ├─ sub-01_sample-02_SEM.png 
+      ├─ sub-01_sample-03_SEM.png 
+      └─ sub-01_SEM.json 
+</code></pre></div>
+<p>In this example, the JSON metadata is common for all samples of <code>sub-01</code>.
+JSON metadata may be defined per subject or per sample as appropriate, as per the
+<a href="../common-principles.html#the-inheritance-principle">inheritance principle</a>.</p>
+<p>The <a href="../appendices/entities.html#acq"><code>acq-&lt;label&gt;</code></a> entity corresponds to a custom label that
+MAY be used to distinguish a different set of parameters used for acquiring the same modality.
+For example, two images of the same sample acquired by bright-field microscopy (BF) in PNG format at
+different magnification of 40x and 60x.
+In such case two files could have the following names: <code>sub-01_sample-01_acq-40x_BF.png</code> and
+<code>sub-01_sample-01_acq-60x_BF.png</code>, however the user is free to choose any other label as long as
+they are consistent across subjects and sessions.</p>
+<p>The <a href="../appendices/entities.html#stain"><code>stain-&lt;label&gt;</code></a> entity MAY be used to distinguish
+image files from the same sample using different stains or antibodies for contrast enhancement.</p>
+<p>For example, one brain slice (<code>sample-01</code>) extracted from subject <code>sub-01</code> with three
+stains (<code>stain-01</code>, <code>stain-02</code> and <code>stain-03</code>) in three separate files, imaged by selective plane
+illumination microscopy (SPIM) in OME-TIFF format:</p>
+<!-- This block generates a file tree.
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<div class="highlight"><pre><span></span><code>└─ sub-01/
+   └─ micr/
+      ├─ sub-01_sample-01_stain-01_SPIM.ome.tif 
+      ├─ sub-01_sample-01_stain-01_SPIM.json 
+      ├─ sub-01_sample-01_stain-02_SPIM.ome.tif 
+      ├─ sub-01_sample-01_stain-02_SPIM.json 
+      ├─ sub-01_sample-01_stain-03_SPIM.ome.tif 
+      └─ sub-01_sample-01_stain-03_SPIM.json 
+</code></pre></div>
+<p>In this example, the <a href="../appendices/entities.html#stain"><code>stain-&lt;label&gt;</code></a> entity
+is used to distinguish images with different stains in separate files from the
+same sample.
+In the case where a single file contains different staining in each channel, the
+<code>stain-&lt;label&gt;</code> is omitted.</p>
+<p>Stains SHOULD be indicated in the <code>"SampleStaining"</code> key in the sidecar JSON file,
+although the label may be different.
+Description of antibodies SHOULD also be indicated in <code>"SamplePrimaryAntibodies"</code>
+and/or <code>"SampleSecondaryAntobodies"</code> as appropriate.</p>
+<p>If more than one run of the same sample, acquisition and stain are acquired during the same
+session, the <a href="../appendices/entities.html#run"><code>run-&lt;index&gt;</code></a> entity MUST be used:
+<code>_run-1</code>, <code>_run-2</code>, <code>_run-3</code>, and so on.
+If only one run was acquired the <code>run-&lt;index&gt;</code> can be omitted.</p>
+<p>The <a href="../appendices/entities.html#chunk"><code>chunk-&lt;index&gt;</code></a> entity is used when multiples
+regions (2D images or 3D volumes files) of the same physical sample are imaged with different
+fields of view, regardless if they overlap or not.</p>
+<p>In some cases, the chunks can be "ordered" and, for example, correspond to the displacement of the
+microscope stage.
+In other cases, the chunks can be different images of the same sample with no explicit
+spatial relation between them.</p>
+<p>Examples of different chunks configurations can be seen in Figure 1.
+<img alt="Figure 1" src="images/microscopy_chunks1.png" title="Examples of Microscopy chunks" /></p>
+<p>Figure 1: Examples of chunks configurations.</p>
+<ul>
+<li>a) ordered 2D chunks without overlap,</li>
+<li>b) ordered 2D chunks with overlap,</li>
+<li>c) unordered 2D chunks with and without overlap,</li>
+<li>d) and e) ordered 2D chunks on different 3D planes,</li>
+<li>f) ordered 3D chunks.</li>
+</ul>
+<p>For example, four chunks (<code>chunk-01</code> to <code>chunk-04</code>) from the same brain sample (<code>sample-01</code>)
+of subject <code>sub-01</code>, imaged by confocal microscopy (CONF) in OME-TIFF format:</p>
+<!-- This block generates a file tree.
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<div class="highlight"><pre><span></span><code>└─ sub-01/
+   └─ micr/
+      ├─ sub-01_sample-01_chunk-01_CONF.ome.tif 
+      ├─ sub-01_sample-01_chunk-01_CONF.json 
+      ├─ sub-01_sample-01_chunk-02_CONF.ome.tif 
+      ├─ sub-01_sample-01_chunk-02_CONF.json 
+      ├─ sub-01_sample-01_chunk-03_CONF.ome.tif 
+      ├─ sub-01_sample-01_chunk-03_CONF.json 
+      ├─ sub-01_sample-01_chunk-04_CONF.ome.tif 
+      └─ sub-01_sample-01_chunk-04_CONF.json 
+</code></pre></div>
+<p>The index number can be assigned arbitrarily and, in the case of "ordered" chunks, the chunks'
+relative positions (in terms of scaling and translation) SHOULD be defined by an affine
+transformation matrix in the JSON sidecar file of each chunk, as described in
+<a href="microscopy.html#chunk-transformations">Chunk Transformations</a>.</p>
+<p>In this example, the JSON metadata is different for each chunk of <code>sub-01_sample-01</code>.
+JSON metadata may be defined per sample or per chunk as appropriate, as per the
+<a href="../common-principles.html#the-inheritance-principle">inheritance principle</a>.</p>
+<p>In microscopy, many pyramidal file formats store multiple resolutions for the same acquisition.
+In the case where a multiple resolutions file format is converted to single resolution file format,
+only the higher resolution file is present in the raw data.
+Lower resolutions files MUST be placed under the <code>derivatives</code> directory and use the
+<a href="../appendices/entities.html#res"><code>res-&lt;label&gt;</code></a> entity.</p>
+<p>For example:</p>
+<!-- This block generates a file tree.
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<div class="highlight"><pre><span></span><code>└─ my_dataset/
+   ├─ derivatives/
+   │  └─ downsampled/
+   │     └─ sub-01/
+   │        └─ micr/
+   │           ├─ sub-01_sample-01_res-4x_TEM.png 
+   │           └─ sub-01_sample-01_res-4x_TEM.json 
+   └─ sub-01/
+      └─ micr/
+         ├─ sub-01_sample-01_TEM.png 
+         └─ sub-01_sample-01_TEM.json 
+</code></pre></div>
+<p>See <a href="../derivatives/imaging.html#preprocessed-coregistered-andor-resampled-volumes">Preprocessed, coregistered and/or resampled volumes</a>
+for details.</p>
+<h3 id="microscopy-metadata-sidecar-json"><a class="toclink" href="#microscopy-metadata-sidecar-json">Microscopy metadata (Sidecar JSON)</a></h3>
+<p>Microscopy data MUST be described by metadata fields, stored in sidecar JSON files.</p>
+<h4 id="image-acquisition"><a class="toclink" href="#image-acquisition">Image Acquisition</a></h4>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.PixelSize">PixelSize</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_arrays.asp">array</a> of <a href="https://www.w3schools.com/js/js_json_datatypes.asp">numbers</a></td>
+<td>A 2- or 3-number array of the physical size of a pixel, either <code>[PixelSizeX, PixelSizeY]</code> or <code>[PixelSizeX, PixelSizeY, PixelSizeZ]</code>, where X is the width, Y the height and Z the depth. If the file format is OME-TIFF, these values need to be consistent with <code>PhysicalSizeX</code>, <code>PhysicalSizeY</code> and <code>PhysicalSizeZ</code> OME metadata fields, after converting in <code>PixelSizeUnits</code> according to <code>PhysicalSizeXunit</code>, <code>PhysicalSizeYunit</code> and <code>PhysicalSizeZunit</code> OME fields.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.PixelSizeUnits">PixelSizeUnits</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Unit format of the specified <code>"PixelSize"</code>. MUST be one of: <code>"mm"</code> (millimeter), <code>"um"</code> (micrometer) or <code>"nm"</code> (nanometer).<br><br>Must be one of: <code>"mm"</code>, <code>"um"</code>, <code>"nm"</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.Immersion">Immersion</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Lens immersion medium. If the file format is OME-TIFF, the value MUST be consistent with the <code>Immersion</code> OME metadata field.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.NumericalAperture">NumericalAperture</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Lens numerical aperture (for example: <code>1.4</code>). If the file format is OME-TIFF, the value MUST be consistent with the <code>LensNA</code> OME metadata field.<br><br>Must be a number greater than 0.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.Magnification">Magnification</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Lens magnification (for example: <code>40</code>). If the file format is OME-TIFF, the value MUST be consistent with the <code>"NominalMagnification"</code> OME metadata field.<br><br>Must be a number greater than 0.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.ImageAcquisitionProtocol">ImageAcquisitionProtocol</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Description of the image acquisition protocol or <a href="../common-principles.html#uniform-resource-indicator">URI</a> (for example from <a href="https://www.protocols.io/">protocols.io</a>).</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.OtherAcquisitionParameters">OtherAcquisitionParameters</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Description of other relevant image acquisition parameters.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample"><a class="toclink" href="#sample">Sample</a></h4>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.BodyPart">BodyPart</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Body part of the organ / body region scanned. Corresponds to <a href="https://www.dicomlookup.com/dicomtags/(0018,0015)">DICOM Tag (0018,0015)</a> <code>Body Part Examined</code>.  From <a href="https://dicom.nema.org/medical/dicom/current/output/chtml/part16/chapter_L.html#chapter_L">DICOM Body Part Examined</a> (for example <code>"BRAIN"</code>).</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.BodyPartDetails">BodyPartDetails</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Additional details about body part or location (for example: <code>"corpus callosum"</code>).</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.BodyPartDetailsOntology">BodyPartDetailsOntology</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td><a href="../common-principles.html#uniform-resource-indicator">URI</a> of ontology used for BodyPartDetails (for example: <code>"https://www.ebi.ac.uk/ols/ontologies/uberon"</code>).</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SampleEnvironment">SampleEnvironment</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Environment in which the sample was imaged. MUST be one of: <code>"in vivo"</code>, <code>"ex vivo"</code> or <code>"in vitro"</code>.<br><br>Must be one of: <code>"in vivo"</code>, <code>"ex vivo"</code>, <code>"in vitro"</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SampleEmbedding">SampleEmbedding</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Description of the tissue sample embedding (for example: <code>"Epoxy resin"</code>).</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SampleFixation">SampleFixation</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Description of the tissue sample fixation (for example: <code>"4% paraformaldehyde, 2% glutaraldehyde"</code>).</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SampleStaining">SampleStaining</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a> or <a href="https://www.w3schools.com/js/js_json_arrays.asp">array</a> of <a href="https://www.w3schools.com/js/js_json_datatypes.asp">strings</a></td>
+<td>Description(s) of the tissue sample staining (for example: <code>"Osmium"</code>). MAY be an array of strings if different stains are used in each channel of the file (for example: <code>["LFB", "PLP"]</code>).</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SamplePrimaryAntibody">SamplePrimaryAntibody</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a> or <a href="https://www.w3schools.com/js/js_json_arrays.asp">array</a> of <a href="https://www.w3schools.com/js/js_json_datatypes.asp">strings</a></td>
+<td>Description(s) of the primary antibody used for immunostaining. Either an <a href="https://rrid.site">RRID</a> or the name, supplier and catalog number of a commercial antibody. For non-commercial antibodies either an <a href="https://rrid.site">RRID</a> or the host-animal and immunogen used (for examples: <code>"RRID:AB_2122563"</code> or <code>"Rabbit anti-Human HTR5A Polyclonal Antibody, Invitrogen, Catalog # PA1-2453"</code>). MAY be an array of strings if different antibodies are used in each channel of the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SampleSecondaryAntibody">SampleSecondaryAntibody</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a> or <a href="https://www.w3schools.com/js/js_json_arrays.asp">array</a> of <a href="https://www.w3schools.com/js/js_json_datatypes.asp">strings</a></td>
+<td>Description(s) of the secondary antibody used for immunostaining. Either an <a href="https://rrid.site">RRID</a> or the name, supplier and catalog number of a commercial antibody. For non-commercial antibodies either an <a href="https://rrid.site">RRID</a> or the host-animal and immunogen used (for examples: <code>"RRID:AB_228322"</code> or <code>"Goat anti-Mouse IgM Secondary Antibody, Invitrogen, Catalog # 31172"</code>). MAY be an array of strings if different antibodies are used in each channel of the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SliceThickness">SliceThickness</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Slice thickness of the tissue sample in the unit micrometers (<code>"um"</code>) (for example: <code>5</code>).<br><br>Must be a number greater than 0.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.TissueDeformationScaling">TissueDeformationScaling</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Estimated deformation of the tissue, given as a percentage of the original tissue size (for examples: for a shrinkage of 3%, the value is <code>97</code>; and for an expansion of 100%, the value is <code>200</code>).<br><br>Must be a number greater than 0.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SampleExtractionProtocol">SampleExtractionProtocol</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Description of the sample extraction protocol or <a href="../common-principles.html#uniform-resource-indicator">URI</a> (for example from <a href="https://www.protocols.io/">protocols.io</a>).</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SampleExtractionInstitution">SampleExtractionInstitution</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The name of the institution in charge of the extraction of the sample, if different from the institution in charge of the equipment that produced the image.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="chunk-transformations"><a class="toclink" href="#chunk-transformations">Chunk Transformations</a></h4>
+<p>Chunk transformations metadata describes the spatial relation between chunks
+of the same sample in an implicit coordinate system.</p>
+<ul>
+<li>
+<p>The source frame of reference is the frame of reference of the associated image.</p>
+</li>
+<li>
+<p>The target frame of reference is the implicit coordinate system of the transform.</p>
+</li>
+<li>
+<p>The target frame of reference has the same units as the <code>PixelSizeUnits</code> metadata.</p>
+</li>
+<li>
+<p>The chunk transformation is described by 2 metadata fields: an affine transformation matrix
+    and a description of the axis of the matrix.</p>
+</li>
+<li>
+<p>Other transformations should be described in derivatives.</p>
+</li>
+</ul>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.ChunkTransformationMatrix">ChunkTransformationMatrix</a></td>
+<td>RECOMMENDED if <code>chunk-&lt;index&gt;</code> is used in filenames</td>
+<td><a href="https://www.w3schools.com/js/js_json_arrays.asp">array</a> of <a href="https://www.w3schools.com/js/js_json_arrays.asp">arrays</a></td>
+<td>3x3 or 4x4 affine transformation matrix describing spatial chunk transformation, for 2D and 3D respectively (for examples: <code>[[2, 0, 0], [0, 3, 0], [0, 0, 1]]</code> in 2D for 2x and 3x scaling along the first and second axis respectively; or <code>[[1, 0, 0, 0], [0, 2, 0, 0], [0, 0, 3, 0], [0, 0, 0, 1]]</code> in 3D for 2x and 3x scaling along the second and third axis respectively). Note that non-spatial dimensions like time and channel are not included in the transformation matrix.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.ChunkTransformationMatrixAxis">ChunkTransformationMatrixAxis</a></td>
+<td>REQUIRED if <code>ChunkTransformationMatrix</code> is present</td>
+<td><a href="https://www.w3schools.com/js/js_json_arrays.asp">array</a> of <a href="https://www.w3schools.com/js/js_json_datatypes.asp">strings</a></td>
+<td>Describe the axis of the ChunkTransformationMatrix (for examples: <code>["X", "Y"]</code> or <code>["Z", "Y", "X"]</code>).</td>
+</tr>
+</tbody>
+</table>
+<p>An example of chunk transformations JSON metadata for <code>chunk-01</code> and <code>chunk-05</code> of Figure 2
+is shown below:</p>
+<p><img alt="Figure 2" src="images/microscopy_chunks2.png" title="Example figure for chunks transformations" /></p>
+<p>Figure 2: Example figure for chunks transformations.</p>
+<p>In this example, there is no scaling and <code>chunk-01</code> is at the origin.
+<code>chunk-05</code> is translated by 5 um along <code>X+</code> and by 3 um along <code>Y+</code>.</p>
+<p><strong><code>*_chunk-01_&lt;suffix&gt;.json</code></strong>:
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;PixelSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;PixelSizeUnits&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;um&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;ChunkTransformationMatrix&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">],</span>
+<span class="w">                                      </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">],</span>
+<span class="w">                                      </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]],</span>
+<span class="w">        </span><span class="nt">&quot;ChunkTransformationMatrixAxis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Y&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong><code>*_chunk-05_&lt;suffix&gt;.json</code></strong>:
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;PixelSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;PixelSizeUnits&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;um&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;ChunkTransformationMatrix&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">],</span>
+<span class="w">                                      </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">],</span>
+<span class="w">                                      </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]],</span>
+<span class="w">        </span><span class="nt">&quot;ChunkTransformationMatrixAxis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Y&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h4 id="hardware-information"><a class="toclink" href="#hardware-information">Hardware information</a></h4>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.Manufacturer">Manufacturer</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Manufacturer of the equipment that produced the measurements.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.ManufacturersModelName">ManufacturersModelName</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Manufacturer's model name of the equipment that produced the measurements.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.DeviceSerialNumber">DeviceSerialNumber</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The serial number of the equipment that produced the measurements. A pseudonym can also be used to prevent the equipment from being identifiable, so long as each pseudonym is unique within the dataset.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.StationName">StationName</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Institution defined name of the machine that produced the measurements.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SoftwareVersions">SoftwareVersions</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Manufacturer's designation of software version of the equipment that produced the measurements.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="institution-information"><a class="toclink" href="#institution-information">Institution information</a></h4>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.InstitutionName">InstitutionName</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The name of the institution in charge of the equipment that produced the measurements.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.InstitutionAddress">InstitutionAddress</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The address of the institution in charge of the equipment that produced the measurements.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.InstitutionalDepartmentName">InstitutionalDepartmentName</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The department in the institution in charge of the equipment that produced the measurements.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-of-sidecar-json-file-_suffixjson"><a class="toclink" href="#example-of-sidecar-json-file-_suffixjson">Example of sidecar JSON file (<code>*_&lt;suffix&gt;.json</code>)</a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;Manufacturer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hamamatsu&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;ManufacturersModelName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C9600-12&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;PixelSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.23</span><span class="p">,</span><span class="w"> </span><span class="mf">0.23</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;PixelSizeUnits&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;um&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Magnification&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;BodyPart&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BRAIN&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;BodyPartDetails&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;corpus callosum&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;SampleEnvironment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ex vivo&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;SampleFixation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4% paraformaldehyde, 2% glutaraldehyde&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;SampleStaining&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LFB&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;SliceThickness&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;TissueDeformationScaling&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">97</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="required-samples-file"><a class="toclink" href="#required-samples-file">Required Samples file</a></h2>
+<p>For Microscopy data, the <a href="../modality-agnostic-files/data-summary-files.html#samples-file">Samples file</a>
+<code>samples.tsv</code> is REQUIRED and its associated sidecar <code>samples.json</code> file is RECOMMENDED.</p>
+<p>Additional optional columns MAY be used to describe other samples' attributes.</p>
+<h2 id="recommended-participants-data"><a class="toclink" href="#recommended-participants-data">Recommended Participants data</a></h2>
+<p>For Microscopy data, we RECOMMEND to make use of the columns <code>species</code>, <code>strain</code> and
+<code>strain_rrid</code> in the <a href="../modality-agnostic-files/data-summary-files.html#participants-file">Participants file</a>
+when applicable.</p>
+<p>Additional optional columns MAY be used to describe other subjects' attributes.</p>
+<p><code>participants.tsv</code> example:
+<table class="tsv-table noindex"><thead><tr><th>participant_id</th><th>species</th><th>strain</th><th>strain_rrid</th></tr></thead><tbody><tr><td>sub-01</td><td>mus musculus</td><td>C57BL/6J</td><td>RRID:IMSR_JAX:000664</td></tr><tr><td>sub-02</td><td>mus musculus</td><td>C57BL/6J</td><td>RRID:IMSR_JAX:000664</td></tr></tbody></table></p>
+<p><code>participants.json</code> example:
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;species&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;Description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;binomial species name from the NCBI Taxonomy (https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi)&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;strain&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;Description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;name of the strain of the species&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;strain_rrid&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;Description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;research resource identifier (RRID) of the strain (https://rrid.site/data/source/nlx_154697-1/search)&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h2 id="photos-of-the-samples-_photoextension"><a class="toclink" href="#photos-of-the-samples-_photoextension">Photos of the samples (<code>*_photo.&lt;extension&gt;</code>)</a></h2>
+<p>Photos of the tissue sample, overview microscopy scans or blockface images from cutting
+MAY be included for visualization of large samples or to indicate the location of chunks
+in a sample.</p>
+<!--
+This block generates a filename templates.
+The inputs for this macro can be found in the directory
+  src/schema/rules/files/raw
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<p>Template:</p>
+<div class="highlight"><pre><code><a href="../appendices/entities.html#sub">sub-&lt;label&gt;</a>/
+    [<a href="../appendices/entities.html#ses">ses-&lt;label&gt;</a>/]
+        <a href="../glossary.html#micr-datatypes">micr</a>/
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#sample">sample</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#photo-suffixes">photo</a><a href="../glossary.html#extension-common_principles">.&lt;extension&gt;</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#sample">sample</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#photo-suffixes">photo</a><a href="../glossary.html#json-extensions">.json</a>
+</code></pre></div>
+<details>
+<summary><strong>Legend:</strong></summary>
+<ul>
+<li>
+<p>For more information about filename elements (for example, entities, suffixes, extensions),
+follow the links embedded in the filename template.</p>
+</li>
+<li>
+<p><code>&lt;matches&gt;</code> is a placeholder to denote an arbitrary (and valid) sequence of entities
+and labels at the beginning of the filename (only BIDS &quot;raw&quot;).</p>
+</li>
+<li>
+<p><code>&lt;source-entities&gt;</code> is a placeholder to denote an arbitrary sequence of entities and labels
+at the beginning of the filename matching a source file from which the file derives
+(only BIDS-Derivatives).</p>
+</li>
+<li>
+<p>Filename entities or directories between square brackets
+(for example, <code>[_ses-&lt;label&gt;]</code>) are OPTIONAL.</p>
+</li>
+<li>
+<p>Some entities may only allow specific values,
+in which case those values are listed in <code>&lt;&gt;</code>, separated by <code>|</code>.</p>
+</li>
+<li>
+<p><code>_&lt;suffix&gt;</code> means that there are several (&gt;6) valid suffixes for this filename pattern.</p>
+</li>
+<li>
+<p><code>.&lt;extension&gt;</code> means that there are several (&gt;6) valid extensions for this file type.</p>
+</li>
+<li>
+<p><code>[.gz]</code> means that both the unzipped and gzipped versions of the extension are valid.</p>
+</li>
+</ul>
+
+</details>
+
+<p>The file <code>&lt;extension&gt;</code> for photos MUST be either <code>.jpg</code>, <code>.png</code> or <code>.tif</code>.</p>
+<p>The <a href="../appendices/entities.html#acq"><code>acq-&lt;label&gt;</code></a> entity MAY be used to indicate
+acquisition of different photos of the same sample.</p>
+<p>For example:</p>
+<!-- This block generates a file tree.
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<div class="highlight"><pre><span></span><code>└─ sub-01/
+   └─ ses-01/
+      └─ micr/
+         ├─ sub-01_ses-01_sample-01_acq-1_photo.jpg 
+         └─ sub-01_ses_01_sample-01_acq-2_photo.jpg 
+</code></pre></div>
+<p>Photo data MAY be accompanied by a JSON file containing the following fields.
+The <code>IntendedFor</code> field is used to link the photo to specific image(s) it was acquired for.</p>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.PhotoDescription">PhotoDescription</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Description of the photo.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.IntendedFor">IntendedFor</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a> or <a href="https://www.w3schools.com/js/js_json_arrays.asp">array</a></td>
+<td>The paths to files for which the associated file is intended to be used. Contains one or more <a href="../common-principles.html#bids-uri">BIDS URIs</a>. Using forward-slash separated paths relative to the participant subdirectory is <a href="../common-principles.html#definitions">DEPRECATED</a>.  This field is OPTIONAL, in case the photos do not correspond to any particular images, it does not have to be filled.</td>
+</tr>
+</tbody>
+</table>
+<p>For example: <code>sub-01_ses-01_sample-01_acq-1_photo.json</code></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">   </span><span class="nt">&quot;PhotoDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;After clearing&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;IntendedFor&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;ses-01/micr/sub-01_ses-01_sample-01_run-1_chunk-01_SPIM.ome.tif&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;ses-01/micr/sub-01_ses-01_sample-01_run-1_chunk-02_SPIM.ome.tif&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;ses-01/micr/sub-01_ses-01_sample-01_run-1_chunk-03_SPIM.ome.tif&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;ses-01/micr/sub-01_ses-01_sample-01_run-1_chunk-04_SPIM.ome.tif&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Below is an example of a spinal cord SEM overview, modified from Zaimi et al., 2018.
+<a href="https://doi.org/10.1038/s41598-018-22181-4">doi:10.1038/s41598-018-22181-4</a>.
+<div class="highlight"><pre><span></span><code>    sub-01_sample-01_photo.jpg
+</code></pre></div>
+<img alt="SEM overview" src="images/microscopy_sem_overview.jpg" title="SEM overview" /></p>
+<!-- Link Definitions -->
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; BIDS Contributors - <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/bids-standard/bids-specification/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://bsky.app/profile/bidsstandard.bsky.social" target="_blank" rel="noopener" title="bsky.app" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M407.8 294.7c-3.3-.4-6.7-.8-10-1.3 3.4.4 6.7.9 10 1.3M288 227.1c-26.1-50.7-97.1-145.2-163.1-191.8C61.6-9.4 37.5-1.7 21.6 5.5 3.3 13.8 0 41.9 0 58.4S9.1 194 15 213.9c19.5 65.7 89.1 87.9 153.2 80.7 3.3-.5 6.6-.9 10-1.4-3.3.5-6.6 1-10 1.4-93.9 14-177.3 48.2-67.9 169.9C220.6 589.1 265.1 437.8 288 361.1c22.9 76.7 49.2 222.5 185.6 103.4 102.4-103.4 28.1-156-65.8-169.9-3.3-.4-6.7-.8-10-1.3 3.4.4 6.7.9 10 1.3 64.1 7.1 133.6-15.1 153.2-80.7C566.9 194 576 75 576 58.4s-3.3-44.7-21.6-52.9c-15.8-7.1-40-14.9-103.2 29.8C385.1 81.9 314.1 176.4 288 227.1"/></svg>
+    </a>
+  
+    
+    
+      
+    
+    
+    
+      
+      
+    
+    <a href="https://fosstodon.org/@bidsstandard" target="_blank" rel="noopener me" title="fosstodon.org" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M433 179.1c0-97.2-63.7-125.7-63.7-125.7-62.5-28.7-228.6-28.4-290.5 0 0 0-63.7 28.5-63.7 125.7 0 115.7-6.6 259.4 105.6 289.1 40.5 10.7 75.3 13 103.3 11.4 50.8-2.8 79.3-18.1 79.3-18.1l-1.7-36.9s-36.3 11.4-77.1 10.1c-40.4-1.4-83-4.4-89.6-54-.6-4.6-.9-9.3-.9-13.9 85.6 20.9 158.7 9.1 178.7 6.7 56.1-6.7 105-41.3 111.2-72.9 9.8-49.8 9-121.5 9-121.5zm-75.1 125.2h-46.6V190.1c0-49.7-64-51.6-64 6.9v62.5H201V197c0-58.5-64-56.6-64-6.9v114.2H90.3c0-122.1-5.2-147.9 18.4-175 25.9-28.9 79.8-30.8 103.8 6.1l11.6 19.5 11.6-19.5c24.1-37.1 78.1-34.8 103.8-6.1 23.7 27.3 18.4 53 18.4 175"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://groups.google.com/g/bids-discussion" target="_blank" rel="noopener" title="groups.google.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M500 261.8C500 403.3 403.1 504 260 504 122.8 504 12 393.2 12 256S122.8 8 260 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C270.5 52.6 106.3 116.6 106.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H260v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.instagram.com/bidsstandard/" target="_blank" rel="noopener" title="www.instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3 141a115 115 0 1 0-.6 230 115 115 0 1 0 .6-230m-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1-.6-149.2m93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1-53.6 0m129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/channel/UCxZUcYfd_nvIVWAbzRB1tlw" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+  
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../js/jquery-3.6.0.min.js"></script>
+      
+    
+  <script src="https://demo.osc.earth/osa-chat-widget.js"></script>
+  <script>
+    OSAChatWidget.setConfig({ communityId: 'bids' });
+  </script>
+
+  </body>
+</html>

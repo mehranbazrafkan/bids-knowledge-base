@@ -1,0 +1,26 @@
+{
+  "spec_schema_files_parsed": 118,
+  "spec_schema_failures": [],
+  "spec_bids_version": "1.11.3-dev",
+  "spec_schema_version": "2.1.0-dev",
+  "spec_rule_files": 101,
+  "spec_object_files": 12,
+  "validator_issue_definitions": 53,
+  "validator_issue_codes_in_src": 57,
+  "example_datasets": 109,
+  "example_failures": [],
+  "schema_repo_snapshots": [
+    "1.10.0",
+    "1.10.1",
+    "1.11.0",
+    "1.11.1",
+    "1.11.2",
+    "1.6.0",
+    "1.7.0",
+    "1.8.0",
+    "1.9.0",
+    "latest",
+    "master"
+  ],
+  "schema_repo_failures": []
+}

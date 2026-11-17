@@ -1,0 +1,531 @@
+{
+  "ok": true,
+  "generated_at": "2026-10-29T17:31:03Z",
+  "checks_total": 45,
+  "checks_passed": 45,
+  "checks_failed": 0,
+  "checks_warned": 0,
+  "failures": [],
+  "warnings": [],
+  "kb": {
+    "path": "D:\\Programming\\01- University of Oldenburg\\BIDS Knowledge Base\\knowledge_base.jsonl",
+    "exists": true,
+    "records": 3505,
+    "issue_records": 232,
+    "unique_issue_codes": 209,
+    "discovered_issue_codes": 193,
+    "kb_only_issue_codes": [
+      "BVEC_ROW_LENGTH",
+      "B_FILE",
+      "GZ_NOT_GZIPPED",
+      "HED_INTERNAL_ERROR",
+      "HED_INTERNAL_WARNING",
+      "HED_MISSING_VALUE_IN_SIDECAR",
+      "HED_VERSION_NOT_DEFINED",
+      "INACCESSIBLE_REMOTE_FILE",
+      "INTERNAL_ERROR",
+      "MALFORMED_BVAL",
+      "MALFORMED_BVEC",
+      "MISSING_SESSION",
+      "NIFTI_TOO_SMALL",
+      "NO_VALID_DATA_FOUND_FOR_SUBJECT",
+      "ORPHANED_SYMLINK",
+      "WRONG_NEW_LINE"
+    ],
+    "version_scoped_records": {
+      "development": 1751,
+      "stable_1_11_2": 1469
+    },
+    "records_by_source": {
+      "bids-examples": 110,
+      "bids-schema": 46,
+      "bids-specification-docs": 1466,
+      "bids-specification-repo": 1775,
+      "bids-validator": 108
+    },
+    "records_by_knowledge_type": {
+      "Concept": 2606,
+      "Example": 129,
+      "FilenameRule": 184,
+      "MetadataRule": 216,
+      "Relationship": 13,
+      "TabularRule": 28,
+      "Troubleshooting": 11,
+      "ValidationIssue": 232,
+      "ValidationRule": 11,
+      "Version": 75
+    },
+    "search_smoke": {
+      "ACCEL_CHANNEL_COUNT": 1,
+      "Inheritance": 4,
+      "participants.tsv": 101,
+      "NOT_INCLUDED": 2
+    },
+    "version_records": 75
+  },
+  "ft": {
+    "path": "D:\\Programming\\01- University of Oldenburg\\BIDS Knowledge Base\\finetuning_dataset.jsonl",
+    "exists": true,
+    "examples": 5330,
+    "splits": {
+      "train": 4983,
+      "eval": 347
+    },
+    "families": 1964,
+    "synthetic_examples": 474,
+    "by_example_type": {
+      "code_comparison": 204,
+      "conditions": 416,
+      "context_json_interpretation": 208,
+      "corrected_example": 256,
+      "explain": 3408,
+      "insufficient_info_question": 209,
+      "investigate": 189,
+      "resolution": 209,
+      "rule_relationship": 197,
+      "version_differences": 34
+    },
+    "issue_examples": 1745,
+    "supplement_examples": 3585,
+    "records_by_source_in_examples": {
+      "bids-examples": 110,
+      "bids-schema": 46,
+      "bids-specification-docs": 1400,
+      "bids-specification-repo": 3442,
+      "bids-validator": 406
+    }
+  },
+  "coverage": {
+    "by_source": {
+      "bids-specification-docs": {
+        "kb_records": 1466,
+        "ft_examples": 1400,
+        "role": "human-readable specification documentation",
+        "authority": "published_documentation"
+      },
+      "bids-specification-repo": {
+        "kb_records": 1775,
+        "ft_examples": 3442,
+        "role": "structured rules and specification source",
+        "authority": "normative_specification"
+      },
+      "bids-validator": {
+        "kb_records": 108,
+        "ft_examples": 406,
+        "role": "implementation and validation issue behavior",
+        "authority": "validator_implementation"
+      },
+      "bids-examples": {
+        "kb_records": 110,
+        "ft_examples": 110,
+        "role": "representative dataset examples",
+        "authority": "dataset_example"
+      },
+      "bids-schema": {
+        "kb_records": 46,
+        "ft_examples": 46,
+        "role": "historical and versioned schema definitions",
+        "authority": "schema_archive"
+      }
+    },
+    "by_knowledge_type": {
+      "Concept": 2606,
+      "Example": 129,
+      "FilenameRule": 184,
+      "MetadataRule": 216,
+      "Relationship": 13,
+      "TabularRule": 28,
+      "Troubleshooting": 11,
+      "ValidationIssue": 232,
+      "ValidationRule": 11,
+      "Version": 75
+    },
+    "issue_codes": {
+      "total": 209,
+      "with_ft_examples": 209,
+      "codes_without_examples": [],
+      "min_examples_per_code": 5,
+      "max_examples_per_code": 10,
+      "mean_examples_per_code": 8.35,
+      "codes_with_single_example": []
+    },
+    "ft_examples_total": 5330,
+    "ft_examples_by_split": {
+      "train": 4983,
+      "eval": 347
+    },
+    "ft_examples_by_type": {
+      "code_comparison": 204,
+      "conditions": 416,
+      "context_json_interpretation": 208,
+      "corrected_example": 256,
+      "explain": 3408,
+      "insufficient_info_question": 209,
+      "investigate": 189,
+      "resolution": 209,
+      "rule_relationship": 197,
+      "version_differences": 34
+    },
+    "ft_examples_by_family_group": {
+      "concept": 1083,
+      "doc": 1400,
+      "doc_dev": 33,
+      "example": 129,
+      "issue": 1779,
+      "relationship": 26,
+      "rule": 812,
+      "validator_doc": 27,
+      "version": 41
+    }
+  },
+  "gaps": [
+    {
+      "kind": "docs_pages_without_records",
+      "pages": [
+        "https://bids-specification.readthedocs.io/en/stable/CHANGES.html"
+      ],
+      "count": 1
+    }
+  ],
+  "checks": [
+    {
+      "name": "kb.file_exists",
+      "status": "pass",
+      "detail": "D:\\Programming\\01- University of Oldenburg\\BIDS Knowledge Base\\knowledge_base.jsonl"
+    },
+    {
+      "name": "kb.lines_parse",
+      "status": "pass",
+      "detail": {
+        "records": 3505,
+        "errors": []
+      }
+    },
+    {
+      "name": "kb.non_empty",
+      "status": "pass",
+      "detail": 3505
+    },
+    {
+      "name": "kb.template_fields",
+      "status": "pass",
+      "detail": {}
+    },
+    {
+      "name": "kb.ids_unique",
+      "status": "pass",
+      "detail": {
+        "duplicate_ids": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "kb.id_format",
+      "status": "pass",
+      "detail": {
+        "bad": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "kb.knowledge_types",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "name": "kb.authorities",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "name": "kb.source_registry",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "name": "kb.provenance_present",
+      "status": "pass",
+      "detail": {
+        "records_without_provenance": []
+      }
+    },
+    {
+      "name": "kb.issue_title_matches_code",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "name": "kb.issue_code_in_retrieval_text",
+      "status": "pass",
+      "detail": {
+        "count": 0,
+        "ids": []
+      }
+    },
+    {
+      "name": "kb.covers_all_discovered_issue_codes",
+      "status": "pass",
+      "detail": {
+        "discovered": 193,
+        "in_kb": 209,
+        "missing": []
+      }
+    },
+    {
+      "name": "kb.issue_messages_exact",
+      "status": "pass",
+      "detail": {
+        "mismatches": 0,
+        "sample": []
+      }
+    },
+    {
+      "name": "kb.selectors_and_checks_preserved",
+      "status": "pass",
+      "detail": {
+        "missing": 0,
+        "sample": []
+      }
+    },
+    {
+      "name": "kb.issue_severities_match_sources",
+      "status": "pass",
+      "detail": {
+        "mismatches": 0,
+        "sample": []
+      }
+    },
+    {
+      "name": "kb.extra_codes_trace_to_sources",
+      "status": "pass",
+      "detail": {
+        "extra_codes": 16,
+        "unresolvable": []
+      }
+    },
+    {
+      "name": "kb.version_specific_records_not_mixed",
+      "status": "pass",
+      "detail": {
+        "violations": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "kb.conflicts_marked_unresolved",
+      "status": "pass",
+      "detail": {
+        "conflicts": 0,
+        "marked_unresolved": 0
+      }
+    },
+    {
+      "name": "kb.no_duplicate_records",
+      "status": "pass",
+      "detail": {
+        "duplicates": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "kb.retrieval_texts_distinct",
+      "status": "pass",
+      "detail": {
+        "duplicates": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "kb.enrichment_fields_complete",
+      "status": "pass",
+      "detail": {
+        "missing": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "kb.resolution_guidance_quotes_sources",
+      "status": "pass",
+      "detail": {
+        "invented_quotes": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "kb.retrieval_text_non_empty",
+      "status": "pass",
+      "detail": {
+        "count": 0
+      }
+    },
+    {
+      "name": "kb.all_sources_covered",
+      "status": "pass",
+      "detail": {
+        "bids-examples": 110,
+        "bids-schema": 46,
+        "bids-specification-docs": 1466,
+        "bids-specification-repo": 1775,
+        "bids-validator": 108
+      }
+    },
+    {
+      "name": "kb.search_smoke_tests",
+      "status": "pass",
+      "detail": {
+        "ACCEL_CHANNEL_COUNT": 1,
+        "Inheritance": 4,
+        "participants.tsv": 101,
+        "NOT_INCLUDED": 2
+      }
+    },
+    {
+      "name": "ft.file_exists",
+      "status": "pass",
+      "detail": "D:\\Programming\\01- University of Oldenburg\\BIDS Knowledge Base\\finetuning_dataset.jsonl"
+    },
+    {
+      "name": "ft.lines_parse",
+      "status": "pass",
+      "detail": {
+        "examples": 5330,
+        "errors": []
+      }
+    },
+    {
+      "name": "ft.non_empty",
+      "status": "pass",
+      "detail": 5330
+    },
+    {
+      "name": "ft.only_prompt_completion_keys",
+      "status": "pass",
+      "detail": {
+        "violations": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "ft.prompt_completion_non_empty",
+      "status": "pass",
+      "detail": {
+        "violations": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "ft.prompts_unique",
+      "status": "pass",
+      "detail": {
+        "duplicates": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "ft.manifest_exists",
+      "status": "pass",
+      "detail": "D:\\Programming\\01- University of Oldenburg\\BIDS Knowledge Base\\artifacts\\ft_manifest.jsonl"
+    },
+    {
+      "name": "ft.manifest_parse",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "name": "ft.manifest_aligned",
+      "status": "pass",
+      "detail": {
+        "manifest": 5330,
+        "examples": 5330
+      }
+    },
+    {
+      "name": "ft.manifest_ids_unique",
+      "status": "pass",
+      "detail": {
+        "unique": 5330,
+        "total": 5330
+      }
+    },
+    {
+      "name": "ft.manifest_example_types_known",
+      "status": "pass",
+      "detail": []
+    },
+    {
+      "name": "ft.family_split_grouping",
+      "status": "pass",
+      "detail": {
+        "leaking_families": []
+      }
+    },
+    {
+      "name": "ft.both_splits_populated",
+      "status": "pass",
+      "detail": {
+        "train": 4983,
+        "eval": 347
+      }
+    },
+    {
+      "name": "ft.synthetic_examples_flagged",
+      "status": "pass",
+      "detail": {
+        "unflagged": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "ft.every_issue_code_has_example",
+      "status": "pass",
+      "detail": {
+        "issue_codes": 209,
+        "without_examples": []
+      }
+    },
+    {
+      "name": "ft.all_issue_example_types_present",
+      "status": "pass",
+      "detail": {
+        "explain": 3408,
+        "conditions": 416,
+        "investigate": 189,
+        "resolution": 209,
+        "context_json_interpretation": 208,
+        "rule_relationship": 197,
+        "code_comparison": 204,
+        "version_differences": 34,
+        "corrected_example": 256,
+        "insufficient_info_question": 209
+      }
+    },
+    {
+      "name": "ft.no_invented_issue_codes",
+      "status": "pass",
+      "detail": {
+        "tokens_absent_from_kb": [],
+        "count": 0
+      }
+    },
+    {
+      "name": "ft.completions_trace_to_kb",
+      "status": "pass",
+      "detail": {
+        "mean_token_coverage": 0.9952,
+        "low_coverage_examples": 0,
+        "allowed_max": 106,
+        "sample": []
+      }
+    },
+    {
+      "name": "ft.deterministic_regeneration",
+      "status": "pass",
+      "detail": "regenerated dataset is byte-identical"
+    }
+  ],
+  "regeneration": {
+    "command": "python -m pipeline.run --force",
+    "staged_command": "python -m pipeline.run --stages 4,5,6,7,8,9",
+    "note": "Stage 9 (this audit) must finish with ok=true; --force clears the stage state and rebuilds all artifacts and both deliverables from the pinned source revisions recorded in artifacts/inventory.json."
+  }
+}

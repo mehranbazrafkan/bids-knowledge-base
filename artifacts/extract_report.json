@@ -1,0 +1,26 @@
+{
+  "raw_records": 3505,
+  "per_source_counts": {
+    "bids-specification-docs": 1466,
+    "bids-specification-repo": 1775,
+    "bids-validator": 108,
+    "bids-examples": 110,
+    "bids-schema": 46
+  },
+  "spec_markdown": {
+    "mirrored": 387,
+    "dev_only": 37,
+    "changed_in_dev": 0,
+    "skipped": 0
+  },
+  "failures": {
+    "bids-specification-docs": 0,
+    "bids-examples": 0,
+    "bids-schema": 0
+  },
+  "failures_detail": {
+    "bids-specification-docs": [],
+    "bids-examples": [],
+    "bids-schema": []
+  }
+}

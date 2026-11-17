@@ -1,0 +1,3167 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://bids-specification.readthedocs.io/en/stable/appendices/qmri.html">
+      
+      
+        <link rel="prev" href="coordinate-systems.html">
+      
+      
+        <link rel="next" href="arterial-spin-labeling.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>Quantitative MRI - Brain Imaging Data Structure 1.11.2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/tsv.css">
+    
+      <link rel="stylesheet" href="../css/dynamic-width.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-SBWH6YNMPX"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-SBWH6YNMPX",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-SBWH6YNMPX",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  <script async type="text/javascript" src="/_/static/javascript/readthedocs-addons.js"></script><meta name="readthedocs-project-slug" content="bids-specification" /><meta name="readthedocs-version-slug" content="stable" /><meta name="readthedocs-resolver-filename" content="/appendices/qmri.html" /><meta name="readthedocs-http-status" content="200" /></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#quantitative-mri" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Brain Imaging Data Structure 1.11.2" class="md-header__button md-logo" aria-label="Brain Imaging Data Structure 1.11.2" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Brain Imaging Data Structure 1.11.2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Quantitative MRI
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/bids-standard/bids-specification" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Brain Imaging Data Structure 1.11.2" class="md-nav__button md-logo" aria-label="Brain Imaging Data Structure 1.11.2" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    Brain Imaging Data Structure 1.11.2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/bids-standard/bids-specification" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The BIDS Specification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The BIDS Specification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../common-principles.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common principles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_3" id="__nav_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modality agnostic files
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modality agnostic files
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/dataset-description.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dataset description
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/data-summary-files.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data summary files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/phenotypic-and-assessment-data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phenotypic and assessment data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/code.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/events.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Events
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_4" id="__nav_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modality specific files
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modality specific files
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/magnetic-resonance-imaging-data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetic Resonance Imaging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/magnetoencephalography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetoencephalography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/electroencephalography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electroencephalography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/intracranial-electroencephalography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intracranial Electroencephalography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/physiological-recordings.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physiological recordings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/behavioral-experiments.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Behavioral experiments (with no neural recordings)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/genetic-descriptor.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Genetic Descriptor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/positron-emission-tomography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Positron Emission Tomography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/microscopy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/near-infrared-spectroscopy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Near-Infrared Spectroscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/motion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Motion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/magnetic-resonance-spectroscopy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetic Resonance Spectroscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/electromyography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electromyography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_5" id="__nav_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Derivatives
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Derivatives
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIDS Derivatives
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/common-data-types.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common data types and metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/imaging.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imaging data types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/atlas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Templates and atlases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../longitudinal-and-multi-site-studies.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Longitudinal and multi-site studies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glossary.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extensions.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIDS Extension Proposals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_9" id="__nav_1_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendix
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="schema.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contributors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="licenses.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Licenses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="entity-table.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entity table
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="entities.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="file-collections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="units.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Units
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="hed.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hierarchical Event Descriptors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="meg-file-formats.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MEG file formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="meg-systems.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MEG systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="coordinate-systems.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coordinate systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quantitative MRI
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="qmri.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quantitative MRI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#organization-of-qmri-data-in-bids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Organization of qMRI data in BIDS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Organization of qMRI data in BIDS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-are-file-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs are file collections
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs-are-quantitative-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs are quantitative maps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-datasets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example datasets
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metadata-requirements-for-qmri-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metadata requirements for qMRI data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Metadata requirements for qMRI data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method-specific-priority-levels-for-qmri-file-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method-specific priority levels for qMRI file collections
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Method-specific priority levels for qMRI file collections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anatomy-imaging-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anatomy imaging data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metadata-requirements-for-qmri-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metadata requirements for qMRI maps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deriving-the-intended-qmri-application-from-an-ambiguous-file-collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deriving the intended qMRI application from an ambiguous file collection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introducing-a-new-qmri-file-collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducing a new qMRI file collection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-specific-notes-for-qmri-file-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Application-specific notes for qMRI file collections
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Application-specific notes for qMRI file collections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anatomy-imaging-data_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anatomy imaging data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Anatomy imaging data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mp2rage-specific-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MP2RAGE specific notes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MP2RAGE specific notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unit1-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UNIT1 images
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#numbershots-metadata-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NumberShots metadata field
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-metadata-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other metadata fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="arterial-spin-labeling.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arterial Spin Labeling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="cross-modality-correspondence.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross modality correspondence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CHANGES.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The BIDS Website
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The BIDS Website
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://bids.neuroimaging.io/getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://bids.neuroimaging.io/getting_started/tutorials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#organization-of-qmri-data-in-bids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Organization of qMRI data in BIDS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Organization of qMRI data in BIDS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-are-file-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs are file collections
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs-are-quantitative-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs are quantitative maps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-datasets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example datasets
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metadata-requirements-for-qmri-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metadata requirements for qMRI data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Metadata requirements for qMRI data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method-specific-priority-levels-for-qmri-file-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method-specific priority levels for qMRI file collections
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Method-specific priority levels for qMRI file collections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anatomy-imaging-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anatomy imaging data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metadata-requirements-for-qmri-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metadata requirements for qMRI maps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deriving-the-intended-qmri-application-from-an-ambiguous-file-collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deriving the intended qMRI application from an ambiguous file collection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introducing-a-new-qmri-file-collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducing a new qMRI file collection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-specific-notes-for-qmri-file-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Application-specific notes for qMRI file collections
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Application-specific notes for qMRI file collections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anatomy-imaging-data_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anatomy imaging data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Anatomy imaging data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mp2rage-specific-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MP2RAGE specific notes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MP2RAGE specific notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unit1-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UNIT1 images
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#numbershots-metadata-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NumberShots metadata field
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-metadata-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other metadata fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/bids-standard/bids-specification/edit/master/src/appendices/qmri.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="quantitative-mri"><a class="toclink" href="#quantitative-mri">Quantitative MRI</a></h1>
+<p>Quantitative MRI (qMRI) is a collection of methods aiming at generating parametric maps
+that can characterize underlying tissue properties.
+Unlike those of conventional MR images (for example, <code>T1w</code> or <code>T2w</code>),
+intensity values of quantitative maps are not represented in an arbitrary range.
+Instead, these maps are represented either in absolute physical units
+(for example, <code>seconds</code> for <code>T1map</code>),
+or within an application dependent range of arbitrary units
+(for example, myelin water fraction <code>MWFmap</code> in brain).</p>
+<h2 id="organization-of-qmri-data-in-bids"><a class="toclink" href="#organization-of-qmri-data-in-bids">Organization of qMRI data in BIDS</a></h2>
+<p>Unlike conventional MR images, quantitative maps are not immediate products of the image reconstruction step
+(from k-space data to structural images).
+Intensity values of qMRI maps are calculated by fitting a collection of parametrically
+linked images to a biophysical model or to an MRI signal representation.
+This processing is typically carried out in the image domain.
+There are two main ways to obtain a quantitative map:</p>
+<ol>
+<li>
+<p>Pre-generated qMRI maps: The qMRI maps are generated right after the reconstruction
+    of required input images and made available to the user at the scanner console.
+    The acquisition scenarios may include (a) vendor pipelines or (b) open-source pipelines
+    deployed at the scanner site.</p>
+</li>
+<li>
+<p>Post-generated qMRI maps: The qMRI maps are generated from a collection of input
+    data after they are exported from the scanner site.
+    This type of processing is commonly carried out using an open-source software such as
+    <a href="https://github.com/hMRI-group/hMRI-toolbox">hMRI toolbox</a>,
+    <a href="https://github.com/mezera/mrQ">mrQ</a>,
+    <a href="https://github.com/IMTtugraz/PyQMRI">PyQMRI</a>,
+    <a href="https://web.archive.org/web/20220201201633/https://www.medphysics.wisc.edu/~samsonov/qmap/doc/qmap.html">qmap</a>,
+    <a href="https://github.com/qmrlab/qmrlab">qMRLab</a>,
+    and <a href="https://github.com/spinicist/QUIT">QUIT</a>.</p>
+</li>
+</ol>
+<h3 id="inputs-are-file-collections"><a class="toclink" href="#inputs-are-file-collections">Inputs are file collections</a></h3>
+<p>The common concept of <a href="../common-principles.html#entity-linked-file-collections">entity-linked file collections</a> enables the description of a qMRI
+application by creating logical groups of input files through <code>suffix</code> and certain entities
+representing acquisition parameters (<code>echo</code>, <code>flip</code>, <code>inv</code>, <code>mt</code>) or file parts (<code>part</code>).</p>
+<p>If a qMRI file collection is intended for creating structural quantitative maps (for example, <code>T1map</code>),
+files belonging to that collection are stored in the <code>anat</code> subdirectory.</p>
+<p>List of currently supported collections:</p>
+<!--
+This block generates a suffix table.
+The definitions of these fields can be found in
+  src/schema/rules/files/raw
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Name</strong></th>
+<th><code>suffix</code></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inversion recovery T1 mapping</td>
+<td><a href="../glossary.html#objects.suffixes.IRT1">IRT1</a></td>
+<td>The IRT1 method involves multiple inversion recovery spin-echo images acquired at different inversion times (<a href="https://doi.org/10.1002/mrm.22497">Barral et al. 2010</a>).</td>
+</tr>
+<tr>
+<td>Multi-echo Gradient Recalled Echo</td>
+<td><a href="../glossary.html#objects.suffixes.MEGRE">MEGRE</a></td>
+<td>Anatomical gradient echo images acquired at different echo times. Please note that this suffix is not intended for the logical grouping of images acquired using an Echo Planar Imaging (EPI) readout.</td>
+</tr>
+<tr>
+<td>Multi-echo Spin Echo</td>
+<td><a href="../glossary.html#objects.suffixes.MESE">MESE</a></td>
+<td>The MESE method involves multiple spin echo images acquired at different echo times and is primarily used for T2 mapping. Please note that this suffix is not intended for the logical grouping of images acquired using an Echo Planar Imaging (EPI) readout.</td>
+</tr>
+<tr>
+<td>Magnetization Prepared Two Gradient Echoes</td>
+<td><a href="../glossary.html#objects.suffixes.MP2RAGE">MP2RAGE</a></td>
+<td>The MP2RAGE method is a special protocol that collects several images at different flip angles and inversion times to create a parametric T1map by combining the magnitude and phase images (<a href="https://doi.org/10.1016/j.neuroimage.2009.10.002">Marques et al. 2010</a>).</td>
+</tr>
+<tr>
+<td>Multi-parametric Mapping</td>
+<td><a href="../glossary.html#objects.suffixes.MPM">MPM</a></td>
+<td>The MPM approaches (a.k.a hMRI) involves the acquisition of highly-similar anatomical images that differ in terms of application of a magnetization transfer RF pulse (MTon or MToff), flip angle and (optionally) echo time and magnitue/phase parts (<a href="https://doi.org/10.3389/fnins.2013.00095">Weiskopf et al. 2013</a>). See <a href="https://owncloud.gwdg.de/index.php/s/iv2TOQwGy4FGDDZ">here</a> for suggested MPM acquisition protocols.</td>
+</tr>
+<tr>
+<td>Magnetization Transfer Ratio</td>
+<td><a href="../glossary.html#objects.suffixes.MTR">MTR</a></td>
+<td>This method is to calculate a semi-quantitative magnetization transfer ratio map.</td>
+</tr>
+<tr>
+<td>Magnetization transfer saturation</td>
+<td><a href="../glossary.html#objects.suffixes.MTS">MTS</a></td>
+<td>This method is to calculate a semi-quantitative magnetization transfer saturation index map. The MTS method involves three sets of anatomical images that differ in terms of application of a magnetization transfer RF pulse (MTon or MToff) and flip angle (<a href="https://doi.org/10.1002/mrm.21732">Helms et al. 2008</a>).</td>
+</tr>
+<tr>
+<td>Variable flip angle</td>
+<td><a href="../glossary.html#objects.suffixes.VFA">VFA</a></td>
+<td>The VFA method involves at least two spoiled gradient echo (SPGR) of steady-state free precession (SSFP) images acquired at different flip angles. Depending on the provided metadata fields and the sequence type, data may be eligible for DESPOT1, DESPOT2 and their variants (<a href="https://doi.org/10.1002/mrm.20314">Deoni et al. 2005</a>).</td>
+</tr>
+</tbody>
+</table>
+<!--
+This block generates a filename templates.
+The inputs for this macro can be found in the directory
+  src/schema/rules/files/raw
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<p>Template:</p>
+<div class="highlight"><pre><code><a href="../appendices/entities.html#sub">sub-&lt;label&gt;</a>/
+    [<a href="../appendices/entities.html#ses">ses-&lt;label&gt;</a>/]
+        <a href="../glossary.html#anat-datatypes">anat</a>/
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#megre-suffixes">MEGRE</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#megre-suffixes">MEGRE</a><a href="../glossary.html#nii-extensions">.nii</a>[<a href="../glossary.html#nii_gz-extensions">.gz</a>]
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#megre-suffixes">MEGRE</a><a href="../glossary.html#omezarr-extensions">.ome.zarr/</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#dir">dir</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#mese-suffixes">MESE</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#dir">dir</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#mese-suffixes">MESE</a><a href="../glossary.html#nii-extensions">.nii</a>[<a href="../glossary.html#nii_gz-extensions">.gz</a>]
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#dir">dir</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#mese-suffixes">MESE</a><a href="../glossary.html#omezarr-extensions">.ome.zarr/</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#flip">flip</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#vfa-suffixes">VFA</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#flip">flip</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#vfa-suffixes">VFA</a><a href="../glossary.html#nii-extensions">.nii</a>[<a href="../glossary.html#nii_gz-extensions">.gz</a>]
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#flip">flip</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#vfa-suffixes">VFA</a><a href="../glossary.html#omezarr-extensions">.ome.zarr/</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#inv">inv</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#irt1-suffixes">IRT1</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#inv">inv</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#irt1-suffixes">IRT1</a><a href="../glossary.html#nii-extensions">.nii</a>[<a href="../glossary.html#nii_gz-extensions">.gz</a>]
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#inv">inv</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#irt1-suffixes">IRT1</a><a href="../glossary.html#omezarr-extensions">.ome.zarr/</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#flip">flip</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#inv">inv</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#mp2rage-suffixes">MP2RAGE</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#flip">flip</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#inv">inv</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#mp2rage-suffixes">MP2RAGE</a><a href="../glossary.html#nii-extensions">.nii</a>[<a href="../glossary.html#nii_gz-extensions">.gz</a>]
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#flip">flip</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#inv">inv</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#mp2rage-suffixes">MP2RAGE</a><a href="../glossary.html#omezarr-extensions">.ome.zarr/</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#flip">flip</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;_<a href="../appendices/entities.html#mt">mt-&lt;on|off&gt;</a>[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#mpm-suffixes">MPM</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#flip">flip</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;_<a href="../appendices/entities.html#mt">mt-&lt;on|off&gt;</a>[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#mpm-suffixes">MPM</a><a href="../glossary.html#nii-extensions">.nii</a>[<a href="../glossary.html#nii_gz-extensions">.gz</a>]
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#flip">flip</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;_<a href="../appendices/entities.html#mt">mt-&lt;on|off&gt;</a>[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#mpm-suffixes">MPM</a><a href="../glossary.html#omezarr-extensions">.ome.zarr/</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#flip">flip</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;_<a href="../appendices/entities.html#mt">mt-&lt;on|off&gt;</a>[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#mts-suffixes">MTS</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#flip">flip</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;_<a href="../appendices/entities.html#mt">mt-&lt;on|off&gt;</a>[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#mts-suffixes">MTS</a><a href="../glossary.html#nii-extensions">.nii</a>[<a href="../glossary.html#nii_gz-extensions">.gz</a>]
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#echo">echo</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#flip">flip</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;_<a href="../appendices/entities.html#mt">mt-&lt;on|off&gt;</a>[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#mts-suffixes">MTS</a><a href="../glossary.html#omezarr-extensions">.ome.zarr/</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#mt">mt-&lt;on|off&gt;</a>[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#mtr-suffixes">MTR</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#mt">mt-&lt;on|off&gt;</a>[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#mtr-suffixes">MTR</a><a href="../glossary.html#nii-extensions">.nii</a>[<a href="../glossary.html#nii_gz-extensions">.gz</a>]
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#ce">ce</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#rec">rec</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../appendices/entities.html#mt">mt-&lt;on|off&gt;</a>[_<a href="../appendices/entities.html#part">part-&lt;mag|phase|real|imag&gt;</a>][_<a href="../appendices/entities.html#chunk">chunk</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;]_<a href="../glossary.html#mtr-suffixes">MTR</a><a href="../glossary.html#omezarr-extensions">.ome.zarr/</a>
+</code></pre></div>
+<details>
+<summary><strong>Legend:</strong></summary>
+<ul>
+<li>
+<p>For more information about filename elements (for example, entities, suffixes, extensions),
+follow the links embedded in the filename template.</p>
+</li>
+<li>
+<p><code>&lt;matches&gt;</code> is a placeholder to denote an arbitrary (and valid) sequence of entities
+and labels at the beginning of the filename (only BIDS &quot;raw&quot;).</p>
+</li>
+<li>
+<p><code>&lt;source-entities&gt;</code> is a placeholder to denote an arbitrary sequence of entities and labels
+at the beginning of the filename matching a source file from which the file derives
+(only BIDS-Derivatives).</p>
+</li>
+<li>
+<p>Filename entities or directories between square brackets
+(for example, <code>[_ses-&lt;label&gt;]</code>) are OPTIONAL.</p>
+</li>
+<li>
+<p>Some entities may only allow specific values,
+in which case those values are listed in <code>&lt;&gt;</code>, separated by <code>|</code>.</p>
+</li>
+<li>
+<p><code>_&lt;suffix&gt;</code> means that there are several (&gt;6) valid suffixes for this filename pattern.</p>
+</li>
+<li>
+<p><code>.&lt;extension&gt;</code> means that there are several (&gt;6) valid extensions for this file type.</p>
+</li>
+<li>
+<p><code>[.gz]</code> means that both the unzipped and gzipped versions of the extension are valid.</p>
+</li>
+</ul>
+
+</details>
+
+<p>Below is an example file collection for <code>MP2RAGE</code>:</p>
+<!-- This block generates a file tree.
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<div class="highlight"><pre><span></span><code>└─ sub-01/
+   └─ anat/
+      ├─ sub-01_inv-1_part-mag_MP2RAGE.nii.gz 
+      ├─ sub-01_inv-1_part-phase_MP2RAGE.nii.gz 
+      ├─ sub-01_inv-1_MP2RAGE.json 
+      ├─ sub-01_inv-2_part-mag_MP2RAGE.nii.gz 
+      ├─ sub-01_inv-2_part-phase_MP2RAGE.nii.gz 
+      └─ sub-01_inv-2_MP2RAGE.json 
+</code></pre></div>
+<p>Commonly, RF fieldmaps (<code>B1+</code> and <code>B1-</code> maps) are used for the correction of structural quantitative maps.
+As these images do not convey substantial structural information,
+respective file collections of RF fieldmaps are stored in the <code>fmap</code> subdirectory.
+Below is an example file collection for RF transmit field map <code>TB1EPI</code>:</p>
+<!-- This block generates a file tree.
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<div class="highlight"><pre><span></span><code>└─ sub-01/
+   └─ fmap/
+      ├─ sub-01_echo-1_flip-1_TB1EPI.nii.gz 
+      ├─ sub-01_echo-1_flip-1_TB1EPI.json 
+      ├─ sub-01_echo-2_flip-1_TB1EPI.nii.gz 
+      ├─ sub-01_echo-2_flip-1_TB1EPI.json 
+      ├─ sub-01_echo-1_flip-2_TB1EPI.nii.gz 
+      ├─ sub-01_echo-1_flip-2_TB1EPI.json 
+      ├─ sub-01_echo-2_flip-2_TB1EPI.nii.gz 
+      └─ sub-01_echo-2_flip-2_TB1EPI.json 
+</code></pre></div>
+<p>Please visit the <a href="file-collections.html#magnetic-resonance-imaging">file collections appendix</a> to see the list of currently supported qMRI applications.</p>
+<h3 id="outputs-are-quantitative-maps"><a class="toclink" href="#outputs-are-quantitative-maps">Outputs are quantitative maps</a></h3>
+<p>qMRI maps are stored differently depending on the process that generated them.
+Pre-generated qMRI maps MAY be stored as part of a raw BIDS dataset,
+whereas they MUST be stored in a derivative BIDS dataset if they were post-generated.</p>
+<p>See the example below of a <code>T1map</code> generated from an <code>MP2RAGE</code> file collection using either option.</p>
+<p>If the map is post-generated:</p>
+<!-- This block generates a file tree.
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<div class="highlight"><pre><span></span><code>└─ ds-example/
+   ├─ derivatives/
+   │  └─ qMRI-software-name/
+   │     └─ sub-01/
+   │        └─ anat/
+   │           ├─ sub-01_T1map.nii.gz  # --&gt; T1 map in a derivative dataset
+   │           ├─ sub-01_T1map.json 
+   │           ├─ sub-01_UNIT1.nii.gz  # --&gt; UNI T1 in a derivative dataset
+   │           └─ sub-01_UNIT1.json 
+   └─ sub-01/
+      └─ anat/
+         ├─ sub-01_inv-1_part-mag_MP2RAGE.nii.gz 
+         ├─ sub-01_inv-1_part-phase_MP2RAGE.nii.gz 
+         ├─ sub-01_inv-1_MP2RAGE.json 
+         ├─ sub-01_inv-2_part-mag_MP2RAGE.nii.gz 
+         ├─ sub-01_inv-2_part-phase_MP2RAGE.nii.gz 
+         └─ sub-01_inv-2_MP2RAGE.json 
+</code></pre></div>
+<p>If the map is pre-generated, for example, by a Siemens scanner:</p>
+<!-- This block generates a file tree.
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<div class="highlight"><pre><span></span><code>└─ ds-example/
+   └─ sub-01/
+      └─ anat/
+         ├─ sub-01_inv-1_part-mag_MP2RAGE.nii.gz 
+         ├─ sub-01_inv-1_part-phase_MP2RAGE.nii.gz 
+         ├─ sub-01_inv-1_MP2RAGE.json 
+         ├─ sub-01_inv-2_part-mag_MP2RAGE.nii.gz 
+         ├─ sub-01_inv-2_part-phase_MP2RAGE.nii.gz 
+         ├─ sub-01_inv-2_MP2RAGE.json 
+         ├─ sub-01_T1map.nii.gz  # --&gt; T1 map in a raw dataset
+         ├─ sub-01_T1map.json 
+         ├─ sub-01_UNIT1.nii.gz  # --&gt; UNI T1 in a raw dataset
+         └─ sub-01_UNIT1.json 
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Sharing of vendor outputs</p>
+<p>Even though the process from which pre-generated qMRI maps are obtained (vendor pipelines) is not known,
+vendors generally allow exporting of the corresponding input data.
+It is RECOMMENDED to share them along with the vendor outputs,
+whenever possible for a qMRI method supported by BIDS.</p>
+</div>
+<h3 id="example-datasets"><a class="toclink" href="#example-datasets">Example datasets</a></h3>
+<p>You can find example file collections and qMRI maps organized according to BIDS
+in the <a href="https://bids.neuroimaging.io/datasets/examples.html#qmri">BIDS examples</a>.</p>
+<h2 id="metadata-requirements-for-qmri-data"><a class="toclink" href="#metadata-requirements-for-qmri-data">Metadata requirements for qMRI data</a></h2>
+<p>The table of required entities for qMRI file collections are provided in the <a href="entity-table.html">entity table</a>.
+However, viability of a qMRI file collection is determined not only by the naming and organization of the input files,
+but also by which metadata fields are provided in accompanying json files.</p>
+<h3 id="method-specific-priority-levels-for-qmri-file-collections"><a class="toclink" href="#method-specific-priority-levels-for-qmri-file-collections">Method-specific priority levels for qMRI file collections</a></h3>
+<h4 id="anatomy-imaging-data"><a class="toclink" href="#anatomy-imaging-data">Anatomy imaging data</a></h4>
+<table>
+<thead>
+<tr>
+<th><strong>File collection</strong></th>
+<th><strong>REQUIRED metadata</strong></th>
+<th><strong>OPTIONAL metadata</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VFA</td>
+<td><code>FlipAngle</code>, <code>PulseSequenceType</code>, <code>RepetitionTimeExcitation</code></td>
+<td><code>SpoilingRFPhaseIncrement</code></td>
+</tr>
+<tr>
+<td>IRT1</td>
+<td><code>InversionTime</code></td>
+<td></td>
+</tr>
+<tr>
+<td>MP2RAGE<sup>*</sup></td>
+<td><code>FlipAngle</code>, <code>InversionTime</code>, <code>RepetitionTimeExcitation</code>, <code>RepetitionTimePreparation</code>, <code>NumberShots</code>,<code>MagneticFieldStrength</code></td>
+<td><code>EchoTime</code></td>
+</tr>
+<tr>
+<td>MESE</td>
+<td><code>EchoTime</code></td>
+<td></td>
+</tr>
+<tr>
+<td>MEGRE</td>
+<td><code>EchoTime</code></td>
+<td></td>
+</tr>
+<tr>
+<td>MTR</td>
+<td><code>MTState</code></td>
+<td></td>
+</tr>
+<tr>
+<td>MTS</td>
+<td><code>FlipAngle</code>, <code>MTState</code>, <code>RepetitionTimeExcitation</code></td>
+<td></td>
+</tr>
+<tr>
+<td>MPM</td>
+<td><code>FlipAngle</code>, <code>MTState</code>, <code>RepetitionTimeExcitation</code></td>
+<td><code>EchoTime</code></td>
+</tr>
+</tbody>
+</table>
+<p><sup>*</sup> Please see MP2RAGE-specific notes for the calculation of <code>NumberShots</code> and regarding the
+organization of <code>UNIT1</code> image.</p>
+<p>Explanation of the table:</p>
+<ul>
+<li>
+<p>The metadata fields listed in the REQUIRED column are needed to perform a minimum viable qMRI processing for the corresponding <code>file collection</code>.</p>
+</li>
+<li>
+<p>Note that some of the metadata fields may be constant across different files in a file collection,
+    yet still required as an input (for example, <code>NumberShots</code> in <code>MP2RAGE</code>).
+    Such metadata fields MUST be provided in the accompanying JSON files.</p>
+</li>
+<li>
+<p>The metadata fields listed in the OPTIONAL column can be used to form different flavors of an existing file collection suffix,
+    dispensing with the need for introducing a new suffix.
+    See <a href="#deriving-the-intended-qmri-application-from-an-ambiguous-file-collection">deriving the intended qMRI application from an ambiguous file collection</a>
+    for details.</p>
+</li>
+</ul>
+<h3 id="metadata-requirements-for-qmri-maps"><a class="toclink" href="#metadata-requirements-for-qmri-maps">Metadata requirements for qMRI maps</a></h3>
+<p>As qMRI maps are stored as derivatives, they are subjected to the metadata requirements of
+<a href="../modality-agnostic-files/dataset-description.html#derived-dataset-and-pipeline-description">derived datasets</a>.</p>
+<p>An example <code>dataset_description.json</code> for a qMRI map derivatives directory:</p>
+<!-- This block generates a file tree.
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<div class="highlight"><pre><span></span><code>└─ ds-example/
+   └─ derivatives/
+      └─ qMRLab/
+         ├─ dataset_description.json 
+         └─ sub-01/
+            └─ anat/
+               ├─ sub-01_T1map.nii.gz 
+               ├─ sub-01_T1map.json 
+               ├─ sub-01_M0map.nii.gz 
+               └─ sub-01_M0map.json 
+</code></pre></div>
+<p><code>dataset_description.json</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;Name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;qMRLab Outputs&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;BIDSVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.5.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;DatasetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;derivative&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;GeneratedBy&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;Name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;qMRLab&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.4.1&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Container&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;Type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;docker&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;qmrlab/minimal:2.4.1&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;Name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Manual&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Generated example T1map outputs&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;SourceDatasets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;DOI&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;doi:10.17605/OSF.IO/K4BS5&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;URL&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://osf.io/k4bs5/&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>In addition to the metadata fields provided in the <code>dataset_description.json</code>,
+qMRI maps are RECOMMENDED to be accompanied by sidecar JSON files that contain further information about the quantified maps.
+Although this may not be the generic case for common derivative outputs,
+a proper interpretation of qMRI maps may critically depend on some metadata fields.
+For example, without the information of <code>MagneticFieldStrength</code>, white-matter T1 values in a <code>T1map</code> become elusive.</p>
+<ul>
+<li>
+<p>All the acquisition parameters that are constant across the files in a file collection are RECOMMENDED
+    to be added to the sidecar json of the qMRI maps.</p>
+</li>
+<li>
+<p>Relevant acquisition parameters that vary across files in a qMRI file collection are RECOMMENDED
+    to be added to the sidecar json of the qMRI map <strong>in array form</strong>.</p>
+</li>
+<li>
+<p>The JSON file accompanying a qMRI map which is obtained by using open-source software is RECOMMENDED
+    to include additional metadata fields listed in the following table:</p>
+</li>
+</ul>
+<!-- This block generates a metadata table.
+The definitions of these fields can be found in
+  src/schema/objects/metadata.yaml
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.Sources">Sources</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_arrays.asp">array</a> of <a href="https://www.w3schools.com/js/js_json_datatypes.asp">strings</a></td>
+<td>A list of files with the paths specified using <a href="../common-principles.html#bids-uri">BIDS URIs</a>; these files were directly used in the creation of this derivative data file. For example, if a derivative A is used in the creation of another derivative B, which is in turn used to generate C in a chain of A-&gt;B-&gt;C, C should only list B in <code>"Sources"</code>, and B should only list A in <code>"Sources"</code>. However, in case both X and Y are directly used in the creation of Z, then Z should list X and Y in <code>"Sources"</code>, regardless of whether X was used to generate Y. Using paths specified relative to the dataset root is <a href="../common-principles.html#definitions">DEPRECATED</a>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.EstimationReference">EstimationReference</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Reference to the study/studies on which the implementation is based.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.EstimationAlgorithm">EstimationAlgorithm</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Type of algorithm used to perform fitting (for example, <code>"linear"</code>, <code>"non-linear"</code>, <code>"LM"</code> and such).</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.Units">Units</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Measurement units for the associated variable. SI units in CMIXF formatting are RECOMMENDED (see <a href="../common-principles.html#units">Units</a>).</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.BasedOn">BasedOn</a></td>
+<td><a href="../common-principles.html#definitions">DEPRECATED</a></td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a> or <a href="https://www.w3schools.com/js/js_json_arrays.asp">array</a> of <a href="https://www.w3schools.com/js/js_json_datatypes.asp">strings</a></td>
+<td>List of files in a file collection to generate the map. Fieldmaps are also listed, if involved in the processing. This field is DEPRECATED, and this metadata SHOULD be recorded in the <code>Sources</code> field using <a href="../common-principles.html#bids-uri">BIDS URIs</a> to distinguish sources from different datasets.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code>sub-01_T1map.nii.gz
+sub-01_T1map.json
+</code></pre></div>
+<p>sub-01_T1map.json:</p>
+<div class="highlight"><pre><span></span><code>{
+
+&lt;&lt;Parameter injected by the software/pipeline&gt;&gt;
+
+&quot;Sources&quot;:[&quot;bids:raw:sub-01/anat/sub-01_flip-1_VFA.nii.gz&quot;,
+           &quot;bids:raw:sub-01/anat/sub-01_flip-2_VFA.nii.gz&quot;,
+           &quot;bids:raw:sub-01/anat/sub-01_flip-3_VFA.nii.gz&quot;,
+           &quot;bids:raw:sub-01/anat/sub-01_flip-4_VFA.nii.gz&quot;,
+           &quot;bids:raw:sub-01/fmap/sub-01_TB1map.nii.gz&quot;],
+&quot;EstimationPaper&quot;:&quot;Deoni et. al.MRM, 2015&quot;,
+&quot;EstimationAlgorithm&quot;:&quot;Linear&quot;,
+&quot;Units&quot;: &quot;second&quot;,
+
+&lt;&lt;Parameters that are constant across files in the (parent) file collection&gt;&gt;
+
+&quot;MagneticFieldStrength&quot;: &quot;3&quot;,
+&quot;Manufacturer&quot;: &quot;Siemens&quot;,
+&quot;ManufacturersModelName&quot;: &quot;TrioTim&quot;,
+&quot;InstitutionName&quot;: &quot;xxx&quot;,
+&quot;PulseSequenceType&quot;: &quot;SPGR&quot;,
+&quot;PulseSequenceDetails&quot;: &quot;Information beyond the sequence type that identifies
+ specific pulse sequence used (VB version, if not standard, Siemens WIP XXX
+ ersion ### sequence written by xx using a version compiled on mm/dd/yyyy/)&quot;,
+&quot;RepetitionTimeExcitation&quot;: &quot;35&quot;,
+&quot;EchoTime&quot;: &quot;2.86&quot;,
+&quot;SliceThickness&quot;: &quot;5&quot;,
+
+&lt;&lt;Relevant parameters that vary across the linking entity of the (parent) file collection&gt;&gt;
+
+&quot;FlipAngle&quot;: [&quot;5&quot;,&quot;10&quot;,&quot;15&quot;,&quot;20&quot;]
+
+}
+</code></pre></div>
+<h2 id="deriving-the-intended-qmri-application-from-an-ambiguous-file-collection"><a class="toclink" href="#deriving-the-intended-qmri-application-from-an-ambiguous-file-collection">Deriving the intended qMRI application from an ambiguous file collection</a></h2>
+<p>Certain file collection suffixes may refer to a generic data collection regime such as variable flip angle (VFA),
+rather than a more specific acquisition, for example, magnetization prepared two gradient echoes (MP2RAGE).
+Such generic acquisitions can serve as a basis to derive various qMRI applications by changes to the acquisition sequence
+(for example, readout) type or by varying additional scan parameters.</p>
+<p>If such an inheritance relationship is applicable between an already existing file collection
+and a new qMRI application to be included in the specification,
+the inheritor qMRI method is listed in the table below instead of introducing a new file collection suffix.
+This approach aims at:</p>
+<ul>
+<li>preventing the list of available suffixes from over-proliferation,</li>
+<li>providing qMRI-focused BIDS applications with a set of meta-data driven rules to infer possible fitting options,</li>
+<li>keeping an inheritance track of the qMRI methods described within the specification.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>File-collection suffix</strong></th>
+<th><strong>If REQUIRED metadata == Value</strong></th>
+<th><strong>OPTIONAL metadata (<code>entity</code>/<code>fixed</code>)</strong></th>
+<th><strong>Derived application name (NOT a suffix)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VFA</td>
+<td><code>PulseSequenceType</code> == <code>SPGR</code></td>
+<td></td>
+<td>DESPOT1</td>
+</tr>
+<tr>
+<td>VFA</td>
+<td><code>PulseSequenceType</code> == <code>SSFP</code></td>
+<td><code>SpoilingRFPhaseIncrement</code> (<code>fixed</code>)</td>
+<td>DESPOT2</td>
+</tr>
+<tr>
+<td>MP2RAGE</td>
+<td></td>
+<td><code>EchoTime</code> (<code>echo</code>)</td>
+<td>MP2RAGE-ME</td>
+</tr>
+<tr>
+<td>MPM</td>
+<td></td>
+<td><code>EchoTime</code> (<code>echo</code>)</td>
+<td>MPM-ME</td>
+</tr>
+</tbody>
+</table>
+<p>In this table, (<code>entity</code>/<code>fixed</code>) denotes whether the OPTIONAL metadata that forms a new
+flavor of qMRI application for the respective suffix varies across files of a file collection
+(which calls for using a linking entity) or fixed. If former is the case, the entity is to be
+added to the files in that file collection. Note that this addition MUST be allowed by the
+priority levels given for that suffix in the <a href="entity-table.html"><code>entity table</code></a>. If latter (<code>fixed</code>) is the case,
+filenames will remain the same; however, the optional metadata (third column) may
+define the flavor of the application (fourth column) along with the conditional value of a
+required metadata field (second column).</p>
+<p>A derived qMRI application becomes available if all the optional metadata fields
+listed for the respective file collection suffix are provided for the data. In addition,
+conditional rules based on the value of a given required metadata field can be set
+for the description of a derived qMRI application. Note that the value of this
+required metadata is fixed across constituent images of a file collection and defined
+in <a href="#method-specific-priority-levels-for-qmri-file-collections">Method-specific priority levels for qMRI file collections</a>.</p>
+<p>For example, if the optional metadata field of <code>PulseSequenceType</code> is SPGR
+for a collection of anatomical images listed by the <code>VFA</code> suffix, the data
+qualifies for <code>DESPOT1</code> T1 fitting. For the same suffix, if the <code>PulseSequenceType</code>
+metadata field has the value of <code>SSFP</code>, and the <code>SpoilingRFPhaseIncrement</code> is
+provided as a metadata field, then the dataset becomes eligible for <code>DESPOT2</code>
+T2 fitting application.</p>
+<p>Please note that optional metadata fields listed in the
+<a href="#deriving-the-intended-qmri-application-from-an-ambiguous-file-collection">deriving the intended qMRI application from an ambiguous file collection table</a>
+are included in the optional (third) column of
+<a href="#method-specific-priority-levels-for-qmri-file-collections">the priority levels table</a>
+for the consistency of this appendix.</p>
+<h2 id="introducing-a-new-qmri-file-collection"><a class="toclink" href="#introducing-a-new-qmri-file-collection">Introducing a new qMRI file collection</a></h2>
+<p>If a qMRI application cannot be interpreted as a subtype of an already existing suffix
+of a qMRI-related file collection, we RECOMMEND adhering to the following principles to
+introduce a new suffix:</p>
+<ul>
+<li>
+<p>All qMRI-relevant file collection suffixes are capitalized.</p>
+</li>
+<li>
+<p>Unless the pulse sequence is exclusively associated with a specific qMRI application
+    (for example, <code>MP2RAGE</code>), sequence names are not used as suffixes.</p>
+</li>
+<li>
+<p>File collection suffixes for qMRI applications attain a clear description of the qMRI method that they relate to in the
+    <a href="file-collections.html#magnetic-resonance-imaging">file collections appendix</a>.</p>
+</li>
+<li>
+<p>Hyperlinks to example applications and reference method articles are encouraged whenever possible.</p>
+</li>
+<li>
+<p>If it is possible to derive a qMRI application from an already existing file collection suffix
+    by defining a set of logical conditions over the metadata fields, the tables of the
+    <a href="#deriving-the-intended-qmri-application-from-an-ambiguous-file-collection">deriving the intended qMRI application from an ambiguous file collection</a>
+    and the
+    <a href="#anatomy-imaging-data">anatomy data priority levels</a>
+    sections are extended instead of introducing a new suffix.</p>
+</li>
+</ul>
+<h2 id="application-specific-notes-for-qmri-file-collections"><a class="toclink" href="#application-specific-notes-for-qmri-file-collections">Application-specific notes for qMRI file collections</a></h2>
+<h3 id="anatomy-imaging-data_1"><a class="toclink" href="#anatomy-imaging-data_1">Anatomy imaging data</a></h3>
+<p>General notes:</p>
+<ul>
+<li>Some BIDS metadata field values are calculated based on the values of other metadata fields that are not listed as required fields.
+    These fields include: <code>NumberShots</code>.
+    The calculation of the values may depend on the type of the acquisition.
+    These acquisitions include: <code>MP2RAGE</code> and <code>TB1SRGE</code>.</li>
+</ul>
+<h4 id="mp2rage-specific-notes"><a class="toclink" href="#mp2rage-specific-notes"><code>MP2RAGE</code> specific notes</a></h4>
+<h5 id="unit1-images"><a class="toclink" href="#unit1-images"><code>UNIT1</code> images</a></h5>
+<p>Although the <code>UNIT1</code> image is provided as an output by the acquisition sequence, it is used
+as an input to offline calculation of a <code>T1map</code> using a dictionary lookup approach. However,
+<code>complex</code> data is needed for an accurate calculation of the <code>UNIT1</code> image, which is not commonly
+provided by the stock sequence. Instead, the <code>magnitude</code> and <code>phase</code> images are exported. Please
+see the relevant discussion at <a href="https://github.com/qMRLab/qMRLab/issues/255">qMRLab issue #255</a>.</p>
+<p>Therefore, the <code>UNIT1</code> image provided by the scanner
+SHOULD be stored under the <code>anat</code> in a raw BIDS dataset
+along with the <code>MP2RAGE</code> file collection
+and to be used as the primary input for quantifying a <code>T1map</code>.</p>
+<p>If an additional <code>UNIT1</code> image is calculated offline,
+then the output MUST be stored in a derivative BIDS dataset with necessary provenance information.</p>
+<h5 id="numbershots-metadata-field"><a class="toclink" href="#numbershots-metadata-field"><code>NumberShots</code> metadata field</a></h5>
+<p>Note that the type of <code>NumberShots</code> field can be either a <code>number</code> or an <code>array of numbers</code>.</p>
+<ul>
+<li>
+<p>If a single <code>number</code> is provided, this should correspond to the number of <code>SlicesPerSlab</code> or <code>ReconMatrixPE</code>.
+    However, in this case, <code>SlicePartialFourier</code> or <code>PartialFourierPE</code> fraction is needed
+    to calculate the number of partitions <code>before</code> and <code>after</code> of the k-space center to calculate a T1 map.</p>
+</li>
+<li>
+<p>If <code>before/after</code> calculation is performed during the BIDS conversion of the <code>MP2RAGE</code> data,
+    then the value of <code>NumberShots</code> metadata field can be given as a 1X2 array,
+    with first entry corresponding to <code>before</code> and the second to the <code>after</code>.</p>
+</li>
+</ul>
+<p>Formula:</p>
+<p>If NumberShots is an array of numbers such that <code>"NumberShots": [before, after]</code>,
+the values of <code>before</code> and <code>after</code> are calculated as follows:</p>
+<div class="highlight"><pre><span></span><code>before = SlicesPerSlab*(SlicePartialFourier - 0.5)
+after  = SlicesPerSlab/2
+</code></pre></div>
+<p>See this <a href="https://github.com/JosePMarques/MP2RAGE-related-scripts/blob/a405df30ac2c617d29d8b1b16025aaa911e86370/func/bids_T1B1correct.m#L16">reference implementation</a>.</p>
+<h5 id="other-metadata-fields"><a class="toclink" href="#other-metadata-fields">Other metadata fields</a></h5>
+<p>The value of the <code>RepetitionTimeExcitation</code> field is not commonly found in the DICOM files.
+When accessible, the value of <code>EchoSpacing</code> corresponds to this metadata.
+When not accessible, <code>2 X EchoTime</code> can be used as a surrogate.</p>
+<p>Further information about other <code>MP2RAGE</code> qMRI protocol fields can be found in the
+<a href="https://qmrlab.readthedocs.io/en/master/protocols.html#mp2rage">qMRLab documentation</a>.</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; BIDS Contributors - <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/bids-standard/bids-specification/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://bsky.app/profile/bidsstandard.bsky.social" target="_blank" rel="noopener" title="bsky.app" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M407.8 294.7c-3.3-.4-6.7-.8-10-1.3 3.4.4 6.7.9 10 1.3M288 227.1c-26.1-50.7-97.1-145.2-163.1-191.8C61.6-9.4 37.5-1.7 21.6 5.5 3.3 13.8 0 41.9 0 58.4S9.1 194 15 213.9c19.5 65.7 89.1 87.9 153.2 80.7 3.3-.5 6.6-.9 10-1.4-3.3.5-6.6 1-10 1.4-93.9 14-177.3 48.2-67.9 169.9C220.6 589.1 265.1 437.8 288 361.1c22.9 76.7 49.2 222.5 185.6 103.4 102.4-103.4 28.1-156-65.8-169.9-3.3-.4-6.7-.8-10-1.3 3.4.4 6.7.9 10 1.3 64.1 7.1 133.6-15.1 153.2-80.7C566.9 194 576 75 576 58.4s-3.3-44.7-21.6-52.9c-15.8-7.1-40-14.9-103.2 29.8C385.1 81.9 314.1 176.4 288 227.1"/></svg>
+    </a>
+  
+    
+    
+      
+    
+    
+    
+      
+      
+    
+    <a href="https://fosstodon.org/@bidsstandard" target="_blank" rel="noopener me" title="fosstodon.org" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M433 179.1c0-97.2-63.7-125.7-63.7-125.7-62.5-28.7-228.6-28.4-290.5 0 0 0-63.7 28.5-63.7 125.7 0 115.7-6.6 259.4 105.6 289.1 40.5 10.7 75.3 13 103.3 11.4 50.8-2.8 79.3-18.1 79.3-18.1l-1.7-36.9s-36.3 11.4-77.1 10.1c-40.4-1.4-83-4.4-89.6-54-.6-4.6-.9-9.3-.9-13.9 85.6 20.9 158.7 9.1 178.7 6.7 56.1-6.7 105-41.3 111.2-72.9 9.8-49.8 9-121.5 9-121.5zm-75.1 125.2h-46.6V190.1c0-49.7-64-51.6-64 6.9v62.5H201V197c0-58.5-64-56.6-64-6.9v114.2H90.3c0-122.1-5.2-147.9 18.4-175 25.9-28.9 79.8-30.8 103.8 6.1l11.6 19.5 11.6-19.5c24.1-37.1 78.1-34.8 103.8-6.1 23.7 27.3 18.4 53 18.4 175"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://groups.google.com/g/bids-discussion" target="_blank" rel="noopener" title="groups.google.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M500 261.8C500 403.3 403.1 504 260 504 122.8 504 12 393.2 12 256S122.8 8 260 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C270.5 52.6 106.3 116.6 106.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H260v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.instagram.com/bidsstandard/" target="_blank" rel="noopener" title="www.instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3 141a115 115 0 1 0-.6 230 115 115 0 1 0 .6-230m-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1-.6-149.2m93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1-53.6 0m129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/channel/UCxZUcYfd_nvIVWAbzRB1tlw" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+  
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../js/jquery-3.6.0.min.js"></script>
+      
+    
+  <script src="https://demo.osc.earth/osa-chat-widget.js"></script>
+  <script>
+    OSAChatWidget.setConfig({ communityId: 'bids' });
+  </script>
+
+  </body>
+</html>

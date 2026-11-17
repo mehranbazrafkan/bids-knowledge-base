@@ -1,0 +1,124 @@
+{
+  "stages": {
+    "1_discovery": {
+      "status": "done",
+      "at": "2026-10-29T17:28:25Z",
+      "summary": {
+        "bids-specification-docs": {
+          "status": "inventoried",
+          "revision": null,
+          "file_total": null,
+          "page_count": 43
+        },
+        "bids-specification-repo": {
+          "status": "inventoried",
+          "revision": "8973fdf11d3c6c8ce40fa7897dc712667b539b0e",
+          "file_total": 333,
+          "page_count": null
+        },
+        "bids-validator": {
+          "status": "inventoried",
+          "revision": "f4d1b3a03723d8b192ca8d5310c1b6619e9fb870",
+          "file_total": 720,
+          "page_count": null
+        },
+        "bids-examples": {
+          "status": "inventoried",
+          "revision": "5e00d47b6f1db106dda1b776d5243eb41b4cb95b",
+          "file_total": 18370,
+          "page_count": null
+        },
+        "bids-schema": {
+          "status": "inventoried",
+          "revision": "ebc0f3616ccfb70fb1aefac45e57d6502455153e",
+          "file_total": 1414,
+          "page_count": null
+        }
+      }
+    },
+    "2_acquire": {
+      "status": "done",
+      "at": "2026-10-29T17:28:52Z",
+      "docs_pages_fetched": 43,
+      "docs_failures": 0,
+      "repos": {
+        "bids-specification-repo": "8973fdf11d3c6c8ce40fa7897dc712667b539b0e",
+        "bids-validator": "f4d1b3a03723d8b192ca8d5310c1b6619e9fb870",
+        "bids-examples": "5e00d47b6f1db106dda1b776d5243eb41b4cb95b",
+        "bids-schema": "ebc0f3616ccfb70fb1aefac45e57d6502455153e"
+      },
+      "repo_failures": 0
+    },
+    "3_parse": {
+      "status": "done",
+      "at": "2026-10-29T17:29:00Z",
+      "spec_schema_files_parsed": 118,
+      "spec_rule_files": 101,
+      "validator_issue_definitions": 53,
+      "example_datasets": 109,
+      "schema_repo_snapshots": [
+        "1.10.0",
+        "1.10.1",
+        "1.11.0",
+        "1.11.1",
+        "1.11.2",
+        "1.6.0",
+        "1.7.0",
+        "1.8.0",
+        "1.9.0",
+        "latest",
+        "master"
+      ]
+    },
+    "4_extract": {
+      "status": "done",
+      "at": "2026-10-29T17:29:17Z",
+      "raw_records": 3505,
+      "per_source": {
+        "bids-specification-docs": 1466,
+        "bids-specification-repo": 1775,
+        "bids-validator": 108,
+        "bids-examples": 110,
+        "bids-schema": 46
+      }
+    },
+    "5_normalize": {
+      "status": "done",
+      "at": "2026-10-29T17:29:17Z",
+      "normalized_records": 3505,
+      "input": 3505
+    },
+    "6_dedupe": {
+      "status": "done",
+      "at": "2026-10-29T17:29:17Z",
+      "input_records": 3505,
+      "exact_duplicate_records_merged": 0,
+      "same_text_records_kept": 0,
+      "conflicts_detected": 0,
+      "cross_source_issue_links": 20,
+      "concept_links": 478,
+      "version_links": 35,
+      "message_variant_codes": 8,
+      "output_records": 3505,
+      "unique_issue_codes": 209
+    },
+    "7_knowledge_base": {
+      "status": "done",
+      "at": "2026-10-29T17:29:18Z",
+      "records": 3505,
+      "unique_issue_codes": 209,
+      "distinct_rules": 607
+    },
+    "8_finetuning": {
+      "status": "done",
+      "at": "2026-10-29T17:29:18Z",
+      "examples": 5330
+    },
+    "9_validation": {
+      "status": "done",
+      "at": "2026-10-29T17:29:41Z",
+      "ok": true
+    }
+  },
+  "updated": "2026-10-29T17:29:41Z"
+}

@@ -1,0 +1,3246 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://bids-specification.readthedocs.io/en/stable/appendices/entities.html">
+      
+      
+        <link rel="prev" href="entity-table.html">
+      
+      
+        <link rel="next" href="file-collections.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>Entities - Brain Imaging Data Structure 1.11.2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/tsv.css">
+    
+      <link rel="stylesheet" href="../css/dynamic-width.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-SBWH6YNMPX"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-SBWH6YNMPX",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-SBWH6YNMPX",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  <script async type="text/javascript" src="/_/static/javascript/readthedocs-addons.js"></script><meta name="readthedocs-project-slug" content="bids-specification" /><meta name="readthedocs-version-slug" content="stable" /><meta name="readthedocs-resolver-filename" content="/appendices/entities.html" /><meta name="readthedocs-http-status" content="200" /></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#entities" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Brain Imaging Data Structure 1.11.2" class="md-header__button md-logo" aria-label="Brain Imaging Data Structure 1.11.2" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Brain Imaging Data Structure 1.11.2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Entities
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/bids-standard/bids-specification" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Brain Imaging Data Structure 1.11.2" class="md-nav__button md-logo" aria-label="Brain Imaging Data Structure 1.11.2" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    Brain Imaging Data Structure 1.11.2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/bids-standard/bids-specification" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The BIDS Specification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The BIDS Specification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../common-principles.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common principles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_3" id="__nav_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modality agnostic files
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modality agnostic files
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/dataset-description.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dataset description
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/data-summary-files.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data summary files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/phenotypic-and-assessment-data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phenotypic and assessment data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/code.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/events.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Events
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_4" id="__nav_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modality specific files
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modality specific files
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/magnetic-resonance-imaging-data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetic Resonance Imaging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/magnetoencephalography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetoencephalography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/electroencephalography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electroencephalography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/intracranial-electroencephalography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intracranial Electroencephalography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/physiological-recordings.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physiological recordings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/behavioral-experiments.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Behavioral experiments (with no neural recordings)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/genetic-descriptor.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Genetic Descriptor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/positron-emission-tomography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Positron Emission Tomography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/microscopy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/near-infrared-spectroscopy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Near-Infrared Spectroscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/motion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Motion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/magnetic-resonance-spectroscopy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetic Resonance Spectroscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-specific-files/electromyography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electromyography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_5" id="__nav_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Derivatives
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Derivatives
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIDS Derivatives
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/common-data-types.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common data types and metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/imaging.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imaging data types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/atlas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Templates and atlases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../longitudinal-and-multi-site-studies.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Longitudinal and multi-site studies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glossary.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extensions.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIDS Extension Proposals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_9" id="__nav_1_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendix
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="schema.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contributors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="licenses.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Licenses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="entity-table.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entity table
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entities
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="entities.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sub
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tpl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tpl
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ses
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cohort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cohort
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sample" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sample
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        task
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tracksys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tracksys
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        acq
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nuc
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#voi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        voi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ce
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        trc
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stain
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rec
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        dir
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mod
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#echo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        echo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        flip
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        inv
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mt
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        part
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        proc
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hemi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hemi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        space
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#split" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        split
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recording" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        recording
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chunk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        chunk
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atlas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        atlas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        seg
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        scale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#res" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        res
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#den" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        den
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        label
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#desc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        desc
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="file-collections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="units.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Units
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="hed.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hierarchical Event Descriptors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="meg-file-formats.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MEG file formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="meg-systems.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MEG systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="coordinate-systems.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coordinate systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="qmri.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quantitative MRI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="arterial-spin-labeling.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arterial Spin Labeling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="cross-modality-correspondence.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross modality correspondence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CHANGES.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The BIDS Website
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The BIDS Website
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://bids.neuroimaging.io/getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://bids.neuroimaging.io/getting_started/tutorials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sub
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tpl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tpl
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ses
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cohort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cohort
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sample" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sample
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        task
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tracksys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tracksys
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        acq
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nuc
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#voi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        voi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ce
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        trc
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        stain
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rec
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        dir
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mod
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#echo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        echo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        flip
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        inv
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mt
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        part
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        proc
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hemi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hemi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        space
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#split" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        split
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recording" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        recording
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chunk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        chunk
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atlas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        atlas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        seg
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        scale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#res" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        res
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#den" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        den
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        label
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#desc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        desc
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/bids-standard/bids-specification/edit/master/src/appendices/entities.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="entities"><a class="toclink" href="#entities">Entities</a></h1>
+<p>This section compiles the entities (key-value pairs within filenames)
+described throughout this specification, and describes each.</p>
+<p>A general introduction to entities is given in the section on
+<a href="../common-principles.html#filenames">filename structure</a>.</p>
+<p>The ordering of entities, and whether each is OPTIONAL, REQUIRED, or MUST NOT
+be specified for a given file type, is specified in the <a href="entity-table.html">Entity Table</a>.</p>
+<!--
+  This section is autogenerated based on the src/schema.  DO NOT EDIT DIRECTLY.
+  Follow https://github.com/bids-standard/bids-specification/blob/master/CONTRIBUTING.md#making-a-change-to-the-bids-schema
+  and a guide for using macros can be found at
+  https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<h2 id="sub"><a class="toclink" href="#sub">sub</a></h2>
+<p><strong>Full name</strong>: Subject</p>
+<p><strong>Format</strong>: <code>sub-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: A person or animal participating in the study.</p>
+<h2 id="tpl"><a class="toclink" href="#tpl">tpl</a></h2>
+<p><strong>Full name</strong>: Template</p>
+<p><strong>Format</strong>: <code>tpl-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: A standardized space of analysis specified or generated by one or more averages of features
+with respect to which group-level and atlas-derived results are provided.
+The <code>&lt;label&gt;</code> SHOULD follow the modality-specific conventions listed in the
+<a href="coordinate-systems.html">Coordinate Systems Appendix</a>.</p>
+<h2 id="ses"><a class="toclink" href="#ses">ses</a></h2>
+<p><strong>Full name</strong>: Session</p>
+<p><strong>Format</strong>: <code>ses-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: A logical grouping of neuroimaging and behavioral data consistent across subjects.
+Session can (but doesn't have to) be synonymous to a visit in a longitudinal study.
+In general, subjects will stay in the scanner during one session.
+However, for example, if a subject has to leave the scanner room and then
+be re-positioned on the scanner bed, the set of MRI acquisitions will still
+be considered as a session and match sessions acquired in other subjects.
+Similarly, in situations where different data types are obtained over
+several visits (for example fMRI on one day followed by DWI the day after)
+those can be grouped in one session.</p>
+<p>Defining multiple sessions is appropriate when several identical or similar
+data acquisitions are planned and performed on all -or most- subjects,
+often in the case of some intervention between sessions
+(for example, training).</p>
+<h2 id="cohort"><a class="toclink" href="#cohort">cohort</a></h2>
+<p><strong>Full name</strong>: Cohort</p>
+<p><strong>Format</strong>: <code>cohort-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: A set of subjects sharing one or more common characteristics.</p>
+<p>In the context of a template, the <code>cohort-&lt;label&gt;</code> entity identifies a subset of
+subjects or sessions that were used to construct template variations.
+For example, a developmental template may use scans from participants of different ages,
+longitudinal sessions of the same participants, or a combination of the two.</p>
+<h2 id="sample"><a class="toclink" href="#sample">sample</a></h2>
+<p><strong>Full name</strong>: Sample</p>
+<p><strong>Format</strong>: <code>sample-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: A sample pertaining to a subject such as tissue, primary cell or cell-free sample.
+The <code>sample-&lt;label&gt;</code> entity is used to distinguish between different samples from the same subject.
+The label MUST be unique per subject and is RECOMMENDED to be unique throughout the dataset.</p>
+<h2 id="task"><a class="toclink" href="#task">task</a></h2>
+<p><strong>Full name</strong>: Task</p>
+<p><strong>Format</strong>: <code>task-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: A set of structured activities performed by the participant.
+Tasks are usually accompanied by stimuli and responses, and can greatly vary in complexity.</p>
+<p>In the context of brain scanning, a task is always tied to one data acquisition.
+Therefore, even if during one acquisition the subject performed multiple conceptually different behaviors
+(with different sets of instructions) they will be considered one (combined) task.</p>
+<p>While tasks may be repeated across multiple acquisitions,
+a given task may have different sets of stimuli (for example, randomized order) and participant responses
+across subjects, sessions, and runs.</p>
+<p>The <code>task-&lt;label&gt;</code> MUST be consistent across subjects and sessions.</p>
+<p>Files with the <code>task-&lt;label&gt;</code> entity SHOULD have an associated
+<a href="../modality-agnostic-files/events.html#events">events file</a>,
+as well as certain metadata fields in the associated JSON file.</p>
+<p>For the purpose of this specification we consider the so-called "resting state" a task,
+although events files are not expected for resting state data.
+Additionally, a common convention in the specification is to include the word "rest" in
+the <code>task</code> label for resting state files (for example, <code>task-rest</code>).</p>
+<h2 id="tracksys"><a class="toclink" href="#tracksys">tracksys</a></h2>
+<p><strong>Full name</strong>: Tracking System</p>
+<p><strong>Format</strong>: <code>tracksys-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: The <code>tracksys-&lt;label&gt;</code> entity can be used as a key-value pair
+to label <em>_motion.tsv and </em>_motion.json files.
+It can also be used to label <em>_channel.tsv or </em>_events.tsv files
+when they belong to a specific tracking system.</p>
+<p>This entity corresponds to the <code>"TrackingSystemName"</code> metadata field in a *_motion.json file.
+<code>tracksys-&lt;label&gt;</code> entity is a concise string whereas <code>"TrackingSystemName"</code>
+may be longer and more human readable.</p>
+<h2 id="acq"><a class="toclink" href="#acq">acq</a></h2>
+<p><strong>Full name</strong>: Acquisition</p>
+<p><strong>Format</strong>: <code>acq-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: The <code>acq-&lt;label&gt;</code> entity corresponds to a custom label the user MAY use to distinguish
+a different set of parameters used for acquiring the same modality.</p>
+<p>For example, this should be used when a study includes two T1w images -
+one full brain low resolution and one restricted field of view but high resolution.
+In such case two files could have the following names:
+<code>sub-01_acq-highres_T1w.nii.gz</code> and <code>sub-01_acq-lowres_T1w.nii.gz</code>;
+however, the user is free to choose any other label than <code>highres</code> and <code>lowres</code> as long
+as they are consistent across subjects and sessions.</p>
+<p>In case different sequences are used to record the same modality
+(for example, <code>RARE</code> and <code>FLASH</code> for T1w)
+this field can also be used to make that distinction.
+The level of detail at which the distinction is made
+(for example, just between <code>RARE</code> and <code>FLASH</code>, or between <code>RARE</code>, <code>FLASH</code>, and <code>FLASHsubsampled</code>)
+remains at the discretion of the researcher.</p>
+<h2 id="nuc"><a class="toclink" href="#nuc">nuc</a></h2>
+<p><strong>Full name</strong>: Nucleus</p>
+<p><strong>Format</strong>: <code>nuc-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: The <code>nuc-&lt;label&gt;</code> entity can be used to distinguish acquisitions tuned
+to detect different nuclei.
+The label is the name of the nucleus or nuclei, which corresponds to DICOM Tag (0018,9100).
+If present in the filename, <code>"ResonantNucleus"</code> MUST also be included in
+the associated metadata.</p>
+<h2 id="voi"><a class="toclink" href="#voi">voi</a></h2>
+<p><strong>Full name</strong>: Volume of Interest</p>
+<p><strong>Format</strong>: <code>voi-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: The <code>voi-&lt;label&gt;</code> entity can be used to distinguish acquisitions localized to different regions.
+The label SHOULD be the name of the body region or part scanned.
+If used, the fields <code>"BodyPart"</code> and <code>"BodyPartDetails"</code> MUST be defined in the JSON file.
+<code>BodyPartDetailsOntology</code> is OPTIONAL to also include.</p>
+<h2 id="ce"><a class="toclink" href="#ce">ce</a></h2>
+<p><strong>Full name</strong>: Contrast Enhancing Agent</p>
+<p><strong>Format</strong>: <code>ce-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: The <code>ce-&lt;label&gt;</code> entity can be used to distinguish sequences using different contrast enhanced images.
+The label is the name of the contrast agent.</p>
+<p>This entity represents the <code>"ContrastBolusIngredient"</code> metadata field.
+Therefore, if the <code>ce-&lt;label&gt;</code> entity is present in a filename,
+<code>"ContrastBolusIngredient"</code> MAY also be added in the JSON file, with the same label.</p>
+<h2 id="trc"><a class="toclink" href="#trc">trc</a></h2>
+<p><strong>Full name</strong>: Tracer</p>
+<p><strong>Format</strong>: <code>trc-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: The <code>trc-&lt;label&gt;</code> entity can be used to distinguish sequences using different tracers.</p>
+<p>This entity represents the <code>"TracerName"</code> metadata field.
+Therefore, if the <code>trc-&lt;label&gt;</code> entity is present in a filename,
+<code>"TracerName"</code> MUST be defined in the associated metadata.
+Please note that the <code>&lt;label&gt;</code> does not need to match the actual value of the field.</p>
+<h2 id="stain"><a class="toclink" href="#stain">stain</a></h2>
+<p><strong>Full name</strong>: Stain</p>
+<p><strong>Format</strong>: <code>stain-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: The <code>stain-&lt;label&gt;</code> key/pair values can be used to distinguish image files
+from the same sample using different stains or antibodies for contrast enhancement.</p>
+<p>This entity represents the <code>"SampleStaining"</code> metadata field.
+Therefore, if the <code>stain-&lt;label&gt;</code> entity is present in a filename,
+<code>"SampleStaining"</code> SHOULD be defined in the associated metadata,
+although the label may be different.</p>
+<p>Descriptions of antibodies SHOULD also be indicated in the <code>"SamplePrimaryAntibodies"</code>
+and/or <code>"SampleSecondaryAntibodies"</code> metadata fields, as appropriate.</p>
+<h2 id="rec"><a class="toclink" href="#rec">rec</a></h2>
+<p><strong>Full name</strong>: Reconstruction</p>
+<p><strong>Format</strong>: <code>rec-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: The <code>rec-&lt;label&gt;</code> entity can be used to distinguish different reconstruction algorithms
+(for example, <code>MoCo</code> for the ones using motion correction).</p>
+<h2 id="dir"><a class="toclink" href="#dir">dir</a></h2>
+<p><strong>Full name</strong>: Phase-Encoding Direction</p>
+<p><strong>Format</strong>: <code>dir-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: The <code>dir-&lt;label&gt;</code> entity can be set to an arbitrary legitimate label
+(for example, <code>dir-LR</code> or <code>dir-AP</code>)
+to distinguish different phase-encoding directions.</p>
+<p>This entity represents the <code>"PhaseEncodingDirection"</code> metadata field.
+Therefore, if the <code>dir-&lt;label&gt;</code> entity is present in a filename,
+<code>"PhaseEncodingDirection"</code> MUST be defined in the associated metadata.</p>
+<p>Labels need not follow any particular convention and in case of conflict,
+JSON metadata MUST take precedence in interpreting an image.</p>
+<p>For example, <code>dir-j0</code> and <code>dir-j1</code> can indicate <code>"PhaseEncodingDirection": "j"</code> and <code>"j-"</code> (or vice versa),
+identifying the phase-encoding axis while avoiding indicating polarity.
+However, in case of a dataset indicating <code>dir-j0</code> with <code>"PhaseEncodingDirection": "i"</code>, the
+JSON metadata overrides the entity <code>dir-</code> setting.</p>
+<p>The use of generic labels, such as <code>dir-reference</code> and <code>dir-reversed</code>, is RECOMMENDED
+to avoid any possible inconsistency.</p>
+<p>To avoid inconsistency, if the <code>&lt;label&gt;</code> is <code>AP</code>, <code>PA</code>, <code>LR</code>, <code>RL</code>, <code>SI</code>, or <code>IS</code>,
+then the <code>"PhaseEncodingDirection"</code> SHOULD correspond to the data
+axis that most closely aligns with the cardinal direction and orientation.
+For example, <code>dir-PA</code> and <code>dir-AP</code> for an image in RAS+ orientation SHOULD have
+<code>"PhaseEncodingDirection": "j"</code> and <code>"j-"</code>, respectively.</p>
+<h2 id="run"><a class="toclink" href="#run">run</a></h2>
+<p><strong>Full name</strong>: Run</p>
+<p><strong>Format</strong>: <code>run-&lt;index&gt;</code></p>
+<p><strong>Definition</strong>: The <code>run-&lt;index&gt;</code> entity is used to distinguish separate data acquisitions with the same acquisition parameters
+and (other) entities.</p>
+<p>If several data acquisitions (for example, MRI scans or EEG recordings)
+with the same acquisition parameters are acquired in the same session,
+they MUST be indexed with the <a href="entities.html#run"><code>run-&lt;index&gt;</code></a> entity:
+<code>_run-1</code>, <code>_run-2</code>, <code>_run-3</code>, and so on
+(only nonnegative integers are allowed as run indices).</p>
+<p>If different entities apply,
+such as a different session indicated by <a href="entities.html#ses"><code>ses-&lt;label&gt;</code></a>,
+or different acquisition parameters indicated by
+<a href="entities.html#acq"><code>acq-&lt;label&gt;</code></a>,
+then <code>run</code> is not needed to distinguish the scans and MAY be omitted.</p>
+<h2 id="mod"><a class="toclink" href="#mod">mod</a></h2>
+<p><strong>Full name</strong>: Corresponding Modality</p>
+<p><strong>Format</strong>: <code>mod-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: The <code>mod-&lt;label&gt;</code> entity corresponds to modality label for defacing
+masks, for example, T1w, inplaneT1, referenced by a defacemask image.
+For example, <code>sub-01_mod-T1w_defacemask.nii.gz</code>.</p>
+<h2 id="echo"><a class="toclink" href="#echo">echo</a></h2>
+<p><strong>Full name</strong>: Echo</p>
+<p><strong>Format</strong>: <code>echo-&lt;index&gt;</code></p>
+<p><strong>Definition</strong>: If files belonging to an entity-linked file collection are acquired at different
+echo times, the <code>echo-&lt;index&gt;</code> entity MUST be used to distinguish individual files.</p>
+<p>This entity represents the <code>"EchoTime"</code> metadata field.
+Therefore, if the <code>echo-&lt;index&gt;</code> entity is present in a filename,
+<code>"EchoTime"</code> MUST be defined in the associated metadata.
+Please note that the <code>&lt;index&gt;</code> denotes the number/index (in the form of a nonnegative integer),
+not the <code>"EchoTime"</code> value of the separate JSON file.</p>
+<h2 id="flip"><a class="toclink" href="#flip">flip</a></h2>
+<p><strong>Full name</strong>: Flip Angle</p>
+<p><strong>Format</strong>: <code>flip-&lt;index&gt;</code></p>
+<p><strong>Definition</strong>: If files belonging to an entity-linked file collection are acquired at different
+flip angles, the <code>_flip-&lt;index&gt;</code> entity pair MUST be used to distinguish
+individual files.</p>
+<p>This entity represents the <code>"FlipAngle"</code> metadata field.
+Therefore, if the <code>flip-&lt;index&gt;</code> entity is present in a filename,
+<code>"FlipAngle"</code> MUST be defined in the associated metadata.
+Please note that the <code>&lt;index&gt;</code> denotes the number/index (in the form of a nonnegative integer),
+not the <code>"FlipAngle"</code> value of the separate JSON file.</p>
+<h2 id="inv"><a class="toclink" href="#inv">inv</a></h2>
+<p><strong>Full name</strong>: Inversion Time</p>
+<p><strong>Format</strong>: <code>inv-&lt;index&gt;</code></p>
+<p><strong>Definition</strong>: If files belonging to an entity-linked file collection are acquired at different inversion times,
+the <code>inv-&lt;index&gt;</code> entity MUST be used to distinguish individual files.</p>
+<p>This entity represents the <code>"InversionTime"</code> metadata field.
+Therefore, if the <code>inv-&lt;index&gt;</code> entity is present in a filename,
+<code>"InversionTime"</code> MUST be defined in the associated metadata.
+Please note that the <code>&lt;index&gt;</code> denotes the number/index (in the form of a nonnegative integer),
+not the <code>"InversionTime"</code> value of the separate JSON file.</p>
+<h2 id="mt"><a class="toclink" href="#mt">mt</a></h2>
+<p><strong>Full name</strong>: Magnetization Transfer</p>
+<p><strong>Format</strong>: <code>mt-&lt;label&gt;</code></p>
+<p><strong>Allowed values</strong>: <code>on</code>, <code>off</code></p>
+<p><strong>Definition</strong>: If files belonging to an entity-linked file collection are acquired at different
+magnetization transfer (MT) states, the <code>_mt-&lt;label&gt;</code> entity MUST be used to
+distinguish individual files.</p>
+<p>This entity represents the <code>"MTState"</code> metadata field.
+Therefore, if the <code>mt-&lt;label&gt;</code> entity is present in a filename,
+<code>"MTState"</code> MUST be defined in the associated metadata.
+Allowed label values for this entity are <code>on</code> and <code>off</code>,
+for images acquired in presence and absence of an MT pulse, respectively.</p>
+<h2 id="part"><a class="toclink" href="#part">part</a></h2>
+<p><strong>Full name</strong>: Part</p>
+<p><strong>Format</strong>: <code>part-&lt;label&gt;</code></p>
+<p><strong>Allowed values</strong>: <code>mag</code>, <code>phase</code>, <code>real</code>, <code>imag</code></p>
+<p><strong>Definition</strong>: This entity is used to indicate which component of the complex
+representation of the MRI signal is represented in voxel data.
+The <code>part-&lt;label&gt;</code> entity is associated with the DICOM Tag
+(0008,9208).
+Allowed label values for this entity are <code>phase</code>, <code>mag</code>, <code>real</code> and <code>imag</code>,
+which are typically used in <code>part-mag</code>/<code>part-phase</code> or
+<code>part-real</code>/<code>part-imag</code> pairs of files.</p>
+<p>Phase images MAY be in radians or in arbitrary units.
+The sidecar JSON file MUST include the <code>"Units"</code> of the <code>phase</code> image.
+The possible options are <code>"rad"</code> or <code>"arbitrary"</code>.</p>
+<p>When there is only a magnitude image of a given type, the <code>part</code> entity MAY be
+omitted.</p>
+<h2 id="proc"><a class="toclink" href="#proc">proc</a></h2>
+<p><strong>Full name</strong>: Processed (on device)</p>
+<p><strong>Format</strong>: <code>proc-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: The proc label is analogous to rec for MR and denotes a variant of
+a file that was a result of particular processing performed on the device.</p>
+<p>This is useful for files produced in particular by Neuromag/Elekta/MEGIN's
+MaxFilter (for example, <code>sss</code>, <code>tsss</code>, <code>trans</code>, <code>quat</code> or <code>mc</code>),
+which some installations impose to be run on raw data because of active
+shielding software corrections before the MEG data can actually be
+exploited.</p>
+<h2 id="hemi"><a class="toclink" href="#hemi">hemi</a></h2>
+<p><strong>Full name</strong>: Hemisphere</p>
+<p><strong>Format</strong>: <code>hemi-&lt;label&gt;</code></p>
+<p><strong>Allowed values</strong>: <code>L</code>, <code>R</code></p>
+<p><strong>Definition</strong>: The <code>hemi-&lt;label&gt;</code> entity indicates which hemibrain is described by the file.
+Allowed label values for this entity are <code>L</code> and <code>R</code>, for the left and right
+hemibrains, respectively.</p>
+<h2 id="space"><a class="toclink" href="#space">space</a></h2>
+<p><strong>Full name</strong>: Space</p>
+<p><strong>Format</strong>: <code>space-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: The <code>space-&lt;label&gt;</code> entity indicates the coordinate system for interpreting
+spatial coordinates.
+For sensor-based modalities, such as EEG/MEG/iEEG,
+the space indicates how sensor positions are reported;
+for imaging modalities,
+the space indicates a reference image to which a file has been aligned.
+A list of common spaces is defined in the
+<a href="coordinate-systems.html">Coordinate Systems Appendix</a>,
+and these SHOULD be used as <code>&lt;label&gt;</code> values for data reported in those
+spaces.</p>
+<p>Note that the space entity is broadly applicable to derivative data,
+but is only defined for a subset of raw data types.
+For particular use cases, <code>&lt;label&gt;</code> may be restricted to a set of enumerated values.</p>
+<h2 id="split"><a class="toclink" href="#split">split</a></h2>
+<p><strong>Full name</strong>: Split</p>
+<p><strong>Format</strong>: <code>split-&lt;index&gt;</code></p>
+<p><strong>Definition</strong>: In the case of long data recordings that exceed a file size of 2Gb,
+<code>.fif</code> files are conventionally split into multiple parts.
+Each of these files has an internal pointer to the next file.
+This is important when renaming these split recordings to the BIDS convention.</p>
+<p>Instead of a simple renaming, files should be read in and saved under their
+new names with dedicated tools like <a href="https://mne.tools/">MNE-Python</a>,
+which will ensure that not only the filenames, but also the internal file pointers, will be updated.</p>
+<p>It is RECOMMENDED that <code>.fif</code> files with multiple parts use the <code>split-&lt;index&gt;</code> entity to indicate each part.
+If there are multiple parts of a recording and the optional <code>scans.tsv</code> is provided,
+all files MUST be listed separately in <code>scans.tsv</code> and
+the entries for the <code>acq_time</code> column in <code>scans.tsv</code> MUST all be identical,
+as described in <a href="../modality-agnostic-files/data-summary-files.html#scans-file">Scans file</a>.</p>
+<h2 id="recording"><a class="toclink" href="#recording">recording</a></h2>
+<p><strong>Full name</strong>: Recording</p>
+<p><strong>Format</strong>: <code>recording-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: The <code>recording-&lt;label&gt;</code> entity can be used to distinguish continuous recording files.</p>
+<p>This entity is commonly applied when continuous recordings are from different acquisition instruments,
+or have different sampling frequencies or start times.
+For example, physiological recordings with different sampling frequencies may be distinguished using
+labels like <code>recording-100Hz</code> and <code>recording-500Hz</code>.</p>
+<h2 id="chunk"><a class="toclink" href="#chunk">chunk</a></h2>
+<p><strong>Full name</strong>: Chunk</p>
+<p><strong>Format</strong>: <code>chunk-&lt;index&gt;</code></p>
+<p><strong>Definition</strong>: The <code>chunk-&lt;index&gt;</code> key/value pair is used to distinguish between images of
+the same physical sample with different fields of view acquired in the same
+imaging experiment.
+This entity applies to collections of 2D images, 3D volumes or 4D volume series
+(for example, diffusion weighted images), and may be used to indicate different
+anatomical structures or regions of the same structure.</p>
+<h2 id="atlas"><a class="toclink" href="#atlas">atlas</a></h2>
+<p><strong>Full name</strong>: Atlas</p>
+<p><strong>Format</strong>: <code>atlas-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: The <code>atlas-&lt;label&gt;</code> entity identifies files that are part of, or derived from, an atlas.</p>
+<h2 id="seg"><a class="toclink" href="#seg">seg</a></h2>
+<p><strong>Full name</strong>: Segmentation</p>
+<p><strong>Format</strong>: <code>seg-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: The <code>seg-&lt;label&gt;</code> key/value pair corresponds to a custom label the user
+MAY use to distinguish specific partitions of the data space
+(segmentations or parcellations).</p>
+<p>Segmentations and parcellations MAY or MAY NOT be associated with
+<a href="../common-principles.html#definitions">atlases</a>.
+Therefore, <code>seg-&lt;label&gt;</code> SHOULD NOT be used to designate
+<a href="../common-principles.html#definitions">atlases</a>.
+Please refer to the <a href="../derivatives/atlas.html">template and atlas section</a>
+for detailed specifications on their combined use.
+When a segmentation is a <em>realization</em> of an atlas' segmentation or parcellation,
+<code>seg-&lt;label&gt;</code> SHOULD be employed to distinguish them.
+For example, the <a href="https://doi.org/10.1152/jn.00338.2011">Yeo 2011 atlas</a>
+is distributed within <em>FreeSurfer</em> with two different parcellations:
+the <em>7 networks</em> MAY be described with <code>seg-7n</code>, for instance, and
+the <em>17 networks</em> MAY correspondingly be described with <code>seg-17n</code>.</p>
+<p>This entity is only applicable to derivative data.</p>
+<h2 id="scale"><a class="toclink" href="#scale">scale</a></h2>
+<p><strong>Full name</strong>: Scale</p>
+<p><strong>Format</strong>: <code>scale-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: The <code>scale-&lt;label&gt;</code> key/value pair corresponds to a custom label the user
+MAY use to distinguish segmentations that entail different levels of
+<em>regional resolution</em> (scales), often indicated by the number of ROIs.
+See (<a href="https://doi.org/10.1038/s41593-020-00726-z">Bijsterbosch et al., 2020</a>)
+for further details on <em>regional resolution</em> or, as defined by the authors of
+the manuscript, the <em>brain units</em>.</p>
+<p>For example, the <a href="https://doi.org/10.1093/cercor/bhx179">Schaefer 2018 atlas</a>
+is distributed within <em>FreeSurfer</em> with ten different scales
+(100, 200, 300, 400, 500, 600, 700, 800, 900, and 1000 regions) for each of
+its three different parcellations (<em>7 networks</em>, <em>17 networks</em>, and
+<em>Kong's variation of 17 networks</em>).</p>
+<p>This entity is only applicable to derivative data.</p>
+<h2 id="res"><a class="toclink" href="#res">res</a></h2>
+<p><strong>Full name</strong>: Resolution</p>
+<p><strong>Format</strong>: <code>res-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: Resolution of regularly sampled N-dimensional data.</p>
+<p>This entity represents the <code>"Resolution"</code> metadata field.
+Therefore, if the <code>res-&lt;label&gt;</code> entity is present in a filename,
+<code>"Resolution"</code> MUST also be added in the JSON file, to provide interpretation.</p>
+<p>This entity is only applicable to derivative data.</p>
+<h2 id="den"><a class="toclink" href="#den">den</a></h2>
+<p><strong>Full name</strong>: Density</p>
+<p><strong>Format</strong>: <code>den-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: Density of non-parametric surfaces.</p>
+<p>This entity represents the <code>"Density"</code> metadata field.
+Therefore, if the <code>den-&lt;label&gt;</code> entity is present in a filename,
+<code>"Density"</code> MUST also be added in the JSON file, to provide interpretation.</p>
+<p>This entity is only applicable to derivative data.</p>
+<h2 id="label"><a class="toclink" href="#label">label</a></h2>
+<p><strong>Full name</strong>: Label</p>
+<p><strong>Format</strong>: <code>label-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: Tissue-type label, following a prescribed vocabulary.
+Applies to binary masks and probabilistic/partial volume segmentations
+that describe a single tissue type.</p>
+<p>This entity is only applicable to derivative data.</p>
+<h2 id="desc"><a class="toclink" href="#desc">desc</a></h2>
+<p><strong>Full name</strong>: Description</p>
+<p><strong>Format</strong>: <code>desc-&lt;label&gt;</code></p>
+<p><strong>Definition</strong>: When necessary to distinguish two files that do not otherwise have a
+distinguishing entity, the <code>desc-&lt;label&gt;</code> entity SHOULD be used.</p>
+<p>This entity is only applicable to derivative data.</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; BIDS Contributors - <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/bids-standard/bids-specification/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://bsky.app/profile/bidsstandard.bsky.social" target="_blank" rel="noopener" title="bsky.app" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M407.8 294.7c-3.3-.4-6.7-.8-10-1.3 3.4.4 6.7.9 10 1.3M288 227.1c-26.1-50.7-97.1-145.2-163.1-191.8C61.6-9.4 37.5-1.7 21.6 5.5 3.3 13.8 0 41.9 0 58.4S9.1 194 15 213.9c19.5 65.7 89.1 87.9 153.2 80.7 3.3-.5 6.6-.9 10-1.4-3.3.5-6.6 1-10 1.4-93.9 14-177.3 48.2-67.9 169.9C220.6 589.1 265.1 437.8 288 361.1c22.9 76.7 49.2 222.5 185.6 103.4 102.4-103.4 28.1-156-65.8-169.9-3.3-.4-6.7-.8-10-1.3 3.4.4 6.7.9 10 1.3 64.1 7.1 133.6-15.1 153.2-80.7C566.9 194 576 75 576 58.4s-3.3-44.7-21.6-52.9c-15.8-7.1-40-14.9-103.2 29.8C385.1 81.9 314.1 176.4 288 227.1"/></svg>
+    </a>
+  
+    
+    
+      
+    
+    
+    
+      
+      
+    
+    <a href="https://fosstodon.org/@bidsstandard" target="_blank" rel="noopener me" title="fosstodon.org" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M433 179.1c0-97.2-63.7-125.7-63.7-125.7-62.5-28.7-228.6-28.4-290.5 0 0 0-63.7 28.5-63.7 125.7 0 115.7-6.6 259.4 105.6 289.1 40.5 10.7 75.3 13 103.3 11.4 50.8-2.8 79.3-18.1 79.3-18.1l-1.7-36.9s-36.3 11.4-77.1 10.1c-40.4-1.4-83-4.4-89.6-54-.6-4.6-.9-9.3-.9-13.9 85.6 20.9 158.7 9.1 178.7 6.7 56.1-6.7 105-41.3 111.2-72.9 9.8-49.8 9-121.5 9-121.5zm-75.1 125.2h-46.6V190.1c0-49.7-64-51.6-64 6.9v62.5H201V197c0-58.5-64-56.6-64-6.9v114.2H90.3c0-122.1-5.2-147.9 18.4-175 25.9-28.9 79.8-30.8 103.8 6.1l11.6 19.5 11.6-19.5c24.1-37.1 78.1-34.8 103.8-6.1 23.7 27.3 18.4 53 18.4 175"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://groups.google.com/g/bids-discussion" target="_blank" rel="noopener" title="groups.google.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M500 261.8C500 403.3 403.1 504 260 504 122.8 504 12 393.2 12 256S122.8 8 260 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C270.5 52.6 106.3 116.6 106.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H260v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.instagram.com/bidsstandard/" target="_blank" rel="noopener" title="www.instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3 141a115 115 0 1 0-.6 230 115 115 0 1 0 .6-230m-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1-.6-149.2m93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1-53.6 0m129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/channel/UCxZUcYfd_nvIVWAbzRB1tlw" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+  
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../js/jquery-3.6.0.min.js"></script>
+      
+    
+  <script src="https://demo.osc.earth/osa-chat-widget.js"></script>
+  <script>
+    OSAChatWidget.setConfig({ communityId: 'bids' });
+  </script>
+
+  </body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "input_records": 3505,
+  "exact_duplicate_records_merged": 0,
+  "same_text_records_kept": 0,
+  "conflicts_detected": 0,
+  "cross_source_issue_links": 20,
+  "concept_links": 478,
+  "version_links": 35,
+  "message_variant_codes": 8,
+  "duplicate_keys": [],
+  "output_records": 3505,
+  "unique_issue_codes": 209
+}

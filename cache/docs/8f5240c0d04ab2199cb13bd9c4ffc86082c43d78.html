@@ -1,0 +1,4011 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://bids-specification.readthedocs.io/en/stable/modality-specific-files/electromyography.html">
+      
+      
+        <link rel="prev" href="magnetic-resonance-spectroscopy.html">
+      
+      
+        <link rel="next" href="../derivatives/introduction.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>Electromyography - Brain Imaging Data Structure 1.11.2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/tsv.css">
+    
+      <link rel="stylesheet" href="../css/dynamic-width.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-SBWH6YNMPX"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-SBWH6YNMPX",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-SBWH6YNMPX",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  <script async type="text/javascript" src="/_/static/javascript/readthedocs-addons.js"></script><meta name="readthedocs-project-slug" content="bids-specification" /><meta name="readthedocs-version-slug" content="stable" /><meta name="readthedocs-resolver-filename" content="/modality-specific-files/electromyography.html" /><meta name="readthedocs-http-status" content="200" /></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#electromyography" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Brain Imaging Data Structure 1.11.2" class="md-header__button md-logo" aria-label="Brain Imaging Data Structure 1.11.2" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Brain Imaging Data Structure 1.11.2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Electromyography
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/bids-standard/bids-specification" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Brain Imaging Data Structure 1.11.2" class="md-nav__button md-logo" aria-label="Brain Imaging Data Structure 1.11.2" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    Brain Imaging Data Structure 1.11.2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/bids-standard/bids-specification" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The BIDS Specification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The BIDS Specification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../common-principles.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common principles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_3" id="__nav_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modality agnostic files
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modality agnostic files
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/dataset-description.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dataset description
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/data-summary-files.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data summary files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/phenotypic-and-assessment-data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phenotypic and assessment data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/code.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modality-agnostic-files/events.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Events
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_4" id="__nav_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modality specific files
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modality specific files
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="magnetic-resonance-imaging-data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetic Resonance Imaging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="magnetoencephalography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetoencephalography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="electroencephalography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electroencephalography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="intracranial-electroencephalography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intracranial Electroencephalography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="physiological-recordings.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physiological recordings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="behavioral-experiments.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Behavioral experiments (with no neural recordings)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="genetic-descriptor.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Genetic Descriptor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="positron-emission-tomography.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Positron Emission Tomography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="microscopy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="near-infrared-spectroscopy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Near-Infrared Spectroscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="motion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Motion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="magnetic-resonance-spectroscopy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magnetic Resonance Spectroscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electromyography
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="electromyography.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electromyography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#emg-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EMG data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="EMG data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#terminology-electrodes-vs-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Terminology: Electrodes vs. Channels
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#describing-sensor-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Describing sensor locations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#emg-in-combination-with-other-modalities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EMG in combination with other modalities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sidecar-json-_emgjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sidecar JSON (*_emg.json)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sidecar JSON (*_emg.json)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hardware-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardware information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#institution-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Institution information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-_emgjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example *_emg.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#channels-description-_channelstsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Channels description (*_channels.tsv)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Channels description (*_channels.tsv)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-_channelstsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example *_channels.tsv
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#electrodes-description-_electrodestsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Electrodes description (*_electrodes.tsv)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Electrodes description (*_electrodes.tsv)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required columns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-_electrodestsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example *_electrodes.tsv
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coordinate-system-json-_coordsystemjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coordinate System JSON (*_coordsystem.json)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Coordinate System JSON (*_coordsystem.json)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1-_coordsystemjson-for-digitized-electrode-positions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 1: *_coordsystem.json for digitized electrode positions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-_coordsystemjson-for-measured-electrode-positions-in-a-single-coordinate-system-defined-by-anatomical-landmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 2: *_coordsystem.json for measured electrode positions in a single coordinate system defined by anatomical landmarks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-3-multiple-_coordsystemjson-files-for-measured-electrode-positions-in-multiple-anatomically-defined-coordinate-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 3: multiple *_coordsystem.json files for measured electrode positions in multiple anatomically-defined coordinate systems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-4-multiple-_coordsystemjson-files-for-nestedanchored-coordinate-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 4: multiple *_coordsystem.json files for nested/anchored coordinate systems
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#photos-of-the-electrode-positions-_photoextension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Photos of the electrode positions (*_photo.&lt;extension&gt;)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Photos of the electrode positions (*_photo.&lt;extension&gt;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-_photoextension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example *_photo.&lt;extension&gt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_5" id="__nav_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Derivatives
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Derivatives
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIDS Derivatives
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/common-data-types.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common data types and metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/imaging.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imaging data types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivatives/atlas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Templates and atlases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../longitudinal-and-multi-site-studies.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Longitudinal and multi-site studies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glossary.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extensions.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIDS Extension Proposals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_9" id="__nav_1_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendix
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/schema.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/contributors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/licenses.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Licenses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/entity-table.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entity table
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/entities.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/file-collections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File collections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/units.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Units
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/hed.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hierarchical Event Descriptors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/meg-file-formats.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MEG file formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/meg-systems.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MEG systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/coordinate-systems.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coordinate systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/qmri.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quantitative MRI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/arterial-spin-labeling.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arterial Spin Labeling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendices/cross-modality-correspondence.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross modality correspondence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CHANGES.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The BIDS Website
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The BIDS Website
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://bids.neuroimaging.io/getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://bids.neuroimaging.io/getting_started/tutorials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#emg-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EMG data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="EMG data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#terminology-electrodes-vs-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Terminology: Electrodes vs. Channels
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#describing-sensor-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Describing sensor locations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#emg-in-combination-with-other-modalities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EMG in combination with other modalities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sidecar-json-_emgjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sidecar JSON (*_emg.json)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sidecar JSON (*_emg.json)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hardware-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardware information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#institution-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Institution information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-_emgjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example *_emg.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#channels-description-_channelstsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Channels description (*_channels.tsv)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Channels description (*_channels.tsv)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-_channelstsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example *_channels.tsv
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#electrodes-description-_electrodestsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Electrodes description (*_electrodes.tsv)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Electrodes description (*_electrodes.tsv)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required columns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-_electrodestsv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example *_electrodes.tsv
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coordinate-system-json-_coordsystemjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coordinate System JSON (*_coordsystem.json)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Coordinate System JSON (*_coordsystem.json)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1-_coordsystemjson-for-digitized-electrode-positions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 1: *_coordsystem.json for digitized electrode positions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-_coordsystemjson-for-measured-electrode-positions-in-a-single-coordinate-system-defined-by-anatomical-landmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 2: *_coordsystem.json for measured electrode positions in a single coordinate system defined by anatomical landmarks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-3-multiple-_coordsystemjson-files-for-measured-electrode-positions-in-multiple-anatomically-defined-coordinate-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 3: multiple *_coordsystem.json files for measured electrode positions in multiple anatomically-defined coordinate systems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-4-multiple-_coordsystemjson-files-for-nestedanchored-coordinate-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 4: multiple *_coordsystem.json files for nested/anchored coordinate systems
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#photos-of-the-electrode-positions-_photoextension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Photos of the electrode positions (*_photo.&lt;extension&gt;)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Photos of the electrode positions (*_photo.&lt;extension&gt;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-_photoextension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example *_photo.&lt;extension&gt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/bids-standard/bids-specification/edit/master/src/modality-specific-files/electromyography.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="electromyography"><a class="toclink" href="#electromyography">Electromyography</a></h1>
+<p>Support for Electromyography (EMG) was developed as a
+<a href="../extensions.html#bids-extension-proposals">BIDS Extension Proposal</a>.
+Please see <a href="../introduction.html#citing-bids">Citing BIDS</a> on how to appropriately credit
+this extension when referring to it in the context of the academic literature.</p>
+<div class="admonition example">
+<p class="admonition-title">Example datasets</p>
+<p>Electromyography datasets formatted according to this specification are available on
+the <a href="https://bids.neuroimaging.io/datasets/examples.html#emg">BIDS examples repository</a>
+and can be emulated when curating new datasets.</p>
+</div>
+<h2 id="emg-data"><a class="toclink" href="#emg-data">EMG data</a></h2>
+<!--
+This block generates a filename templates.
+The inputs for this macro can be found in the directory
+  src/schema/rules/files/raw
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<p>Template:</p>
+<div class="highlight"><pre><code><a href="../appendices/entities.html#sub">sub-&lt;label&gt;</a>/
+    [<a href="../appendices/entities.html#ses">ses-&lt;label&gt;</a>/]
+        <a href="../glossary.html#emg-datatypes">emg</a>/
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#emg-suffixes">emg</a><a href="../glossary.html#bdf-extensions">.bdf</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#emg-suffixes">emg</a><a href="../glossary.html#edf-extensions">.edf</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#emg-suffixes">emg</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#events-suffixes">events</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#events-suffixes">events</a><a href="../glossary.html#tsv-extensions">.tsv</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#physio-suffixes">physio</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#physio-suffixes">physio</a><a href="../glossary.html#tsv_gz-extensions">.tsv.gz</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#stim-suffixes">stim</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#stim-suffixes">stim</a><a href="../glossary.html#tsv_gz-extensions">.tsv.gz</a>
+</code></pre></div>
+<details>
+<summary><strong>Legend:</strong></summary>
+<ul>
+<li>
+<p>For more information about filename elements (for example, entities, suffixes, extensions),
+follow the links embedded in the filename template.</p>
+</li>
+<li>
+<p><code>&lt;matches&gt;</code> is a placeholder to denote an arbitrary (and valid) sequence of entities
+and labels at the beginning of the filename (only BIDS &quot;raw&quot;).</p>
+</li>
+<li>
+<p><code>&lt;source-entities&gt;</code> is a placeholder to denote an arbitrary sequence of entities and labels
+at the beginning of the filename matching a source file from which the file derives
+(only BIDS-Derivatives).</p>
+</li>
+<li>
+<p>Filename entities or directories between square brackets
+(for example, <code>[_ses-&lt;label&gt;]</code>) are OPTIONAL.</p>
+</li>
+<li>
+<p>Some entities may only allow specific values,
+in which case those values are listed in <code>&lt;&gt;</code>, separated by <code>|</code>.</p>
+</li>
+<li>
+<p><code>_&lt;suffix&gt;</code> means that there are several (&gt;6) valid suffixes for this filename pattern.</p>
+</li>
+<li>
+<p><code>.&lt;extension&gt;</code> means that there are several (&gt;6) valid extensions for this file type.</p>
+</li>
+<li>
+<p><code>[.gz]</code> means that both the unzipped and gzipped versions of the extension are valid.</p>
+</li>
+</ul>
+
+</details>
+
+<p>EMG device manufacturers use a variety of formats for storing raw data, and there is
+no single standard that all researchers agree on. For BIDS, EMG data MUST be
+stored in one of the following formats:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Format</strong></th>
+<th><strong>Extension(s)</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.biosemi.com/faq/file_format.htm">Biosemi data format</a></td>
+<td><code>.bdf</code></td>
+<td>Each recording consists of a single <code>.bdf</code> file. <a href="https://www.teuniz.net/edfbrowser/bdfplus%20format%20description.html"><code>bdf+</code></a> files are permitted. The capital <code>.BDF</code> extension MUST NOT be used.</td>
+</tr>
+<tr>
+<td><a href="https://www.edfplus.info/">European data format</a></td>
+<td><code>.edf</code></td>
+<td>Each recording consists of a single <code>.edf</code> file. <a href="https://www.edfplus.info/specs/edfplus.html"><code>edf+</code></a> files are permitted. The capital <code>.EDF</code> extension MUST NOT be used.</td>
+</tr>
+</tbody>
+</table>
+<p>EDF, EDF+, BDF, and BDF+ are all open data formats with broad support in various programming languages for reading and writing the files. BDF and BDF+ formats store data samples using 3 bytes instead of 2 bytes as in EDF and EDF+ formats, allowing for greater resolution. EDF+/BDF+ accommodate more header metadata than EDF/BDF, and support storing event or annotation information in the file. Thus it is RECOMMENDED to use the BDF+ data format.</p>
+<p>The <a href="../appendices/entities.html#recording"><code>recording-&lt;label&gt;</code></a> entity MAY be used to indicate
+simultaneous acquisition of data from multiple EMG devices, in cases where the devices
+store data in separate data files.
+If separate devices are being used with separate sampling rates, start times, or other
+acquisition parameters, the <code>recording-&lt;label&gt;</code> entity MUST be used to distinguish between them.
+The synchronization of data from multiple devices SHOULD be described in the
+<a href="../modality-agnostic-files/data-summary-files.html#scans-file">Scans</a> (<code>scans.tsv</code>) file, using the
+<code>acq_time</code> entity.</p>
+<p>In cases where the allowed formats do not encode all relevant metadata present in the
+device manufacturer's native file format, we encourage users to provide the additional
+metadata in the sidecar JSON file.</p>
+<h3 id="terminology-electrodes-vs-channels"><a class="toclink" href="#terminology-electrodes-vs-channels">Terminology: Electrodes vs. Channels</a></h3>
+<p>For proper documentation of EMG recording metadata it is important to understand the
+difference between an electrode and a channel: an EMG electrode is a single point of
+electrical contact with the body, whereas a channel is the combination of the analog
+differential amplifier (which combines signals from two electrode sources) and the
+analog-to-digital converter, which results in a potential difference (voltage) that forms
+the actual data stored in the EMG dataset. We employ the following short definitions:</p>
+<ul>
+<li>
+<p><strong>Electrode:</strong> A single point of contact between the acquisition system and
+    the recording site (whether on the skin surface or intramuscular).
+    Multiple electrodes can be organized as arrays, grids, leads, strips, probes,
+    shafts, and so on.</p>
+</li>
+<li>
+<p><strong>Channel:</strong> A single analog-to-digital converter in the recording system that
+    regularly samples the value of a transducer, which results in the signal being
+    represented as a time series in the digitized data.
+    This can be connected to two electrodes (to measure the potential difference between
+    them), a magnetic field or magnetic gradient sensor, temperature sensor,
+    accelerometer, and so forth.</p>
+</li>
+</ul>
+<p>This distinction is especially important for EMG because a common type of EMG device
+(often erroneously called a "bipolar electrode") comprises two electrodes at a fixed distance,
+wired such that the electrode pair is necessarily converted to a single channel by the amplifier
+(in other words, one of the electrodes necessarily acts as the <em>reference</em> for the other).
+In other kinds of devices, researchers may have control over which electrode(s) to use as
+the reference for each channel.</p>
+<p>Note also that although the <em>reference</em> and <em>ground</em> electrodes are often referred to as
+channels, in most common EMG systems they are not recorded by themselves.
+Therefore they are usually not represented as channels in the data.</p>
+<!-- The type of referencing for all channels and optionally the location of the reference
+electrode and the location of the ground electrode MAY be specified. -->
+
+<h3 id="describing-sensor-locations"><a class="toclink" href="#describing-sensor-locations">Describing sensor locations</a></h3>
+<p>Each EMG-BIDS dataset SHOULD include sensor location information that is as accurate as
+possible given the measurement means available to the researcher(s).
+Below are examples ranging from most accurate to least accurate, which can serve as a
+guide to where sensor placement information should be stored in the dataset.</p>
+<ol>
+<li>
+<p>Electrode locations and anatomical landmarks are digitized with a 3D localizer device
+    such as Polhemus FasTrak or a 3D scanner.
+    3D coordinates for each electrode are given in <code>x,y,z</code> columns of <code>*_electrodes.tsv</code>,
+    and the coordinate system definition is given in <code>*_coordsystem.json</code>.</p>
+</li>
+<li>
+<p>Electrode locations are measured relative to nearby anatomical landmarks using a flexible
+    measuring tape.
+    2D or 3D coordinates for each electrode are given in <code>x</code>, <code>y</code>, and (optionally) <code>z</code>
+    columns of <code>*_electrodes.tsv</code>, and the coordinate system definition in
+    <code>*_coordsystem.json</code> specifies the axis directions with reference to those anatomical
+    landmarks.</p>
+</li>
+<li>
+<p>The arrangement of electrodes in a group or grid is measured (or known from the device
+    manufacturer), and is provided in <code>x</code>, <code>y</code>, and (optionally) <code>z</code> columns of <code>*_electrodes.tsv</code>,
+    with a device-internal "child" coordinate system defined in a <code>*_coordsystem.json</code> file.
+    An anatomically-defined "parent" coordinate system is also defined in a different
+    <code>*_coordsystem.json</code> file, and the name and coordinates of one electrode (the "anchor"
+    electrode) from each "child" group or grid is provided in the "parent" coordinate system.
+    This allows the approximate anatomical locations of all electrodes to be calculated
+    by treating the device-internal coordinates as offsets from the anchor coordinate.
+    The two <code>*_coordsystem.json</code> files are distinguished by the <code>space</code> entity in their filenames;
+    the labels used for that entity may be arbitrary (for example, <code>*_space-grid_coordsystem.json</code>
+    for the child coordinate system, and <code>*_space-forearm_coordsystem.json</code> for the parent
+    coordinate system).</p>
+</li>
+<li>
+<p>Individual electrode locations are chosen by visual inspection, palpation, or
+    functional localizers.
+    No measured coordinates are provided; placement information is given either in the
+    <code>EMGPlacementSchemeDescription</code> field of <code>*_emg.json</code> (when the placement approach is
+    the same for all sensors), or in the <code>placement_description</code> column of <code>*_channels.tsv</code>
+    (when the placement approach varied across sensors).</p>
+</li>
+</ol>
+<p>More details on each of these scenarios is given below in the
+<a href="#channels-description-_channelstsv">Channels description</a>,
+<a href="#electrodes-description-_electrodestsv">Electrodes description</a>, and
+<a href="#coordinate-system-json-_coordsystemjson">Coordinate system</a> sections.</p>
+<p>A fifth scenario unique to EMG involves location information that is fairly accurate
+(as in scenarios (1) and (2) above) but it locates <em>bipolar sensor devices</em> rather than
+<em>electrodes</em>.
+In this case, researchers SHOULD provide <code>*_electrodes.tsv</code> even though information about
+the individual electrode contacts is not available.
+Rather, each entry from <code>*_channels.tsv</code> should have a corresponding row in <code>*_electrodes.tsv</code>
+where the location information is given, and <code>*_coordsystem.json</code> should also be provided
+(as in scenarios (1) or (2) above).</p>
+<h3 id="emg-in-combination-with-other-modalities"><a class="toclink" href="#emg-in-combination-with-other-modalities">EMG in combination with other modalities</a></h3>
+<p>When EMG is recorded alongside other BIDS modalities (such as EEG or motion),
+researchers SHOULD define how recordings are synchronized. Options include:</p>
+<ul>
+<li>
+<p>Recording time stamps from a common clock source on the LATENCY channel of
+    each modality’s acquisition device.</p>
+</li>
+<li>
+<p>Recording experimental events (usually as TTL pulses) on dedicated channels of
+    each modality’s acquisition devices.</p>
+</li>
+<li>
+<p>Storing the acquisition start time (relative to a common clock source)
+    of each modality’s recording in the acq_time column of the *_scans.tsv file.
+    Note that the BIDS date time format allows optional fractional seconds,
+    which SHOULD be used to maximize the precision of the synchronization.</p>
+</li>
+<li>
+<p>Record the start- and stop-time of one modality’s recording (relative to
+    the other modality’s clock) in the *_events.tsv file for the other modality.</p>
+</li>
+</ul>
+<p>It is up to the user to decide which approach is most appropriate given their experimental setup,
+and to identify which modality will serve as the 'main' clock source for synchronization purposes
+(or whether a separate external clock source is used).</p>
+<h3 id="sidecar-json-_emgjson"><a class="toclink" href="#sidecar-json-_emgjson">Sidecar JSON (<code>*_emg.json</code>)</a></h3>
+<p>For consistency between studies and institutions,
+we encourage users to extract the values of metadata fields from the actual raw data.
+Whenever possible, please avoid using ad hoc wording.</p>
+<p>These fields MUST be present:</p>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.EMGPlacementScheme">EMGPlacementScheme</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The way in which electrode placement locations were determined. If electrode locations are provided as coordinates in <code>*_electrodes.tsv</code> in reference to a coordinate system defined in <code>*_coordsystem.json</code>, then specify <code>"Measured"</code>. If approach to placement varied across sensor devices, specify <code>"ChannelSpecific"</code> and include placement details in the <code>placement_scheme</code> column of <code>*_channels.tsv</code>. If a standardized electrode placement procedure (for example, SENIAM 8) was followed, or if an ad-hoc procedure was followed, specify <code>"Other"</code> and provide details in <code>EMGPlacementSchemeDescription</code>.<br><br>Must be one of: <code>"ChannelSpecific"</code>, <code>"Measured"</code>, <code>"Other"</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.EMGPlacementSchemeDescription">EMGPlacementSchemeDescription</a></td>
+<td>OPTIONAL, but REQUIRED if <code>EMGPlacementScheme</code> is <code>"Other"</code></td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Additional details of the approach to EMG sensor placement. Descriptions SHOULD NOT simply give the name of the targeted muscle (use the <code>target_muscle</code> column in <code>*_channels.tsv</code> for that), but rather SHOULD reflect the process used by the researcher(s) when placing electrodes. For example, EMG electrode sites may be chosen by <em>measured distance</em> from anatomical landmarks, by <em>visual reference</em> to (parts of) target muscles, by <em>palpation</em> of the skin to locate target muscles, or by <em>functional localization</em> (temporary electrode placement at several sites during prescribed behavior, until a site yielding strong EMG signal is found).</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.EMGReference">EMGReference</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Description of the approach to signal referencing. If the same signal source is used as reference for all channels (often called a "monopolar" recording), specify the signal source (typically an electrode name). If different channels have different reference electrodes, this field SHOULD contain the string <code>"ChannelSpecific"</code> and each channel's reference SHOULD be given in the <code>reference</code> column of <code>*_channels.tsv</code>. For bipolar recording devices (where a single sensor unit contains two rigidly separated contacts, and the paired contacts are not listed independently in <code>*_electrodes.tsv</code>), this field SHOULD be <code>"Bipolar"</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SamplingFrequency">SamplingFrequency</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Sampling frequency (in Hz) of all the data in the recording, regardless of their type (for example, <code>2400</code>).  The sampling frequency of data channels that deviate from the main sampling frequency SHOULD be specified in the <code>channels.tsv</code> file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.PowerLineFrequency">PowerLineFrequency</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a> or <code>"n/a"</code></td>
+<td>Frequency (in Hz) of the power grid at the geographical location of the instrument (for example, <code>50</code> or <code>60</code>).</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.RecordingType">RecordingType</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Defines whether the recording is <code>"continuous"</code>, <code>"discontinuous"</code>, or <code>"epoched"</code>, where <code>"epoched"</code> is limited to time windows about events of interest (for example, stimulus presentations or subject responses).<br><br>Must be one of: <code>"continuous"</code>, <code>"epoched"</code>, <code>"discontinuous"</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SoftwareFilters">SoftwareFilters</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.json.org/json-en.html">object</a> of <a href="https://www.json.org/json-en.html">objects</a> or <code>"n/a"</code></td>
+<td><a href="https://www.json.org/json-en.html">Object</a> of temporal software filters applied, or <code>"n/a"</code> if the data is not available. Each key-value pair in the JSON object is a name of the filter and an object in which its parameters are defined as key-value pairs (for example, <code>{"Anti-aliasing filter": {"half-amplitude cutoff (Hz)": 500, "Roll-off": "6dB/Octave"}}</code>).</td>
+</tr>
+</tbody>
+</table>
+<p>Note the <code>RecordingType</code>, which depends on whether the data stream on disk is interrupted or not.
+Continuous data is by definition 1 segment without interruption.
+Epoched data consists of multiple segments that all have the same length
+(for example, corresponding to trials) and that have gaps in between.
+Discontinuous data consists of multiple segments of different length,
+for example due to a pause in the acquisition.</p>
+<p>These fields SHOULD be present:</p>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.EMGChannelCount">EMGChannelCount</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">integer</a></td>
+<td>Number of EMG channels.<br><br>Must be a number greater than or equal to 0.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.HardwareFilters">HardwareFilters</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.json.org/json-en.html">object</a> of <a href="https://www.json.org/json-en.html">objects</a> or <code>"n/a"</code></td>
+<td>Object of temporal hardware filters applied, or <code>"n/a"</code> if the data is not available. Each key-value pair in the JSON object is a name of the filter and an object in which its parameters are defined as key-value pairs. For example, <code>{"Highpass RC filter": {"Half amplitude cutoff (Hz)": 0.0159, "Roll-off": "6dB/Octave"}}</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.RecordingDuration">RecordingDuration</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Length of the recording in seconds (for example, <code>3600</code>).</td>
+</tr>
+</tbody>
+</table>
+<p>These fields MAY be present:</p>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.ElectrodeMaterial">ElectrodeMaterial</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Material of the electrode (for example, <code>Tin</code>, <code>Ag/AgCl</code>, <code>Gold</code>). If multiple sensor devices with heterogeneous electrode materials are recorded into the same data file, electrode material SHOULD be recorded in the <code>material</code> column of <code>*_electrodes.tsv</code> instead. If instead those devices were recorded into separate data files (distinguished for example by the <code>recording</code> entity), separate <code>*_emg.json</code> files (similarly distinguished) MAY be included, each with their own <code>ElectrodeMaterial</code> values.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.ElectrodeType">ElectrodeType</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Type of the electrode (for example, cup, ring, clip-on, wire, needle).</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.EMGGround">EMGGround</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Description of the location of the ground electrode (for example, <code>"right radial styloid process"</code>).</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.EpochLength">EpochLength</a></td>
+<td>OPTIONAL, but RECOMMENDED if RecordingType is "epoched"</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Duration of individual epochs in seconds (for example, <code>1</code>) in case of epoched data. If recording was continuous or discontinuous, leave out the field.<br><br>Must be a number greater than or equal to 0.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.Gain">Gain</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Signal gain from an in-line amplifier, applied between the EMG sensor/device and the data acquisition computer. See also Preamplification.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.InterelectrodeDistance">InterelectrodeDistance</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Distance between pairs or grids of electrodes rigidly attached to the same sensor device. If multiple sensor devices with heterogeneous inter-electrode distances are recorded into the same data file, inter-electrode distance SHOULD be recorded in the <code>interelectrode_distance</code> column of <code>*_electrodes.tsv</code> instead. If instead those devices were recorded into separate data files (distinguished for example by the <code>recording</code> entity), separate <code>*_emg.json</code> files (similarly distinguished) MAY be included, each with their own <code>InterelectrodeDistance</code> values.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.Preamplification">Preamplification</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Amplification built into an EMG bipolar sensor, electrode grid, or other device. See also Gain.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SkinPreparation">SkinPreparation</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>How skin was prepared prior to sensor device placement, for example, <code>"alcohol wipe"</code> or <code>"abrasive gel"</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SubjectArtefactDescription">SubjectArtefactDescription</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Freeform description of the observed subject artifact and its possible cause (for example, <code>"Vagus Nerve Stimulator"</code>, <code>"non-removable implant"</code>). If this field is set to <code>"n/a"</code>, it will be interpreted as absence of major source of artifacts except cardiac and blinks.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.TriggerChannelCount">TriggerChannelCount</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">integer</a></td>
+<td>Number of channels for digital (binary TTL) triggers or analog equivalents (TTL in volt). Corresponds to the <code>TRIG</code> channel type.<br><br>Must be a number greater than or equal to 0.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="hardware-information"><a class="toclink" href="#hardware-information">Hardware information</a></h4>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.Manufacturer">Manufacturer</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Manufacturer of the equipment that produced the measurements.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.ManufacturersModelName">ManufacturersModelName</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Manufacturer's model name of the equipment that produced the measurements.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.SoftwareVersions">SoftwareVersions</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Manufacturer's designation of software version of the equipment that produced the measurements.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.DeviceSerialNumber">DeviceSerialNumber</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The serial number of the equipment that produced the measurements. A pseudonym can also be used to prevent the equipment from being identifiable, so long as each pseudonym is unique within the dataset.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.ElectrodeManufacturer">ElectrodeManufacturer</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Can be used if all electrodes are of the same manufacturer (for example, <code>"AD-TECH"</code>, <code>"DIXI"</code>). If electrodes of different manufacturers are used, please use the corresponding table in the <code>_electrodes.tsv</code> file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.ElectrodeManufacturersModelName">ElectrodeManufacturersModelName</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>If different electrode types are used, please use the corresponding table in the <code>_electrodes.tsv</code> file.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="task-information"><a class="toclink" href="#task-information">Task information</a></h4>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.TaskName">TaskName</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Name of the task. No two tasks should have the same name. The task label included in the filename MAY be derived from this <code>"TaskName"</code> field by removing all non-alphanumeric or <code>+</code> characters (that is, all except those matching <code>[0-9a-zA-Z+]</code>), and potentially replacing spaces with <code>+</code> to ease readability. For example <code>"TaskName"</code> <code>"faces n-back"</code> or <code>"head nodding"</code> could correspond to task labels <code>faces+n+back</code> or <code>facesnback</code> and <code>head+nodding</code> or <code>headnodding</code>, respectively.  A RECOMMENDED convention is to name resting state task using labels beginning with <code>rest</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.TaskDescription">TaskDescription</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Longer description of the task.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.Instructions">Instructions</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Text of the instructions given to participants before the recording.  This is especially important in context of resting state recordings, to distinguish resting positions with different postures (for example, <code>"seated"</code>, <code>"reclined"</code>).</td>
+</tr>
+</tbody>
+</table>
+<p>Note that the <code>TaskName</code> field does not have to be a "behavioral task" that subjects perform,
+but can reflect some information about the conditions present when the data was acquired
+(for example, <code>"treatment"</code>, <code>"control"</code>, or <code>"sleep"</code>).</p>
+<h4 id="institution-information"><a class="toclink" href="#institution-information">Institution information</a></h4>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/sidecars
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.InstitutionName">InstitutionName</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The name of the institution in charge of the equipment that produced the measurements.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.InstitutionAddress">InstitutionAddress</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The address of the institution in charge of the equipment that produced the measurements.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.InstitutionalDepartmentName">InstitutionalDepartmentName</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The department in the institution in charge of the equipment that produced the measurements.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-_emgjson"><a class="toclink" href="#example-_emgjson">Example <code>*_emg.json</code></a></h4>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;EMGChannelCount&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;EMGGround&quot;</span><span class="p">:</span><span class="s2">&quot;n/a&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;EMGPlacementScheme&quot;</span><span class="p">:</span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;EMGPlacementSchemeDescription&quot;</span><span class="p">:</span><span class="s2">&quot;midpoint between cubital fossa and radial styloid process&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;EMGReference&quot;</span><span class="p">:</span><span class="s2">&quot;4 reference electrodes built-in to device, placed near the midpoint between radial and ulnar styloid processes on the volar surface&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;HardwareFilters&quot;</span><span class="p">:{</span><span class="nt">&quot;Highpass RC filter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;Half amplitude cutoff (Hz)&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0159</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;Roll-off&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6dBOctave&quot;</span><span class="p">}},</span>
+<span class="w">  </span><span class="nt">&quot;InstitutionAddress&quot;</span><span class="p">:</span><span class="s2">&quot;9500 Gilman Drive 0559, La Jolla, CA 92093&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;InstitutionalDepartmentName&quot;</span><span class="p">:</span><span class="s2">&quot;Swartz Center for Computational Neuroscience&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;InstitutionName&quot;</span><span class="p">:</span><span class="s2">&quot;University of California San Diego&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;Instructions&quot;</span><span class="p">:</span><span class="s2">&quot;Jump straight upward as high as you can, while keeping your arms at your sides.&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;Manufacturer&quot;</span><span class="p">:</span><span class="s2">&quot;Delsys&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ManufacturersModelName&quot;</span><span class="p">:</span><span class="s2">&quot;Trigno® Galileo&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;PowerLineFrequency&quot;</span><span class="p">:</span><span class="mi">60</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;RecordingDuration&quot;</span><span class="p">:</span><span class="mf">123.456</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;RecordingType&quot;</span><span class="p">:</span><span class="s2">&quot;continuous&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;SamplingFrequency&quot;</span><span class="p">:</span><span class="mi">1000</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;SoftwareFilters&quot;</span><span class="p">:</span><span class="s2">&quot;n/a&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;TaskDescription&quot;</span><span class="p">:</span><span class="s2">&quot;jumping with stationary arms&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;TaskName&quot;</span><span class="p">:</span><span class="s2">&quot;jumping&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="channels-description-_channelstsv"><a class="toclink" href="#channels-description-_channelstsv">Channels description (<code>*_channels.tsv</code>)</a></h2>
+<!--
+This block generates a filename templates.
+The inputs for this macro can be found in the directory
+  src/schema/rules/files/raw
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<p>Template:</p>
+<div class="highlight"><pre><code><a href="../appendices/entities.html#sub">sub-&lt;label&gt;</a>/
+    [<a href="../appendices/entities.html#ses">ses-&lt;label&gt;</a>/]
+        <a href="../glossary.html#emg-datatypes">emg</a>/
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#channels-suffixes">channels</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#channels-suffixes">channels</a><a href="../glossary.html#tsv-extensions">.tsv</a>
+</code></pre></div>
+<details>
+<summary><strong>Legend:</strong></summary>
+<ul>
+<li>
+<p>For more information about filename elements (for example, entities, suffixes, extensions),
+follow the links embedded in the filename template.</p>
+</li>
+<li>
+<p><code>&lt;matches&gt;</code> is a placeholder to denote an arbitrary (and valid) sequence of entities
+and labels at the beginning of the filename (only BIDS &quot;raw&quot;).</p>
+</li>
+<li>
+<p><code>&lt;source-entities&gt;</code> is a placeholder to denote an arbitrary sequence of entities and labels
+at the beginning of the filename matching a source file from which the file derives
+(only BIDS-Derivatives).</p>
+</li>
+<li>
+<p>Filename entities or directories between square brackets
+(for example, <code>[_ses-&lt;label&gt;]</code>) are OPTIONAL.</p>
+</li>
+<li>
+<p>Some entities may only allow specific values,
+in which case those values are listed in <code>&lt;&gt;</code>, separated by <code>|</code>.</p>
+</li>
+<li>
+<p><code>_&lt;suffix&gt;</code> means that there are several (&gt;6) valid suffixes for this filename pattern.</p>
+</li>
+<li>
+<p><code>.&lt;extension&gt;</code> means that there are several (&gt;6) valid extensions for this file type.</p>
+</li>
+<li>
+<p><code>[.gz]</code> means that both the unzipped and gzipped versions of the extension are valid.</p>
+</li>
+</ul>
+
+</details>
+
+<p>A channel is represented by one time series recorded with the recording system.
+Although this information can often be extracted from the EMG recording,
+listing it in a simple <code>.tsv</code> document makes it easy to browse or search
+(for example, searching for recordings with a sampling frequency of &gt;=1000 Hz).
+Hence, the <code>*_channels.tsv</code> file is RECOMMENDED.
+Channels SHOULD appear in the table in the same order they do in the EMG data file.
+Additional columns MAY be included to provide additional information about the channels.
+Note that electrode positions SHOULD NOT be added to this file but to <code>*_electrodes.tsv</code>.</p>
+<p>The columns of the channels description table stored in <code>*_channels.tsv</code> are:</p>
+<!-- This block generates a columns table.
+The definitions of these fields can be found in
+  src/schema/rules/tabular_data/*.yaml
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Column name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.columns.name__channels">name</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Label of the channel.  <br><br>Values in <code>name</code> MUST be unique.<br><br>This column must appear <strong>first</strong> in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.type__channels">type</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Type of channel; MUST use the channel types listed below. Note that the type MUST be in upper-case.  <br><br>This column must appear <strong>second</strong> in the file.<br><br>For a list of valid values for this column, see the <a href="../glossary.html#objects.columns.type__channels">associated glossary entry</a>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.units">units</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Physical unit of the value represented in this channel, for example, <code>V</code> for Volt, or <code>fT/cm</code> for femto Tesla per centimeter (see <a href="../common-principles.html#units">Units</a>).  <br><br>This column must appear <strong>third</strong> in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.description">description</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Brief free-text description of the channel, or other information of interest.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.sampling_frequency">sampling_frequency</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Sampling rate of the channel in Hz.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.signal_electrode">signal_electrode</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The name of the electrode from which the <code>reference</code>'s signal is subtracted to yield the channel's data. For channels originating from bipolar devices, the <code>signal_electrode</code> MAY be the same as the channel <code>name</code>.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.reference__emg">reference</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The reference for the given channel. When the reference is an electrode in <code>*_electrodes.tsv</code>, use the name of that electrode. For channels originating from bipolar devices, use <code>"bipolar"</code>. For non-EMG channels (for example, trigger channels, microphones) use <code>"n/a"</code>.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.group__emg">group</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a> or <a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Which group the electrode or channel belongs to (typically this indicates electrodes or bipolar channels on the same grid, strip, or other device).  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.target_muscle">target_muscle</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Name of the muscle(s) from which the EMG signal in this channel is believed to originate. When exact muscle is unknown (such as when using electrode grids that cover multiple muscles), groups of muscles may be named instead (for example "flexors of the left forearm").  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.placement_scheme">placement_scheme</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>A description of the electrode placement procedure used. See description of the <code>EMGPlacementScheme</code> field in <code>*_emg.json</code>.  <br><br>This column may appear anywhere in the file.<br><br>Must be one of: <code>"measured"</code>, <code>"other"</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.placement_description">placement_description</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Additional details of the approach to EMG sensor placement. See description of the <code>EMGPlacementSchemeDescription</code> field in <code>*_emg.json</code>.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.interelectrode_distance">interelectrode_distance</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Distance between adjacent electrodes (in a pair or grid) that are rigidly attached to the same sensor device, or between the <code>signal_electrode</code> and its <code>reference</code> when each is independently placed.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.low_cutoff">low_cutoff</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Frequencies used for the high-pass filter applied to the channel in Hz. If no high-pass filter applied, use <code>n/a</code>.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.high_cutoff">high_cutoff</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Frequencies used for the low-pass filter applied to the channel in Hz. If no low-pass filter applied, use <code>n/a</code>. Note that hardware anti-aliasing in A/D conversion of all MEG/EEG/EMG electronics applies a low-pass filter; specify its frequency here if applicable.  <br><br>This column may appear anywhere in the file.<br><br>Must be a number greater than or equal to 0.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.notch">notch</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Frequencies used for the notch filter applied to the channel, in Hz. If notch filters are applied at multiple frequencies, these frequencies MAY be specified as a list, for example, <code>[60, 120, 180]</code>. If no notch filter was applied, use <code>n/a</code>.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.status">status</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Data quality observed on the channel. A channel is considered <code>bad</code> if its data quality is compromised by excessive noise. If quality is unknown, then a value of <code>n/a</code> may be used. Description of noise type SHOULD be provided in <code>[status_description]</code>.  <br><br>This column may appear anywhere in the file.<br><br>Must be one of: <code>"good"</code>, <code>"bad"</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.status_description">status_description</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Freeform text description of noise or artifact affecting data quality on the channel. It is meant to explain why the channel was declared bad in the <code>status</code> column.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><strong>Additional Columns</strong></td>
+<td>OPTIONAL</td>
+<td><code>n/a</code></td>
+<td>Additional columns are allowed if they are defined in the associated metadata file.</td>
+</tr>
+</tbody>
+</table>
+<p>Restricted keyword list for field type in alphabetic order (shared with the MEG
+and EEG modality; however, only types that are common in EMG data are listed here).
+Note that upper-case is REQUIRED:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Keyword</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ECG</td>
+<td>ElectroCardioGram (heart)</td>
+</tr>
+<tr>
+<td>EMG</td>
+<td>ElectroMyoGram (muscle)</td>
+</tr>
+<tr>
+<td>EOG</td>
+<td>Generic EOG channel if HEOG or VEOG information not available</td>
+</tr>
+<tr>
+<td>HEOG</td>
+<td>Horizontal EOG</td>
+</tr>
+<tr>
+<td>LATENCY</td>
+<td>Latency of sample, in seconds from recording onset, typically from an <em>external</em> clock source. See <code>acq_time</code> column of the respective <code>*_scans.tsv</code> file. MUST be in form of <code>s[.000000]</code>, where <code>s</code> reflects whole seconds, and <code>.000000</code> reflects OPTIONAL fractional seconds.</td>
+</tr>
+<tr>
+<td>MISC</td>
+<td>Miscellaneous</td>
+</tr>
+<tr>
+<td>REF</td>
+<td>Reference channel</td>
+</tr>
+<tr>
+<td>SYSCLOCK</td>
+<td>Elapsed time since trial/recording start, as provided by the recording device.</td>
+</tr>
+<tr>
+<td>TRIG</td>
+<td>Analog (TTL in Volt) or digital (binary TTL) trigger channel</td>
+</tr>
+<tr>
+<td>VEOG</td>
+<td>Vertical EOG (electrooculogram)</td>
+</tr>
+</tbody>
+</table>
+<p>Examples of common free-form text for the <code>description</code> column (these should occur <em>without enclosing quotation marks</em>):</p>
+<ul>
+<li>n/a</li>
+<li>stimulus</li>
+<li>response</li>
+<li>skin conductance</li>
+<li>battery status</li>
+</ul>
+<h3 id="example-_channelstsv"><a class="toclink" href="#example-_channelstsv">Example <code>*_channels.tsv</code></a></h3>
+<p>See also the corresponding <a href="#example-electrodestsv"><code>electrodes.tsv</code> example</a>.
+<div class="highlight"><pre><span></span><code>name  type  units  signal_electrode  reference  target_muscle
+emg1  EMG   V      E1                E2         anterior belly of the digastric
+emg2  EMG   V      E3                E4         levator angulis oris, zygomaticus major
+emg3  EMG   V      E5                E6         platysma
+emg4  EMG   V      E7                E8         obicularis oris
+</code></pre></div></p>
+<h2 id="electrodes-description-_electrodestsv"><a class="toclink" href="#electrodes-description-_electrodestsv">Electrodes description (<code>*_electrodes.tsv</code>)</a></h2>
+<!--
+This block generates a filename templates.
+The inputs for this macro can be found in the directory
+  src/schema/rules/files/raw
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<p>Template:</p>
+<div class="highlight"><pre><code><a href="../appendices/entities.html#sub">sub-&lt;label&gt;</a>/
+    [<a href="../appendices/entities.html#ses">ses-&lt;label&gt;</a>/]
+        <a href="../glossary.html#emg-datatypes">emg</a>/
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#electrodes-suffixes">electrodes</a><a href="../glossary.html#json-extensions">.json</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#run">run</a>-&lt;<a href="../glossary.html#index-common_principles">index</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#electrodes-suffixes">electrodes</a><a href="../glossary.html#tsv-extensions">.tsv</a>
+</code></pre></div>
+<details>
+<summary><strong>Legend:</strong></summary>
+<ul>
+<li>
+<p>For more information about filename elements (for example, entities, suffixes, extensions),
+follow the links embedded in the filename template.</p>
+</li>
+<li>
+<p><code>&lt;matches&gt;</code> is a placeholder to denote an arbitrary (and valid) sequence of entities
+and labels at the beginning of the filename (only BIDS &quot;raw&quot;).</p>
+</li>
+<li>
+<p><code>&lt;source-entities&gt;</code> is a placeholder to denote an arbitrary sequence of entities and labels
+at the beginning of the filename matching a source file from which the file derives
+(only BIDS-Derivatives).</p>
+</li>
+<li>
+<p>Filename entities or directories between square brackets
+(for example, <code>[_ses-&lt;label&gt;]</code>) are OPTIONAL.</p>
+</li>
+<li>
+<p>Some entities may only allow specific values,
+in which case those values are listed in <code>&lt;&gt;</code>, separated by <code>|</code>.</p>
+</li>
+<li>
+<p><code>_&lt;suffix&gt;</code> means that there are several (&gt;6) valid suffixes for this filename pattern.</p>
+</li>
+<li>
+<p><code>.&lt;extension&gt;</code> means that there are several (&gt;6) valid extensions for this file type.</p>
+</li>
+<li>
+<p><code>[.gz]</code> means that both the unzipped and gzipped versions of the extension are valid.</p>
+</li>
+</ul>
+
+</details>
+
+<p>File that gives the measured location, size, and other properties of EMG electrodes.
+If an <code>*_electrodes.tsv</code> file is specified, a <code>*_coordsystem.json</code> file MUST be specified
+as well.</p>
+<p>Electrode locations may be specified in one of four ways:</p>
+<ol>
+<li>
+<p><strong>Coordinates and landmarks digitized in situ.</strong>
+    When 3D electrode locations are digitized in situ, the origin, orientation, and measurement
+    unit of the coordinate system MUST be recorded in Cartesian coordinates according to the
+    <code>EMGCoordinateSystem</code> and <code>EMGCoordinateUnits</code> fields in <code>*_coordsystem.json</code>,
+    as described in the <a href="../appendices/coordinate-systems.html">Coordinate Systems Appendix</a>.
+    In such cases, <code>EMGCoordinateSystem</code> SHOULD be specified as <code>Other</code>, the
+    <code>EMGCoordinateSystemDescription</code> SHOULD contain a description of the origin and axis
+    orientations of the 3D coordinate system, and the <code>coordinate_system</code> column in
+    <code>*_electrodes.tsv</code> may be omitted.</p>
+</li>
+<li>
+<p><strong>Measured coordinates in a single coordinate system defined by anatomical landmarks.</strong>
+    This approach is suitable for individual electrodes placed close together on a single
+    body part.
+    In this case the <code>*_coordsystem.json</code> file MUST contain fields <code>EMGCoordinateSystem</code>,
+    <code>EMGCoordinateUnits</code>, and <code>EMGCoordinateSystemDescription</code> as described in (1) above.
+    For example, 4 electrodes all placed on the forearm (2 on the volar surface and 2 on
+    the dorsal surface) could be located with coordinates in the following coordinate system:</p>
+<ul>
+<li><code>x</code>: radial styloid process (RSP) → ulnar styloid process (USP);</li>
+<li><code>y</code>: oleacranon process → cubital fossa;</li>
+<li><code>z</code>: RSP-USP → lateral humerus epicondyle</li>
+</ul>
+<p>It may be possible to omit the <code>z</code> column when all electrodes are on the same surface
+(in the above example, if all electrodes were on the volar surface and none were on
+the dorsal surface).
+Though it would be possible to omit both <code>z</code> and <code>y</code> if all electrodes are collinear
+along the anatomically defined <code>x</code> axis, the <code>y</code> column is required and thus researchers
+SHOULD enter <code>0</code> for all entries in column <code>y</code> in such cases.
+In this case (of a single coordinate system for all electrodes) the
+<code>coordinate_system</code> column in <code>*_electrodes.tsv</code> may be omitted as in (1) above.</p>
+</li>
+<li>
+<p><strong>Measured coordinates in multiple anatomically-defined coordinate systems.</strong>
+    This approach is suitable for individual electrodes placed on multiple body parts.
+    In this case there MUST be multiple <code>*_coordsystem.json</code> files (distinguished by the
+    <code>space</code> entity) for each coordinate system, each of which MUST contain the fields
+    <code>EMGCoordinateSystem</code>, <code>EMGCoordinateUnits</code>, and <code>EMGCoordinateSystemDescription</code> as
+    described in (1) above.
+    Additionally, the <code>coordinate_system</code> column in <code>*_electrodes.tsv</code> MUST indicate which
+    named coordinate system the coordinate values in that row reflect, by referencing the
+    label of the <code>space</code> entity for the corresponding <code>*_coordsystem.json</code> file.
+    For example, <code>*_space-lowerLeg_coordsystem.json</code> may specify a coordinate system defined
+    by lower leg landmarks for electrodes below the knee, and another called
+    <code>*_space-thigh_coordsystem.json</code> defined by upper-leg landmarks for electrodes above the knee.
+    In such a case, entries in the <code>coordinate_system</code> column of <code>*_electrodes.tsv</code> MUST
+    specify either <code>"lowerLeg"</code> or <code>"thigh"</code>.
+    As in (2) above, enter <code>0</code> for the <code>y</code> column values if all electrodes are collinear
+    along the defined <code>x</code> axis.</p>
+</li>
+<li>
+<p><strong>Measured coordinates in "nested" coordinate systems.</strong>
+    This approach is suitable for large electrode grids or similar devices.
+    In this case, measured 2D locations in the <code>x</code> and <code>y</code> columns define the geometry
+    of an electrode grid or group, relative to an arbitrary device-internal origin and
+    axes (this is the "child" coordinate system, defined for example in a file
+    <code>*_space-dorsalGrid_coordsystem.json</code>).
+    The group's placement on the body is then described by selecting an "anchor"
+    electrode and providing its coordinates within a "parent" coordinate system defined
+    in reference to subject anatomy (as in (2) above), in a separate file such as
+    <code>*_space-forearm_coordsystem.json</code>.
+    Each coordinate system file MUST contain the fields <code>EMGCoordinateSystem</code>,
+    <code>EMGCoordinateUnits</code>, and <code>EMGCoordinateSystemDescription</code> as described in (1) above.
+    Additionally, each child coordinate system file MUST contain an entry <code>ParentCoordinateSystem</code>
+    giving the value of the <code>space</code> entity for the file that defines the parent (anatomical) coordinate system,
+    and entries <code>AnchorElectrode</code> and <code>AnchorCoordinates</code> that name an electrode and provide
+    its coordinates in the parent coordinate system (respectively).
+    For example, a coordinate system called "forearm" defined by forearm anatomical landmarks
+    (as in (2) above) could be the parent coordinate system for two electrode grids placed on
+    the volar and dorsal surfaces of the forearm.
+    Each grid would have its own coordinate system file (named, for example,
+    <code>*_space-dorsalGrid_coordsystem.json</code> and <code>*_space-volarGrid_coordsystem.json</code>)
+    in which coordinates of each electrode are relative to a device-internal
+    origin, such as the lower-leftmost electrode when the device is in a specified orientation.
+    In such a scenario, entries in the <code>coordinate_system</code> column of <code>*_electrodes.tsv</code>
+    MUST specify either <code>"volarGrid"</code> or <code>"dorsalGrid"</code> for electrodes within each grid
+    (electrodes external to the grid, such as separate reference or ground electrodes, MAY
+    specify a different value in the <code>coordinate_system</code> column: typically this will be the parent
+    coordinate system or a different anatomically defined coordinate system as in (2) above).
+    Note that the parent coordinate system may be defined in different units than the child
+    coordinate system; for example, if an anchor electrode was placed 50% of the distance
+    between the ulnar styloid process and cubital fossa, the unit of the parent coordinate
+    system is <code>"percent"</code> and <code>AnchorCoordinates</code> would have a value of <code>50</code> for the <code>x</code>
+    coordinate in <code>*_space-volarGrid_coordsystem.json</code>.
+    Meanwhile, the <code>x</code> column of <code>*_electrodes.tsv</code> gives the device-internal coordinates
+    of the grid electrodes, which may be in a different unit such as <code>"mm"</code>.
+    See the <a href="#example-coordsystemjson"><code>coordsystem.json</code> section</a> for further details.</p>
+</li>
+</ol>
+<p>For details of how to specify the coordinate systems in each of these cases, see the
+<a href="#example-coordsystemjson"><code>coordsystem.json</code> section</a>.</p>
+<h3 id="required-columns"><a class="toclink" href="#required-columns">Required columns</a></h3>
+<p>The order of the required columns in the <code>*_electrodes.tsv</code> file MUST be as listed below.</p>
+<!-- This block generates a columns table.
+The definitions of these fields can be found in
+  src/schema/rules/tabular_data/*.yaml
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Column name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.columns.name__electrodes">name</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Name of the electrode contact point.  <br><br>The combination of <code>name</code> and <code>group</code> MUST be unique.<br><br>This column must appear <strong>first</strong> in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.x">x</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Recorded position along the x-axis.  <br><br>This column must appear <strong>second</strong> in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.y">y</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Recorded position along the y-axis.  <br><br>This column must appear <strong>third</strong> in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.z">z</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Recorded position along the z-axis.  <br><br>This column must appear <strong>fourth</strong> in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.coordinate_system">coordinate_system</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Name of the coordinate system defined in <code>coordsystem.json</code> in which the electrode's <code>x</code>, <code>y</code>, and (optionally) <code>z</code> coordinates are given.  <br><br>This column must appear <strong>fifth</strong> in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.type__electrodes">type</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Type of the electrode (for example, cup, ring, clip-on, wire, needle).  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.material">material</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Material of the electrode (for example, <code>Tin</code>, <code>Ag/AgCl</code>, <code>Gold</code>).  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.impedance">impedance</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Impedance of the electrode, units MUST be in <code>kOhm</code>.  <br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.columns.group__emg">group</a></td>
+<td>RECOMMENDED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a> or <a href="https://www.w3schools.com/js/js_json_datatypes.asp">number</a></td>
+<td>Which group the electrode or channel belongs to (typically this indicates electrodes or bipolar channels on the same grid, strip, or other device).  <br><br>The combination of <code>name</code> and <code>group</code> MUST be unique.<br><br>This column may appear anywhere in the file.</td>
+</tr>
+<tr>
+<td><strong>Additional Columns</strong></td>
+<td>OPTIONAL</td>
+<td><code>n/a</code></td>
+<td>Additional columns are allowed if they are defined in the associated metadata file.</td>
+</tr>
+</tbody>
+</table>
+<p>The <a href="../appendices/entities.html#recording"><code>recording-&lt;label&gt;</code></a> entity MUST be used to indicate
+simultaneous acquisition of data from multiple EMG devices, in cases where the devices
+store data in separate data files.
+For example:</p>
+<!-- This block generates a file tree.
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<div class="highlight"><pre><span></span><code>└─ sub-01/
+   └─ ses-01/
+      └─ emg/
+         ├─ sub-01_ses-01_recording-RectusFemoris_electrodes.tsv 
+         ├─ sub-01_ses-01_recording-VastusLateralis_electrodes.tsv 
+         └─ sub-01_ses-01_recording-VastusMedialis_electrodes.tsv 
+</code></pre></div>
+<p>Above, acquisitions are labeled with the target muscle, but other naming schemes are also
+appropriate. For example, if bipolar and grid EMG devices are used simultaneously,
+acquisitions may be labeled "bipolar" and "grid", or use the device manufacturer names.
+For cases of multiple devices recording simultaneously into <em>the same data file</em>,
+the <code>group</code> column MUST be used to distinguish which electrodes belong to which device.</p>
+<p>Except in cases of simultaneous acquisitions from different devices into different data
+files (as mentioned above), <code>*_electrodes.tsv</code> files SHOULD NOT be duplicated for each data file,
+for example, during multiple runs of a task.
+The <a href="../common-principles.html#the-inheritance-principle">inheritance principle</a> MUST
+be used to find the appropriate electrode positions for a given data file.
+If electrodes are repositioned, it is RECOMMENDED to use multiple sessions to indicate this.</p>
+<h3 id="example-_electrodestsv"><a class="toclink" href="#example-_electrodestsv">Example <code>*_electrodes.tsv</code></a></h3>
+<p>Example <code>*_electrodes.tsv</code> for a 2 by 2 grid of EMG electrodes with 2.5 mm electrode diameter
+and 10 mm inter-electrode distance.</p>
+<div class="highlight"><pre><span></span><code>name  x     y     coordinate_system  group  diameter
+001   0.0   0.0   VolarForearm       grid1  2.5
+002   10.0  0.0   VolarForearm       grid1  2.5
+003   0.0   10.0  VolarForearm       grid1  2.5
+004   10.0  10.0  VolarForearm       grid1  2.5
+001   0.0   0.0   DorsalForearm      grid2  2.5
+002   10.0  0.0   DorsalForearm      grid2  2.5
+003   0.0   10.0  DorsalForearm      grid2  2.5
+004   10.0  10.0  DorsalForearm      grid2  2.5
+</code></pre></div>
+<h2 id="coordinate-system-json-_coordsystemjson"><a class="toclink" href="#coordinate-system-json-_coordsystemjson">Coordinate System JSON (<code>*_coordsystem.json</code>)</a></h2>
+<!--
+This block generates a filename templates.
+The inputs for this macro can be found in the directory
+  src/schema/rules/files/raw
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<p>Template:</p>
+<div class="highlight"><pre><code><a href="../appendices/entities.html#sub">sub-&lt;label&gt;</a>/
+    [<a href="../appendices/entities.html#ses">ses-&lt;label&gt;</a>/]
+        <a href="../glossary.html#emg-datatypes">emg</a>/
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#task">task</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#space">space</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#coordsystem-suffixes">coordsystem</a><a href="../glossary.html#json-extensions">.json</a>
+</code></pre></div>
+<details>
+<summary><strong>Legend:</strong></summary>
+<ul>
+<li>
+<p>For more information about filename elements (for example, entities, suffixes, extensions),
+follow the links embedded in the filename template.</p>
+</li>
+<li>
+<p><code>&lt;matches&gt;</code> is a placeholder to denote an arbitrary (and valid) sequence of entities
+and labels at the beginning of the filename (only BIDS &quot;raw&quot;).</p>
+</li>
+<li>
+<p><code>&lt;source-entities&gt;</code> is a placeholder to denote an arbitrary sequence of entities and labels
+at the beginning of the filename matching a source file from which the file derives
+(only BIDS-Derivatives).</p>
+</li>
+<li>
+<p>Filename entities or directories between square brackets
+(for example, <code>[_ses-&lt;label&gt;]</code>) are OPTIONAL.</p>
+</li>
+<li>
+<p>Some entities may only allow specific values,
+in which case those values are listed in <code>&lt;&gt;</code>, separated by <code>|</code>.</p>
+</li>
+<li>
+<p><code>_&lt;suffix&gt;</code> means that there are several (&gt;6) valid suffixes for this filename pattern.</p>
+</li>
+<li>
+<p><code>.&lt;extension&gt;</code> means that there are several (&gt;6) valid extensions for this file type.</p>
+</li>
+<li>
+<p><code>[.gz]</code> means that both the unzipped and gzipped versions of the extension are valid.</p>
+</li>
+</ul>
+
+</details>
+
+<p>This <code>*_coordsystem.json</code> file contains the coordinate system in which electrode positions
+are expressed.
+Associated photos can also be provided.
+<strong>The <code>*_coordsystem.json</code> is REQUIRED if the optional <code>*_electrodes.tsv</code> is specified</strong>;
+please see the <a href="#electrodes-description-electrodestsv">electrodes description section</a> for
+important guidance regarding how to specify electrode location.</p>
+<p>Fields relating to the EMG coordinate system(s):</p>
+<!-- This block generates a metadata table.
+These tables are defined in
+  src/schema/rules/json
+The definitions of the fields specified in these tables may be found in
+  src/schema/objects/metadata.yaml
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<table>
+<thead>
+<tr>
+<th><strong>Key name</strong></th>
+<th><strong>Requirement Level</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../glossary.html#objects.metadata.EMGCoordinateSystem">EMGCoordinateSystem</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Defines the coordinate system for the EMG sensors.<br>See the <a href="../appendices/coordinate-systems.html">Coordinate Systems Appendix</a> for a list of restricted keywords for coordinate systems. If <code>"Other"</code>, provide definition of the coordinate system in <code>EMGCoordinateSystemDescription</code>.  <code>"Other"</code> is the only valid value until standardized names become available for EMG coordinate systems.<br><br>Must be one of: <code>"Other"</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.EMGCoordinateUnits">EMGCoordinateUnits</a></td>
+<td>REQUIRED</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Units of the coordinates of <code>EMGCoordinateSystem</code>.<br><br>Must be one of: <code>"m"</code>, <code>"mm"</code>, <code>"cm"</code>, <code>"percent"</code>, <code>"n/a"</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.EMGCoordinateSystemDescription">EMGCoordinateSystemDescription</a></td>
+<td>RECOMMENDED, but REQUIRED if <code>EMGCoordinateSystem</code> is <code>"Other"</code></td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Free-form text description of the coordinate system, typically defining the origin and positive x,y,z axis directions, relative to anatomical landmarks. May also include a link to a documentation page or paper describing the system in greater detail.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.ParentCoordinateSystem">ParentCoordinateSystem</a></td>
+<td>OPTIONAL</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>The name of a JSON mapping key that defines the parent (anatomical) coordinate system in which this child (device) coordinate system is anchored.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.AnchorCoordinates">AnchorCoordinates</a></td>
+<td>OPTIONAL, but REQUIRED if <code>ParentCoordinateSystem</code> is present</td>
+<td><a href="https://www.w3schools.com/js/js_json_arrays.asp">array</a> of <a href="https://www.w3schools.com/js/js_json_datatypes.asp">numbers</a></td>
+<td>Coordinates of the <code>AnchorElectrode</code> in the parent (anatomical) coordinate system. This should be an array of numbers of length 3, in the units given in <code>EMGCoordinateSystemUnits</code> within the JSON object named in <code>ParentCoordinateSystem</code>.</td>
+</tr>
+<tr>
+<td><a href="../glossary.html#objects.metadata.AnchorElectrode">AnchorElectrode</a></td>
+<td>OPTIONAL, but REQUIRED if <code>ParentCoordinateSystem</code> is present</td>
+<td><a href="https://www.w3schools.com/js/js_json_datatypes.asp">string</a></td>
+<td>Name of the electrode in the child (device) coordinate system whose coordinates in the parent (anatomical) coordinate system are given in <code>AnchorCoordinates</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>The <a href="../appendices/entities.html#recording"><code>recording-&lt;label&gt;</code></a> entity MUST be used to indicate
+simultaneous acquisition of data from multiple EMG devices, in cases where the devices
+store data in separate data files.
+Except in cases of simultaneous acquisitions from different devices into different data
+files (as just mentioned), <code>*_coordsystem.json</code> files SHOULD NOT be duplicated for each data file,
+for example, during multiple runs of a task.
+However, multiple <code>*_coordsystem.json</code> files distinguished by the <code>space</code> entity MUST be
+used to describe separate anatomically-defined coordinate systems (for example, to situate
+devices in reference to landmarks on different limbs).
+Multiple <code>*_coordsystem.json</code> files distinguished by the <code>space</code> entity MUST also be used to describe
+<em>nested coordinate systems</em> that give the relative positions of groups or grids of electrodes
+mounted to a single device and situate that "child" coordinate system within an anatomically-defined
+"parent" coordinate system that situates the placement multi-electrode device on the body.
+The <a href="../common-principles.html#the-inheritance-principle">inheritance principle</a> MUST
+be used to find the appropriate coordinate system description for a given data file.</p>
+<h3 id="example-1-_coordsystemjson-for-digitized-electrode-positions"><a class="toclink" href="#example-1-_coordsystemjson-for-digitized-electrode-positions">Example 1: <code>*_coordsystem.json</code> for digitized electrode positions</a></h3>
+<p>Here, a coordinate system is defined based on digitized cranial landmarks, and is suitable
+for EMG electrodes on the face whose locations are digitized with the same equipment as the
+cranial landmarks:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystemDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x: left helix-tragus junction (LHJ) → right helix-tragus junction (RHJ); y: inion → nasion; z: midpoint between mastoid processes → vertex&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystemUnits&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;m&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="example-2-_coordsystemjson-for-measured-electrode-positions-in-a-single-coordinate-system-defined-by-anatomical-landmarks"><a class="toclink" href="#example-2-_coordsystemjson-for-measured-electrode-positions-in-a-single-coordinate-system-defined-by-anatomical-landmarks">Example 2: <code>*_coordsystem.json</code> for measured electrode positions in a single coordinate system defined by anatomical landmarks</a></h3>
+<p>Here, a coordinate system is defined based on percentage of distances between anatomical
+landmarks of the forearm, and is suitable for localizing individual electrodes on the
+same body part:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystemDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x: radial styloid process (RSP) → ulnar styloid process (USP); y: oleacranon process → cubital fossa; z: RSP-USP → lateral humerus epicondyle&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystemUnits&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;percent&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="example-3-multiple-_coordsystemjson-files-for-measured-electrode-positions-in-multiple-anatomically-defined-coordinate-systems"><a class="toclink" href="#example-3-multiple-_coordsystemjson-files-for-measured-electrode-positions-in-multiple-anatomically-defined-coordinate-systems">Example 3: multiple <code>*_coordsystem.json</code> files for measured electrode positions in multiple anatomically-defined coordinate systems</a></h3>
+<p>Here, separate anatomically-based coordinate systems are defined for electrodes above and
+below the elbow joint, and each is given a unique name ("Forearm" or "Humerus") which can
+be referenced in the <code>coordinate_system</code> column of <code>*_electrodes.tsv</code>:</p>
+<div class="highlight"><span class="filename">*_space-Forearm_coordsystem.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystemDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x: radial styloid process (RSP) → ulnar styloid process (USP); y: oleacranon process → cubital fossa; z: RSP-USP → lateral humerus epicondyle&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystemUnits&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;percent&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">*_space-Humerus_coordsystem.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystemDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x: medial humerus epicondyle (MHE) → lateral humerus epicondyle (LHE), y: oleacranon process → cubital fossa, z: MHE-LHE → greater humerus tubercule&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystemUnits&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;percent&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="example-4-multiple-_coordsystemjson-files-for-nestedanchored-coordinate-systems"><a class="toclink" href="#example-4-multiple-_coordsystemjson-files-for-nestedanchored-coordinate-systems">Example 4: multiple <code>*_coordsystem.json</code> files for nested/anchored coordinate systems</a></h3>
+<p>Here, coordinate systems for the <em>relative</em> locations of electrodes in grids or groups are
+given in "child" coordinate systems ("BicepGrid", "VolarForearmGrid", "DorsalForearmGrid"),
+each of which is anchored to a "parent" coordinate system that is defined anatomically:</p>
+<div class="highlight"><span class="filename">*_space-BicepGrid_coordsystem.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystemDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x-axis left → right, y-axis bottom → top, when grid is oriented with leads at the bottom&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystemUnits&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mm&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;ParentCoordinateSystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Humerus&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;AnchorCoordinates&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;AnchorElectrode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;E1&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">*_space-VolarForearmGrid_coordsystem.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystemDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x-axis left → right, y-axis bottom → top, when grid is oriented with leads at the bottom&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystemUnits&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mm&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;ParentCoordinateSystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Forearm&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;AnchorCoordinates&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;AnchorElectrode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;E1&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">*_space-DorsalForearmGrid_coordsystem.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystemDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x-axis left → right, y-axis bottom → top, when grid is oriented with leads at the bottom&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystemUnits&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mm&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;ParentCoordinateSystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Forearm&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;AnchorCoordinates&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">75</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">90</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;AnchorElectrode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;E1&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">*_space-Forearm_coordsystem.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystemDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x: radial styloid process (RSP) → ulnar styloid process (USP); y: oleacranon process → cubital fossa; z: RSP-USP → lateral humerus epicondyle&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;EMGCoordinateSystemUnits&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;percent&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">*_space-Humerus_coordsystem.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;EMGCoordinateSystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Other&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;EMGCoordinateSystemDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x: medial humerus epicondyle (MHE) → lateral humerus epicondyle (LHE), y: oleacranon process → cubital fossa, z: MHE-LHE → greater humerus tubercule&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;EMGCoordinateSystemUnits&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;percent&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="photos-of-the-electrode-positions-_photoextension"><a class="toclink" href="#photos-of-the-electrode-positions-_photoextension">Photos of the electrode positions (<code>*_photo.&lt;extension&gt;</code>)</a></h2>
+<!--
+This block generates a filename templates.
+The inputs for this macro can be found in the directory
+  src/schema/rules/files/raw
+and a guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+<p>Template:</p>
+<div class="highlight"><pre><code><a href="../appendices/entities.html#sub">sub-&lt;label&gt;</a>/
+    [<a href="../appendices/entities.html#ses">ses-&lt;label&gt;</a>/]
+        <a href="../glossary.html#emg-datatypes">emg</a>/
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#photo-suffixes">photo</a><a href="../glossary.html#jpg-extensions">.jpg</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#photo-suffixes">photo</a><a href="../glossary.html#png-extensions">.png</a>
+            <a href="../appendices/entities.html#sub">sub</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;[_<a href="../appendices/entities.html#ses">ses</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#acq">acq</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;][_<a href="../appendices/entities.html#recording">recording</a>-&lt;<a href="../glossary.html#label-common_principles">label</a>&gt;]_<a href="../glossary.html#photo-suffixes">photo</a><a href="../glossary.html#tif-extensions">.tif</a>
+</code></pre></div>
+<details>
+<summary><strong>Legend:</strong></summary>
+<ul>
+<li>
+<p>For more information about filename elements (for example, entities, suffixes, extensions),
+follow the links embedded in the filename template.</p>
+</li>
+<li>
+<p><code>&lt;matches&gt;</code> is a placeholder to denote an arbitrary (and valid) sequence of entities
+and labels at the beginning of the filename (only BIDS &quot;raw&quot;).</p>
+</li>
+<li>
+<p><code>&lt;source-entities&gt;</code> is a placeholder to denote an arbitrary sequence of entities and labels
+at the beginning of the filename matching a source file from which the file derives
+(only BIDS-Derivatives).</p>
+</li>
+<li>
+<p>Filename entities or directories between square brackets
+(for example, <code>[_ses-&lt;label&gt;]</code>) are OPTIONAL.</p>
+</li>
+<li>
+<p>Some entities may only allow specific values,
+in which case those values are listed in <code>&lt;&gt;</code>, separated by <code>|</code>.</p>
+</li>
+<li>
+<p><code>_&lt;suffix&gt;</code> means that there are several (&gt;6) valid suffixes for this filename pattern.</p>
+</li>
+<li>
+<p><code>.&lt;extension&gt;</code> means that there are several (&gt;6) valid extensions for this file type.</p>
+</li>
+<li>
+<p><code>[.gz]</code> means that both the unzipped and gzipped versions of the extension are valid.</p>
+</li>
+</ul>
+
+</details>
+
+<p>Photos of the electrode locations are OPTIONAL.
+Photos SHOULD include sufficient surrounding context to distinguish anatomical location.
+For example, photographs of electrodes on the limbs should include at least one adjacent joint.
+Photos may need to be cropped and/or blurred to conceal identifying features
+or entirely omitted prior to dataset distribution, depending on obtained consent.</p>
+<p>If there are photos of the electrodes, the <a href="../appendices/entities.html#recording"><code>recording-&lt;label&gt;</code></a> entity
+MAY be specified, if separate photos are provided of each EMG device and the devices recorded
+into separate data files.
+The <a href="../appendices/entities.html#ses"><code>ses-&lt;label&gt;</code></a> entity may be used to specify when the photo was taken.</p>
+<h3 id="example-_photoextension"><a class="toclink" href="#example-_photoextension">Example <code>*_photo.&lt;extension&gt;</code></a></h3>
+<!-- This block generates a file tree.
+A guide for using macros can be found at
+ https://github.com/bids-standard/bids-specification/blob/master/macros_doc.md
+-->
+
+<div class="highlight"><pre><span></span><code>└─ sub-01/
+   └─ ses-01/
+      ├─ sub-01_ses-01_recording-DorsalForearmGrid_photo.jpg 
+      └─ ... 
+</code></pre></div>
+<p><img alt="photo of EMG electrodes" src="images/emg_electrodes1.png" title="photo of an EMG electrode grid on a subject's forearm" /></p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; BIDS Contributors - <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/bids-standard/bids-specification/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://bsky.app/profile/bidsstandard.bsky.social" target="_blank" rel="noopener" title="bsky.app" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M407.8 294.7c-3.3-.4-6.7-.8-10-1.3 3.4.4 6.7.9 10 1.3M288 227.1c-26.1-50.7-97.1-145.2-163.1-191.8C61.6-9.4 37.5-1.7 21.6 5.5 3.3 13.8 0 41.9 0 58.4S9.1 194 15 213.9c19.5 65.7 89.1 87.9 153.2 80.7 3.3-.5 6.6-.9 10-1.4-3.3.5-6.6 1-10 1.4-93.9 14-177.3 48.2-67.9 169.9C220.6 589.1 265.1 437.8 288 361.1c22.9 76.7 49.2 222.5 185.6 103.4 102.4-103.4 28.1-156-65.8-169.9-3.3-.4-6.7-.8-10-1.3 3.4.4 6.7.9 10 1.3 64.1 7.1 133.6-15.1 153.2-80.7C566.9 194 576 75 576 58.4s-3.3-44.7-21.6-52.9c-15.8-7.1-40-14.9-103.2 29.8C385.1 81.9 314.1 176.4 288 227.1"/></svg>
+    </a>
+  
+    
+    
+      
+    
+    
+    
+      
+      
+    
+    <a href="https://fosstodon.org/@bidsstandard" target="_blank" rel="noopener me" title="fosstodon.org" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M433 179.1c0-97.2-63.7-125.7-63.7-125.7-62.5-28.7-228.6-28.4-290.5 0 0 0-63.7 28.5-63.7 125.7 0 115.7-6.6 259.4 105.6 289.1 40.5 10.7 75.3 13 103.3 11.4 50.8-2.8 79.3-18.1 79.3-18.1l-1.7-36.9s-36.3 11.4-77.1 10.1c-40.4-1.4-83-4.4-89.6-54-.6-4.6-.9-9.3-.9-13.9 85.6 20.9 158.7 9.1 178.7 6.7 56.1-6.7 105-41.3 111.2-72.9 9.8-49.8 9-121.5 9-121.5zm-75.1 125.2h-46.6V190.1c0-49.7-64-51.6-64 6.9v62.5H201V197c0-58.5-64-56.6-64-6.9v114.2H90.3c0-122.1-5.2-147.9 18.4-175 25.9-28.9 79.8-30.8 103.8 6.1l11.6 19.5 11.6-19.5c24.1-37.1 78.1-34.8 103.8-6.1 23.7 27.3 18.4 53 18.4 175"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://groups.google.com/g/bids-discussion" target="_blank" rel="noopener" title="groups.google.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M500 261.8C500 403.3 403.1 504 260 504 122.8 504 12 393.2 12 256S122.8 8 260 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C270.5 52.6 106.3 116.6 106.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H260v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.instagram.com/bidsstandard/" target="_blank" rel="noopener" title="www.instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3 141a115 115 0 1 0-.6 230 115 115 0 1 0 .6-230m-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1-.6-149.2m93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1-53.6 0m129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/channel/UCxZUcYfd_nvIVWAbzRB1tlw" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+  
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../js/jquery-3.6.0.min.js"></script>
+      
+    
+  <script src="https://demo.osc.earth/osa-chat-widget.js"></script>
+  <script>
+    OSAChatWidget.setConfig({ communityId: 'bids' });
+  </script>
+
+  </body>
+</html>

@@ -1,0 +1,501 @@
+{
+  "docs": {
+    "source": "bids-specification-docs",
+    "pages": [
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/index.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:25Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"4975bda6be9dbccf6265ae418a2a476b\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 44768,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/CHANGES.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:26Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"aa8818a8ebc76d36ec94d2453d391884\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 190769,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/common-principles.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:26Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"af1c22fd0fea0da91bc6e32417cc2feb\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 147716,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/extensions.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:27Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"c93762a778f795da91e1b6bd353a6f2e\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 44909,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/glossary.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:27Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"1a478ca956266f21e7423298257a08f6\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 1344082,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/introduction.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:28Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"2c7dd89cd8be96d8c8d5991270c1606d\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 64449,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/longitudinal-and-multi-site-studies.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:28Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"d25d874078de6f8e2da980aeb0a79984\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 53992,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/appendices/arterial-spin-labeling.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:29Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"03799ea9a38cb560563af8e812f73d6f\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 59887,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/appendices/contributors.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:29Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"103cec5a930fbe05c09404a9743a4af0\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 68580,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/appendices/coordinate-systems.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:30Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"824dd5766aac5d2d5d511661be1f5e92\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 71106,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/appendices/cross-modality-correspondence.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:30Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"a0b7f7bb6d0720b6fd91ac402a6bb080\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 47378,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/appendices/entities.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:30Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"6ee9d909caeed284e48c173be32eabda\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 84564,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/appendices/entity-table.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:31Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"98cc3630f802f05106f5a0b6a070eab1\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 86131,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/appendices/file-collections.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:32Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"3c80624cda7abf6128a2ee8195566bb2\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 120979,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/appendices/hed.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:32Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"6dc357a22b0759dcc25f17f9fe084d4a\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 71108,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/appendices/licenses.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:33Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"080c9096342b79b7135ba097f6cc4eca\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 45339,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/appendices/meg-file-formats.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:33Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"37202bae29b195d11f757dafbcc8145b\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 70465,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/appendices/meg-systems.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:34Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"cc430f18440033ee4494d60367bcdb44\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 46223,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/appendices/qmri.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:34Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"4e2d558a8c6684a974960f38c40d128d\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 124048,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/appendices/schema.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:35Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"98d2c2e40e8ac8ce194c8a0f3808e9ae\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 45407,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/appendices/units.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:35Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"19d63e09b8566a464ee007c7d9273d33\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 54216,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/derivatives/atlas.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:36Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"4795df5836c4d89cb209958de796b0e7\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 82810,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/derivatives/common-data-types.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:36Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"0d8fdc9d06cbae3c73b0e3f93e530ccc\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 69963,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/derivatives/imaging.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:37Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"4090cd887b620f06cd270cd242a7b02b\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 93899,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/derivatives/introduction.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:37Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"680dc8d570858e10a60c326ae9bd59f3\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 55786,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-agnostic-files/code.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:38Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"5f0342ed9b5283ab67b4d9e72551c416\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 44755,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-agnostic-files/data-summary-files.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:38Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"e7d6c204ded14f1d0427557da608eb10\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 72366,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-agnostic-files/dataset-description.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:39Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"6373a41f8348822cfc02d6301e25e2a0\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 73432,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-agnostic-files/events.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:39Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"410f3afd0bc9801b8a74b9b6f17b83eb\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 90496,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-agnostic-files/phenotypic-and-assessment-data.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:40Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"87ab642044fdbb9062aadd74f0cca7da\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 50629,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-specific-files/behavioral-experiments.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:40Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"3608da4a332800032c8ad57aae82831f\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 67507,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-specific-files/electroencephalography.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:41Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"64d3cde8e2f109728e7f7458cbe32e34\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 133102,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-specific-files/electromyography.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:41Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"0f4672fd1495cd27abfa735de583bab9\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 160972,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-specific-files/genetic-descriptor.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:42Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"f510921bc5b8698e9e5485630674fafc\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 60033,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-specific-files/intracranial-electroencephalography.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:43Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"a5849142f9df8a6ec918aef0bf540741\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 140060,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-specific-files/magnetic-resonance-imaging-data.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:44Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"2080b1ce502e3333906edd04d496d130\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 417042,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-specific-files/magnetic-resonance-spectroscopy.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:45Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"c1602d9b3b6d522b9fc2827ec9da3058\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 114097,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-specific-files/magnetoencephalography.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:45Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"323db1f444363305a451ec19100f64eb\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 144848,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-specific-files/microscopy.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:46Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"886353ac8ce4d99042fdae4c50c01e6c\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 104650,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-specific-files/motion.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:46Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"c38b7146a6cc353ef48b6231b4b72b3c\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 103202,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-specific-files/near-infrared-spectroscopy.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:47Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"3015b72edaa75675415e09f19e709c1c\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 135279,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-specific-files/physiological-recordings.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:47Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"ea4517d3c12aa4c0d61fc8ace6fd31e7\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 134809,
+        "provenance": "network"
+      },
+      {
+        "url": "https://bids-specification.readthedocs.io/en/stable/modality-specific-files/positron-emission-tomography.html",
+        "status": 200,
+        "retrieved_at": "2026-10-29T17:28:48Z",
+        "content_type": "text/html; charset=utf-8",
+        "etag": "\"3c5c14bd4643f96946dc881dae8f4314\"",
+        "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+        "bytes": 146778,
+        "provenance": "network"
+      }
+    ],
+    "failures": [],
+    "sitemap": {
+      "url": "https://bids-specification.readthedocs.io/en/stable/sitemap.xml",
+      "status": 200,
+      "retrieved_at": "2026-10-29T17:28:25Z",
+      "content_type": "text/xml; charset=utf-8",
+      "etag": "W/\"cfa29364432170531312295a8e12be24\"",
+      "last_modified": "Tue, 29 Sep 2026 19:05:24 GMT",
+      "bytes": 7350,
+      "provenance": "network"
+    }
+  },
+  "sources": {
+    "repos": [
+      {
+        "source_id": "bids-specification-repo",
+        "url": "https://github.com/bids-standard/bids-specification",
+        "path": "D:\\Programming\\01- University of Oldenburg\\BIDS Knowledge Base\\sources\\bids-specification",
+        "commit": "8973fdf11d3c6c8ce40fa7897dc712667b539b0e",
+        "branch": "master",
+        "tag": "8973fdf",
+        "commit_date": "2026-10-21T09:30:29-05:00",
+        "retrieved_at": "2026-10-29T17:28:49Z",
+        "clone_url": "https://github.com/bids-standard/bids-specification.git",
+        "status": "cloned"
+      },
+      {
+        "source_id": "bids-validator",
+        "url": "https://github.com/bids-standard/bids-validator",
+        "path": "D:\\Programming\\01- University of Oldenburg\\BIDS Knowledge Base\\sources\\bids-validator",
+        "commit": "f4d1b3a03723d8b192ca8d5310c1b6619e9fb870",
+        "branch": "main",
+        "tag": "f4d1b3a",
+        "commit_date": "2026-10-15T14:03:28-05:00",
+        "retrieved_at": "2026-10-29T17:28:50Z",
+        "clone_url": "https://github.com/bids-standard/bids-validator.git",
+        "status": "cloned"
+      },
+      {
+        "source_id": "bids-examples",
+        "url": "https://github.com/bids-standard/bids-examples",
+        "path": "D:\\Programming\\01- University of Oldenburg\\BIDS Knowledge Base\\sources\\bids-examples",
+        "commit": "5e00d47b6f1db106dda1b776d5243eb41b4cb95b",
+        "branch": "master",
+        "tag": "5e00d47",
+        "commit_date": "2026-10-09T14:50:00-04:00",
+        "retrieved_at": "2026-10-29T17:28:50Z",
+        "clone_url": "https://github.com/bids-standard/bids-examples.git",
+        "status": "cloned"
+      },
+      {
+        "source_id": "bids-schema",
+        "url": "https://github.com/bids-standard/bids-schema",
+        "path": "D:\\Programming\\01- University of Oldenburg\\BIDS Knowledge Base\\sources\\bids-schema",
+        "commit": "ebc0f3616ccfb70fb1aefac45e57d6502455153e",
+        "branch": "main",
+        "tag": "ebc0f36",
+        "commit_date": "2026-10-29T05:22:58Z",
+        "retrieved_at": "2026-10-29T17:28:51Z",
+        "clone_url": "https://github.com/bids-standard/bids-schema.git",
+        "status": "cloned"
+      }
+    ],
+    "failures": []
+  }
+}

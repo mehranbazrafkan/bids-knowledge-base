@@ -1,0 +1,160 @@
+{
+  "path": "D:\\Programming\\01- University of Oldenburg\\BIDS Knowledge Base\\artifacts\\tmp5w4r6rcc\\ft.jsonl",
+  "manifest_path": "D:\\Programming\\01- University of Oldenburg\\BIDS Knowledge Base\\artifacts\\tmp5w4r6rcc\\manifest.jsonl",
+  "examples_written": 5330,
+  "manifest_entries": 5330,
+  "duplicates_dropped": 74,
+  "by_example_type": {
+    "code_comparison": 204,
+    "conditions": 416,
+    "context_json_interpretation": 208,
+    "corrected_example": 256,
+    "explain": 3408,
+    "insufficient_info_question": 209,
+    "investigate": 189,
+    "resolution": 209,
+    "rule_relationship": 197,
+    "version_differences": 34
+  },
+  "issue_example_types": {
+    "explain": 209,
+    "conditions": 157,
+    "investigate": 189,
+    "resolution": 209,
+    "context_json_interpretation": 208,
+    "rule_relationship": 197,
+    "code_comparison": 204,
+    "version_differences": 34,
+    "corrected_example": 129,
+    "insufficient_info_question": 209
+  },
+  "by_family_group": {
+    "concept": 1083,
+    "doc": 1400,
+    "doc_dev": 33,
+    "example": 129,
+    "issue": 1779,
+    "relationship": 26,
+    "rule": 812,
+    "validator_doc": 27,
+    "version": 41
+  },
+  "by_knowledge_type": {
+    "Concept": 2532,
+    "Example": 129,
+    "FilenameRule": 186,
+    "MetadataRule": 533,
+    "Relationship": 26,
+    "TabularRule": 82,
+    "Troubleshooting": 11,
+    "ValidationIssue": 1745,
+    "ValidationRule": 11,
+    "Version": 75
+  },
+  "by_split": {
+    "eval": 347,
+    "train": 4983
+  },
+  "by_source_id": {
+    "bids-examples": 110,
+    "bids-schema": 46,
+    "bids-specification-docs": 1400,
+    "bids-specification-repo": 3442,
+    "bids-validator": 406
+  },
+  "families": 1964,
+  "top_families": [
+    {
+      "family": "doc:glossary",
+      "examples": 1040
+    },
+    {
+      "family": "doc:magnetic-resonance-imaging-data",
+      "examples": 40
+    },
+    {
+      "family": "doc:common-principles",
+      "examples": 36
+    },
+    {
+      "family": "doc:entities",
+      "examples": 35
+    },
+    {
+      "family": "doc_dev:introduction",
+      "examples": 14
+    },
+    {
+      "family": "doc:positron-emission-tomography",
+      "examples": 13
+    },
+    {
+      "family": "doc:electroencephalography",
+      "examples": 12
+    },
+    {
+      "family": "doc:electromyography",
+      "examples": 12
+    },
+    {
+      "family": "doc:meg-file-formats",
+      "examples": 12
+    },
+    {
+      "family": "doc:qmri",
+      "examples": 12
+    },
+    {
+      "family": "issue:ASLCONTEXT_TSV_NOT_CONSISTENT",
+      "examples": 11
+    },
+    {
+      "family": "issue:BRAINVISION_LINKS_BROKEN",
+      "examples": 11
+    },
+    {
+      "family": "issue:BVAL_MULTIPLE_ROWS",
+      "examples": 11
+    },
+    {
+      "family": "issue:BVEC_NUMBER_ROWS",
+      "examples": 11
+    },
+    {
+      "family": "issue:DWI_MISSING_BVAL",
+      "examples": 11
+    },
+    {
+      "family": "issue:DWI_MISSING_BVEC",
+      "examples": 11
+    },
+    {
+      "family": "issue:ECHO_TIME_NOT_CONSISTENT",
+      "examples": 11
+    },
+    {
+      "family": "issue:EVENTS_TSV_MISSING",
+      "examples": 11
+    },
+    {
+      "family": "issue:EXCESSIVE_ELECTRODE_SPECIFICITY",
+      "examples": 11
+    },
+    {
+      "family": "issue:FLIP_ANGLE_NOT_MATCHING_ASLCONTEXT_TSV",
+      "examples": 11
+    }
+  ],
+  "unique_issue_codes_in_kb": 209,
+  "unique_issue_codes_with_examples": 209,
+  "issue_codes_without_examples": [],
+  "issue_examples": 1745,
+  "supplement_examples": 3585,
+  "synthetic_examples": 474,
+  "builder_errors": [],
+  "sha256": {
+    "finetuning_dataset": "4fc93815e57544ce032aee267010db34ea2c64b24cad415e0399a03066d42d52",
+    "manifest": "91e50665b1d9efff286ba6226a0451a6c247413abf96ee0d54adf3168d5a8c73",
+    "knowledge_base": "22c46f2df522459cfca3d6462c8406235d03d018963a723555d92d04ac03e6c1"
+  }
+}
